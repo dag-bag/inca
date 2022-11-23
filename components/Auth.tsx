@@ -8,6 +8,7 @@ import Btn from "./Btn";
 import { formValidation, formValidationSchema } from "../validation/form";
 import { createUser, loginUser } from "../hooks/form";
 import { useRouter } from "next/router";
+import Link from "next/link";
 type Props = {
   type: "login" | "signup";
 };
@@ -56,10 +57,13 @@ function Auth({ type }: Props) {
     switch (type) {
       case "login":
         let isVerified = await loginUser(loginUserDetails);
-        isVerified?.status === 200
-          ? router.push(`${isVerified?.url}`)
-          : setErrors({ email: "Invalid Credentials" }),
+        if (isVerified?.status === 200) {
+          router.push(`${isVerified?.url}`);
           resetForm();
+        } else {
+          setErrors({ email: isVerified?.error });
+        }
+
         break;
       case "signup":
         let isSignedUp = await createUser(loginUserDetails);
@@ -208,12 +212,13 @@ flex items-center justify-center"
           </button>
           <p className="mt-8">
             Need an account?{" "}
-            <a
-              href="#"
-              className="text-blue-500 hover:text-blue-700 font-semibold"
-            >
-              Create an account
-            </a>
+            <Link href={`/${type === "login" ? "signup" : "login"}`}>
+              <span className="text-blue-500 hover:text-blue-700 font-semibold">
+                {type === "login"
+                  ? "Create an Account"
+                  : "Login to your account"}
+              </span>
+            </Link>
           </p>
         </div>
       </div>

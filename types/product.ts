@@ -9,10 +9,21 @@ export interface Variant {
   sellPrice: number;
   metadesc: string;
 }
-export interface Product {
+export interface ProductType {
   title: string;
   tag: string;
   desc: string;
   category: string;
+  _id?: string;
   variant: Variant[];
 }
+
+export type FetchedProductType = {
+  _id: "string";
+  active: boolean;
+  category: string;
+  desc: string;
+  tag: string;
+  title: string;
+  variant: Variant[];
+};
