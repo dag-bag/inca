@@ -143,7 +143,7 @@ export default function Carousel({ products }: Props) {
             <div className="relative overflow-hidden">
               <div
                 ref={carousel}
-                className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pb-16 scrollbar"
+                className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory  z-0 pb-16 scrollbar "
               >
                 {products.map((product, index) => {
                   return <ProductCard {...product} key={index} />;
