@@ -50,7 +50,7 @@ export const cartSelector = selector({
     const cardItems = get(cartAtom);
     const alreadyExists = find(cardItems, { uni: newValue.uni });
     if (alreadyExists) {
-      let newCardItems = cardItems.map((i) => {
+      let newCardItems = cardItems.map((i: any) => {
         if (i.id === newValue.id) {
           return {
             ...i,
@@ -72,7 +72,7 @@ export const cartTotal = selector({
   get: ({ get }) => {
     const cartItems = get(cartAtom);
     let total = 0;
-    cartItems.map((i) => {
+    cartItems.map((i: any) => {
       total += i.price * i.qty;
     });
     return total;
@@ -84,7 +84,7 @@ export const cartQty = selector({
   get: ({ get }) => {
     const cartItems = get(cartAtom);
     let total = 0;
-    cartItems.map((i) => {
+    cartItems.map((i: any) => {
       total += i.qty;
     });
     return total;
@@ -99,7 +99,7 @@ export const removeCart = selector({
   },
   set: ({ set, get }, newValue) => {
     const cartItems = get(cartAtom);
-    let newCartItems = cartItems.filter((i) => i.uni !== newValue.uni);
+    let newCartItems = cartItems.filter((i: any) => i.uni !== newValue.uni);
     set(cartAtom, newCartItems);
   },
 });
