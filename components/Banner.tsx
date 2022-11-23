@@ -28,6 +28,8 @@ function Banner() {
           image={"/assets/slider/slider.jpg"}
           alt="Banner"
           type="fill"
+          height={35}
+          width={100}
         />
       </div>
     </div>
