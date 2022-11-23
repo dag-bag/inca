@@ -56,97 +56,99 @@ export default function Carousel({ products }: Props) {
   }, []);
 
   return (
-    <div className="w-full md:w-[80%] mx-auto ">
-      <div className="flex items-center justify-center w-full h-full  relative  px-4">
-        <button
-          onClick={movePrev}
-          className=" text-white w-10 h-full text-center  disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
+    <div>
+      <div className="w-full md:w-[80%] mx-auto ">
+        <div className="flex items-center justify-center w-full h-full  relative  px-4">
+          <button
+            onClick={movePrev}
+            className=" text-white w-10 h-full text-center  disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
             absolute top-[40%] left-14 transform -translate-x-1/2 -translate-y-1/2
             hidden md:block
             "
-          disabled={isDisabled("prev")}
-        >
-          <svg
-            width={60}
-            height={60}
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[60px] h-[60px]"
-            preserveAspectRatio="none"
+            disabled={isDisabled("prev")}
           >
-            <path
-              d="M37.5 48.75L18.75 30L37.5 11.25"
-              stroke="#BD9575"
-              strokeWidth={3}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <rect
-              x={1}
-              y={1}
-              width={58}
-              height={58}
-              stroke="#BD9575"
-              strokeWidth={2}
-            />
-          </svg>
-          <span className="sr-only">Prev</span>
-        </button>
-        <button
-          onClick={moveNext}
-          className=" text-white w-10 h-full text-center disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
+            <svg
+              width={60}
+              height={60}
+              viewBox="0 0 60 60"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[60px] h-[60px]"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M37.5 48.75L18.75 30L37.5 11.25"
+                stroke="#BD9575"
+                strokeWidth={3}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <rect
+                x={1}
+                y={1}
+                width={58}
+                height={58}
+                stroke="#BD9575"
+                strokeWidth={2}
+              />
+            </svg>
+            <span className="sr-only">Prev</span>
+          </button>
+          <button
+            onClick={moveNext}
+            className=" text-white w-10 h-full text-center disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
             absolute top-[40%] right-14 transform -translate-x-1/2 -translate-y-1/2
             hidden md:block
             "
-          disabled={isDisabled("next")}
-        >
-          <svg
-            width={60}
-            height={60}
-            viewBox="0 0 60 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[60px] h-[60px]"
-            preserveAspectRatio="none"
+            disabled={isDisabled("next")}
           >
-            <rect
-              x={59}
-              y={59}
-              width={58}
-              height={58}
-              transform="rotate(-180 59 59)"
-              fill="#BD9575"
-            />
-            <path
-              d="M22.5 11.25L41.25 30L22.5 48.75"
-              stroke="white"
-              strokeWidth={3}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <rect
-              x={59}
-              y={59}
-              width={58}
-              height={58}
-              transform="rotate(-180 59 59)"
-              stroke="#BD9575"
-              strokeWidth={2}
-            />
-          </svg>
-          <span className="sr-only">Next</span>
-        </button>
-        {/* Carousel for desktop and large size devices */}
-        <div className="carousel my-12 mx-auto max-w-full relative  md:block">
-          <div className="relative overflow-hidden">
-            <div
-              ref={carousel}
-              className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pb-16 scrollbar"
+            <svg
+              width={60}
+              height={60}
+              viewBox="0 0 60 60"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[60px] h-[60px]"
+              preserveAspectRatio="none"
             >
-              {products.map((product, index) => {
-                return <ProductCard {...product} key={index} />;
-              })}
+              <rect
+                x={59}
+                y={59}
+                width={58}
+                height={58}
+                transform="rotate(-180 59 59)"
+                fill="#BD9575"
+              />
+              <path
+                d="M22.5 11.25L41.25 30L22.5 48.75"
+                stroke="white"
+                strokeWidth={3}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <rect
+                x={59}
+                y={59}
+                width={58}
+                height={58}
+                transform="rotate(-180 59 59)"
+                stroke="#BD9575"
+                strokeWidth={2}
+              />
+            </svg>
+            <span className="sr-only">Next</span>
+          </button>
+          {/* Carousel for desktop and large size devices */}
+          <div className="carousel my-12 mx-auto max-w-full relative  md:block">
+            <div className="relative overflow-hidden">
+              <div
+                ref={carousel}
+                className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory touch-pan-x z-0 pb-16 scrollbar"
+              >
+                {products.map((product, index) => {
+                  return <ProductCard {...product} key={index} />;
+                })}
+              </div>
             </div>
           </div>
         </div>
