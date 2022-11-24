@@ -318,7 +318,7 @@ function Navbar() {
               <span className="text-info">Subtotal: ${subTotal}</span>
               <div className="card-actions">
                 <button className="btn btn-primary btn-block bg-pr1imary-1 hover:bg-black border-none">
-                  View cart
+                  <Link href="/cart">View cart</Link>
                 </button>
               </div>
             </div>

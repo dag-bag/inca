@@ -27,3 +27,15 @@ export type FetchedProductType = {
   title: string;
   variant: Variant[];
 };
+
+export type VariantDetails = {
+  _id: string;
+  active: boolean;
+  availableQty: number;
+  color: string;
+  img: string[];
+  price: number;
+  sellPrice: string;
+  size: string[];
+  slug: string;
+};

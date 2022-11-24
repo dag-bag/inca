@@ -3,6 +3,7 @@
 import { selector, atom } from "recoil";
 import { find } from "lodash";
 import { recoilPersist } from "recoil-persist";
+import { CartItem } from "../types/cart";
 
 const { persistAtom } = recoilPersist();
 
@@ -32,7 +33,7 @@ export const favSelector = selector({
   },
 });
 
-export const cartAtom = atom({
+export const cartAtom = atom<CartItem | any>({
   key: "cartAtom",
   default: [],
   effects_UNSTABLE: [persistAtom],

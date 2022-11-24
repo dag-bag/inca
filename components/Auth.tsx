@@ -4,11 +4,12 @@ import React from "react";
 import { signIn } from "next-auth/react";
 import Input from "./Input";
 import { FormikValues, useFormik } from "formik";
-import Btn from "./Btn";
+import Btn from "./buttons/Btn";
 import { formValidation, formValidationSchema } from "../validation/form";
 import { createUser, loginUser } from "../hooks/form";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import BlurImage from "./BlurImage";
 type Props = {
   type: "login" | "signup";
 };
@@ -106,12 +107,18 @@ function Auth({ type }: Props) {
 
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
-      <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
-        <img
+      <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen relative">
+        <BlurImage
+          image="https://source.unsplash.com/random"
+          alt="Random"
+          width={200}
+          height={200}
+        />
+        {/* <img
           src="https://source.unsplash.com/random"
           alt=""
           className="w-full h-full object-cover"
-        />
+        /> */}
       </div>
       <div
         className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
@@ -124,7 +131,7 @@ flex items-center justify-center"
               : "Create a new account"}{" "}
           </h1>
           <form className="mt-6" onSubmit={handleSubmit}>
-            {InputsData.map((item, index) => {
+            {InputsData?.map((item, index) => {
               if (!item) return null;
               return (
                 <div className="mt-4" key={index}>

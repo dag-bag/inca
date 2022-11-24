@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SubHeader from "../components/SubHeader";
 
 export default function App({
   Component,
@@ -14,6 +15,7 @@ export default function App({
   return (
     <RecoilRoot>
       <SessionProvider session={session}>
+        <SubHeader />
         <Navbar />
         <Component {...pageProps} />;
         <Footer />

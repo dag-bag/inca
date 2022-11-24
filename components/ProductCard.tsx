@@ -23,17 +23,9 @@ function ProductCard({ title, variant, tag }: Props) {
     <div className="relative rounded-md">
       <Link href={`/product/${slug}`}>
         <div className="relative ">
-          {tag !== "General" && (
-            <span
-              className={`absolute  left-1 top-5 z-40 block bg-${
-                tag === "New" ? "blue" : "orange"
-              }-500 rounded-full py-1 px-3 text-white`}
-            >
-              {tag}
-            </span>
-          )}
+          {/* <span className="badge bg-primary text-white">{tag}</span> */}
           <div
-            className="flex group relative  md:w-full bg-[#e8e8e8] h-[161.66px] md:h-[287.425px] justify-end items-center flex-col min-w-[161.66px] md:min-w-[287.425px] lg:min-w-[287.425px] lg:min-h-[287.425px] xl:min-w-[300.425px] xl:min-h-[300.425px] 2xl:min-w-[387.425px] 2xl:min-h-[387.425px]
+            className="flex group relative  md:w-full bg-[#e8e8e8] h-[161.66px] md:h-[287.425px] justify-end items-center flex-col min-w-[161.66px] md:min-w-[287.425px] lg:min-w-[287.425px] lg:min-h-[287.425px] xl:min-w-[300.425px] xl:min-h-[300.425px] 2xl:min-w-[387.425px] 2xl:min-h-[387.425px] rounded-md
           "
           >
             <BlurImage image={img[0]} height={200} width={200} alt={metadesc} />
@@ -54,19 +46,6 @@ function ProductCard({ title, variant, tag }: Props) {
         </div>
       </div>
     </div>
-    // <div className=" bg-gray-100 flex items-center">
-    //   <div className="container mx-auto p-9 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
-    //     {/* // eslint-disable-next-line @next/next/no-img-element */}
-    //     <img className="rounded-xl" src={variant[0].img[0]} alt="product" />
-    //     <div className="flex justify-between items-center">
-    //       <div>
-    //         <h1 className="mt-5 text-2xl font-semibold">{title}</h1>
-    //         <p className="mt-2">${variant[0].price}</p>
-    //       </div>
-    //       <div></div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 
