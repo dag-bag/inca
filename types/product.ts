@@ -8,6 +8,7 @@ export interface Variant {
   price: number;
   sellPrice: number;
   metadesc: string;
+  _id?: string;
 }
 export interface ProductType {
   title: string;
