@@ -6,7 +6,7 @@ import connectDb from "../../libs/ConnectDb";
 
 import Product from "../../models/Product";
 
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+// Next.js API route support: https://nextjs.org/docs/api-routes/introducti
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {

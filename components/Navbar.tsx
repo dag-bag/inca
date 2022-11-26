@@ -284,7 +284,7 @@ function Navbar() {
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <div className="indicator">
               {rightDivData[1]?.svg}
-              {/* <span className="badge badge-sm indicator-item">8</span> */}
+            
             </div>
           </label>
           <div

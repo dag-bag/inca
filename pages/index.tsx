@@ -16,6 +16,7 @@ export default function Home({ products }: { products: FetchedProductType[] }) {
   return (
     <div>
       <main>
+        <div></div>
         <Banner />
         <Carousel products={products} />
         <Story
