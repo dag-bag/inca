@@ -1,8 +1,81 @@
 /** @format */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7f4ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #e8e8e8;
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }
+  .slider {
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 2px; /* Specified height */
+    background: black; /* Grey background */
+    outline: none; /* Remove outline */
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+    transition: opacity 0.2s;
+  }
+
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 10px; /* Set a specific slider handle width */
+    height: 10px; /* Slider handle height */
+    background: black; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 100%;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 10px; /* Set a specific slider handle width */
+    height: 10px; /* Slider handle height */
+    background: black; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 100%;
+  }
+}
+
+@layer base {
+  html {
+    font-family: "Poppins", system-ui, sans-serif;
+    background-color: #ffffff !important;
+    color: #333 !important;
+  }
+}
 
 @layer utilities {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .inputAll {
+    @apply block w-full px-5 py-3 text-base  transition duration-500 ease-in-out transform  text-[#333]  border-[#333] focus:ring-white focus:ring-offset-2 focus:ring-offset-[#333]  placeholder:text-[#333] outline-none;
+  }
 }

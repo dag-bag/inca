@@ -28,7 +28,7 @@ export default function Home({ products }: { products: FetchedProductType[] }) {
           boxType="left-right"
           type={1}
         />
-        <Carousel products={products} />
+        <Carousel products={products} title="Best Sellers" />
         <Features />
         <Story
           title={"Nuestros productos"}

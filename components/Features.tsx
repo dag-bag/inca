@@ -6,7 +6,7 @@ import Carousel from "./Carosel";
 type Props = {};
 
 let svgClassName =
-  "flex-grow-0 flex-shrink-0 md:w-14 md:h-14 relative xl:w-20 xl:h-20 text-primary";
+  "flex-grow-0 flex-shrink-0 md:w-14 md:h-14 relative xl:w-16 xl:h-16 text-primary";
 const svgColor = "#bd9575";
 const FeaturedData = [
   {
@@ -181,7 +181,7 @@ const FeaturedData = [
 function Features({}: Props) {
   return (
     <div className="py-16">
-      <div className="xl:container m-auto px-6 text-gray-500 md:px-12">
+      <div className=" m-auto px-6 text-gray-500 md:px-12  !w-full">
         <div>
           <h2 className="mt-4 text-2xl font-bold text-gray-700  md:text-4xl text-center">
             Sabemos que amas las
@@ -189,7 +189,7 @@ function Features({}: Props) {
             alpacas
           </h2>
         </div>
-        <div className="mt-16  divide-x divide-y divide-gray-100  overflow-hidden rounded-3xl border flex justify-center items-center">
+        <div className="mt-16  divide-x divide-y divide-gray-100  overflow-hidden rounded-3xl md:border flex justify-center items-center">
           <Carousel features={FeaturedData} />
         </div>
       </div>

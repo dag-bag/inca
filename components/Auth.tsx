@@ -107,13 +107,8 @@ function Auth({ type }: Props) {
 
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
-      <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen relative">
-        <BlurImage
-          image="https://source.unsplash.com/random"
-          alt="Random"
-          width={200}
-          height={200}
-        />
+      <div className="bg-white hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen relative">
+        <BlurImage image="/login.JPG" alt="Random" width={200} height={200} />
         {/* <img
           src="https://source.unsplash.com/random"
           alt=""

@@ -10,16 +10,16 @@ type Props = {
 
 function FeatureCard({ svg, title, description }: Props) {
   return (
-    <div className="group relative bg-white  transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 min-w-[300px]">
-      <div className="relative space-y-8 py-12 p-8">
+    <div className="group relative bg-white  transition z-[1] shadow-2xl shadow-gray-600/10 min-w-[300px] text-center ">
+      <div className="relative space-y-8 py-12 p-8 flex justify-center items-center flex-col">
         {svg}
         <div className="space-y-2">
-          <h5 className="text-xl font-medium text-gray-700  transition group-hover:text-primary">
+          <h5 className="text-xl font-medium   transition text-primary">
             {title}
           </h5>
           <p className="text-sm text-gray-600 ">{description}</p>
         </div>
-        <a
+        {/* <a
           href="#"
           className="flex items-center justify-between group-hover:text-primary"
         >
@@ -36,7 +36,7 @@ function FeatureCard({ svg, title, description }: Props) {
               clipRule="evenodd"
             />
           </svg>
-        </a>
+        </a> */}
       </div>
     </div>
   );

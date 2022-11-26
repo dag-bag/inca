@@ -417,7 +417,7 @@ function ProductDetails({
           </div>
         </div>
       </div>
-      <Carousel products={relatedProducts} />
+      <Carousel products={relatedProducts} title="You Would Like" />
     </>
   );
 }

@@ -16,8 +16,9 @@ interface FeaturesProps {
 type Props = {
   products?: FetchedProductType[];
   features?: FeaturesProps[];
+  title?: string;
 };
-export default function Carousel({ products, features }: Props) {
+export default function Carousel({ products, features, title }: Props) {
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<any>(null);
@@ -64,7 +65,10 @@ export default function Carousel({ products, features }: Props) {
   }, []);
 
   return (
-    <>
+    <div className="md:py-14">
+      <h2 className=" md:text-5xl text-black text-center font-bold my-4">
+        {title}
+      </h2>
       <div className="w-full md:w-[80%] mx-auto ">
         <div className="flex items-center justify-center w-full h-full  relative  px-4">
           <button
@@ -111,6 +115,6 @@ export default function Carousel({ products, features }: Props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
