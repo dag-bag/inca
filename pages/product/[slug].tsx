@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 import { GetStaticProps } from "next";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import BlurImage from "../../components/BlurImage";
 
 import { BsCheckLg, BsSuitHeart } from "react-icons/bs";
@@ -18,6 +18,7 @@ import {
   VariantDetails,
 } from "../../types/product";
 import Carousel from "../../components/Carosel";
+import { favSelector } from "../../atoms/favraites";
 
 const hashTag = [
   {
@@ -44,12 +45,18 @@ function ProductDetails({
   relatedProducts,
 }: Props) {
   const [size, setSize] = useState(variantDetails.size[0]);
+  console.log({
+    product,
+    variants,
+    variantDetails,
+  });
 
   const refreshVarient = (slug: string) => {
     let url = `/product/${slug}`;
   };
 
   const [cart, SetCart] = useRecoilState(cartSelector);
+  const favSet = useSetRecoilState(favSelector);
 
   if (!product)
     return (
@@ -211,23 +218,19 @@ function ProductDetails({
                   className="rounded-[3px] border border-[#bd9575] text-primary-1 w-full flex justify-center items-center py-3 max-w-sm  "
                   onClick={(e) => {
                     e.stopPropagation();
-                    //   let newFavItems = [
-                    //     ...favItems,
-                    //     {
-                    //       id: variantDetails.slug,
-                    //       title: product.title,
-                    //       price: variantDetails.price,
-                    //       color: variantDetails.color,
-                    //       size: variantDetails.size,
-                    //       img: variantDetails.img,
-                    //     },
-                    //   ];
-                    //   if (!fav) {
-                    //     setFavItems(newFavItems);
-                    //   }
-                    //   if (fav) {
-                    //     removeFav();
-                    //   }
+                    let newProduct = {
+                      title: product.title,
+                      uni: `${variantDetails.slug}-${size}-${variantDetails.color}`,
+                      price: variantDetails.price,
+                      color: variantDetails.color,
+                      size: size,
+                      img: variantDetails.img,
+                      slug: variantDetails.slug,
+                      id: variantDetails._id,
+                      qty: 1,
+                      desc: product.desc,
+                    };
+                    favSet(newProduct);
                   }}
                 >
                   Add to Fav

@@ -7,22 +7,22 @@ import { CartItem } from "../types/cart";
 
 const { persistAtom } = recoilPersist();
 
-export const cartAtom = atom<CartItem | any>({
-  key: "cartAtom",
+export const favAtom = atom<CartItem | any>({
+  key: "favAtom",
   default: [],
   effects_UNSTABLE: [persistAtom],
 });
 
-export const cartSelector = selector({
-  key: "cardSelector",
+export const favSelector = selector({
+  key: "favSelector",
   get: ({ get }) => {
-    let cardItems = get(cartAtom);
+    let cardItems = get(favAtom);
     if (cardItems.length > 0) null;
     // let localCardItems = JSON.parse(localStorage.getItem("cardItems"));
     return cardItems;
   },
   set: ({ set, get }, newValue) => {
-    const cardItems = get(cartAtom);
+    const cardItems = get(favAtom);
     const alreadyExists = find(cardItems, { uni: newValue.uni });
     if (alreadyExists) {
       let newCardItems = cardItems.map((i: any) => {
@@ -35,17 +35,17 @@ export const cartSelector = selector({
           return i;
         }
       });
-      set(cartAtom, newCardItems);
+      set(favAtom, newCardItems);
     } else {
-      set(cartAtom, [...cardItems, newValue]);
+      set(favAtom, [...cardItems, newValue]);
     }
   },
 });
 
-export const cartTotal = selector({
-  key: "cartTotal",
+export const favTotal = selector({
+  key: "favTotal",
   get: ({ get }) => {
-    const cartItems = get(cartAtom);
+    const cartItems = get(favAtom);
     let total = 0;
     cartItems.map((i: any) => {
       total += i.price * i.qty;
@@ -54,10 +54,10 @@ export const cartTotal = selector({
   },
 });
 
-export const cartQty = selector({
-  key: "cartQty",
+export const favQty = selector({
+  key: "favQty",
   get: ({ get }) => {
-    const cartItems = get(cartAtom);
+    const cartItems = get(favAtom);
     let total = 0;
     cartItems.map((i: any) => {
       total += i.qty;
@@ -66,15 +66,15 @@ export const cartQty = selector({
   },
 });
 
-export const removeCart = selector({
-  key: "removeCart",
+export const removeFav = selector({
+  key: "removeFav",
   get: ({ get }) => {
-    const cartItems = get(cartAtom);
+    const cartItems = get(favAtom);
     return cartItems;
   },
   set: ({ set, get }, newValue) => {
-    const cartItems = get(cartAtom);
-    let newCartItems = cartItems.filter((i: any) => i.uni !== newValue.uni);
-    set(cartAtom, newCartItems);
+    const cartItems = get(favAtom);
+    let newCartItems = cartItems.filter((i: CartItem) => i.uni !== newValue);
+    set(favAtom, newCartItems);
   },
 });

@@ -10,4 +10,5 @@ export interface CartItem {
   slug: string;
   id: string;
   qty: number;
+  desc?: string;
 }

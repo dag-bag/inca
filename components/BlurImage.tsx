@@ -27,6 +27,8 @@ export default function BlurImage({
   onClick,
   alt,
   type,
+  width,
+  height,
 }: Props) {
   const [isLoading, setLoading] = useState(true);
 
@@ -37,8 +39,10 @@ export default function BlurImage({
           alt={alt}
           src={image}
           layout={type === "responsive" ? "responsive" : "fill"}
-          //   width={200}
-          //   height={100}
+          {...(type === "responsive" ? { width, height } : {})}
+          // width={width}
+          // width={width}
+          // height={height}
           objectFit="cover"
           className={cn(
             `group-hover:opacity-75 duration-700 ease-in-out object-cover rounded-xl ${

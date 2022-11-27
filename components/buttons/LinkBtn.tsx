@@ -10,24 +10,28 @@ type Props = {
   isLoading?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
+  link: string;
 };
 
-function Btn({
+function LinkBtn({
   className,
   text,
   disabled,
   isLoading,
   children,
   onClick,
+  link,
 }: Props) {
   const btnClasses = `btn btn-primary ${className} disabled:opacity-50 ${
     isLoading && "loading"
   }`;
   return (
-    <button className={btnClasses} disabled={disabled} onClick={onClick}>
-      {text || children}
-    </button>
+    <Link href={`/${link}`}>
+      <button className={btnClasses} disabled={disabled} onClick={onClick}>
+        {text || children}
+      </button>
+    </Link>
   );
 }
 
-export default Btn;
+export default LinkBtn;
