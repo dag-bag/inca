@@ -91,6 +91,7 @@ function ProductDetails({
                       alt={product.title}
                       height={500}
                       width={500}
+                      type="responsive"
                     />
                     {/* <BlurImage
                     width={500}
@@ -118,6 +119,7 @@ function ProductDetails({
                         alt={product.title}
                         height={500}
                         width={500}
+                        type={"responsive"}
                       />
                       {/* <BlurImage
                       width={500}
