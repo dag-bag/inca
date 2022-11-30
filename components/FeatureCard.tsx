@@ -10,11 +10,11 @@ type Props = {
 
 function FeatureCard({ svg, title, description }: Props) {
   return (
-    <div className="group relative bg-white  transition z-[1] shadow-2xl shadow-gray-600/10  text-center w-[90%] m-auto h-72 my-8 rounded-xl">
+    <div className="group relative   transition z-[1]   text-center w-[90%] m-auto h-72 my-8 lg:my-10">
       <div className="relative space-y-8 py-12 p-8 flex justify-center items-center flex-col">
         {svg}
         <div className="space-y-2">
-          <h5 className="text-xl font-medium   transition text-primary">
+          <h5 className="text-xl font-medium   transition text-black">
             {title}
           </h5>
           <p className="text-sm text-gray-600 ">{description}</p>

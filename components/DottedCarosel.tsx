@@ -24,11 +24,24 @@ function DottedCarousel({ features }: Props) {
   // };
   return (
     <Swiper
+      breakpoints={{
+        // when window width is >= 640px
+        640: {
+          width: 640,
+          slidesPerView: 1,
+        },
+        // when window width is >= 768px
+        768: {
+          width: 768,
+          slidesPerView: 2,
+        },
+      }}
       pagination={{
         clickable: true,
       }}
-      modules={[Pagination]}
-      className="mySwiper flex justify-center items-center flex-col py-8"
+      slidesPerView={"auto"}
+      modules={[Pagination, Autoplay]}
+      className="mySwiper flex justify-center items-center flex-col py-8 "
       navigation={true}
       autoplay={{
         delay: 1000,

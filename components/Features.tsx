@@ -181,8 +181,8 @@ const FeaturedData = [
 ];
 function Features({}: Props) {
   return (
-    <div className="py-16">
-      <div className=" m-auto md:px-6 text-gray-500 md:px-12  !w-full">
+    <div className="py-16 ">
+      <div className=" m-auto md:px-6 text-gray-500   !w-full ">
         <div>
           <h2 className="mt-4 text-2xl font-bold text-gray-700  md:text-4xl text-center">
             Sabemos que amas las
@@ -191,9 +191,9 @@ function Features({}: Props) {
           </h2>
         </div>
 
-        <div className="hidden md:flex mt-16  divide-x divide-y divide-gray-100  overflow-hidden rounded-3xl md:border justify-center items-center">
+        {/* <div className="hidden md:flex mt-16  divide-x divide-y divide-gray-100  overflow-hidden rounded-3xl md:border justify-center items-center">
           <Carousel features={FeaturedData} />
-        </div>
+        </div> */}
         <DottedCarousel features={FeaturedData} />
       </div>
     </div>
