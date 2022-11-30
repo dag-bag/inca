@@ -9,7 +9,7 @@ export const menuState = atom({
 });
 import { GrClose } from "react-icons/gr";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import MenuLi from "./Menuli";
+import MenuLi from "./MenuLi";
 function SmallMenu() {
   const [hide, setHide] = useRecoilState(menuState);
 
