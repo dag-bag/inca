@@ -10,6 +10,7 @@ import Story from "../components/Story";
 import { fakeData } from "../atoms/fakedata";
 import SubFooter from "../components/SubFooter";
 import Features from "../components/Features";
+import DottedCarousel from "../components/DottedCarosel";
 
 export default function Home({ products }: { products: FetchedProductType[] }) {
   console.log(products);
@@ -30,6 +31,7 @@ export default function Home({ products }: { products: FetchedProductType[] }) {
         />
         <Carousel products={products} title="Best Sellers" />
         <Features />
+
         <Story
           title={"Nuestros productos"}
           description={
