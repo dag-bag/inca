@@ -13,6 +13,9 @@
   }
 }
 
+:root {
+  --swiper-theme-color: #bd9575 !important;
+}
 @layer utilities {
   .container {
     max-width: 1200px;
@@ -67,6 +70,6 @@
 
   .swiper-pagination-bullet-active {
     color: #fff;
-    background: #007aff;
+    background: #483900 !important;
   }
 }
