@@ -47,6 +47,8 @@ function FavCard({ title, img, desc, price, slug, uni }: CartItem) {
               width={200}
               alt={desc || title}
               type="responsive"
+              rounded="xl"
+              className="rounded-md"
             />
           </div>
         </div>

@@ -34,6 +34,7 @@ function ProductCard({ title, variant, tag }: Props) {
               width={200}
               alt={metadesc}
               type="fill"
+              rounded={true}
             />
           </div>
         </div>

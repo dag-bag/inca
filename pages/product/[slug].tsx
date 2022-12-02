@@ -84,7 +84,7 @@ function ProductDetails({
                 index === 0 && (
                   <div
                     key={index}
-                    className="w-full rounded-[3px] h-auto  md:w-[90%] relative ml-6 shadow-lg"
+                    className="w-full rounded-[3px] h-auto  md:w-[90%] relative m-auto "
                   >
                     <BlurImage
                       image={item}
@@ -92,6 +92,7 @@ function ProductDetails({
                       height={500}
                       width={500}
                       type="responsive"
+                      cursor={true}
                     />
                     {/* <BlurImage
                     width={500}
@@ -106,13 +107,13 @@ function ProductDetails({
               );
               // );
             })}
-            <div className="grid grid-cols-2 gap-y-5">
+            <div className="grid grid-cols-2 gap-y-5 place-items-center">
               {variantDetails.img.map((item, index) => {
                 return (
                   index > 0 && (
                     <div
                       key={index}
-                      className="w-full rounded-[3px] h-[26rem]  md:w-[90%] relative "
+                      className="w-full  h-[26rem]  md:w-[80%] relative "
                     >
                       <BlurImage
                         image={item}
@@ -166,7 +167,10 @@ function ProductDetails({
                   {variants.map((item, index) => {
                     return (
                       // <Link key={index} href={`/${item.slug}`}>
-                      <div key={index} className="h-14 w-14 relative ">
+                      <div
+                        key={index}
+                        className="h-14 w-14 relative hover:opacity-75 duration-700 ease-in-out border border-gray-200 rounded-xl"
+                      >
                         <BlurImage
                           image={item.img[0]}
                           alt="product"
@@ -174,7 +178,9 @@ function ProductDetails({
                           className="h-14 w-14  cursor-pointer"
                           width={50}
                           height={50}
+                          rounded={true}
                           onClick={() => refreshVarient(item.slug)}
+                          cursor={true}
                         />
                       </div>
                     );

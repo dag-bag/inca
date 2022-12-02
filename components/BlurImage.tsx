@@ -13,7 +13,7 @@ type Props = {
   placeholder?: "blur" | "empty";
   className?: string;
   type?: "responsive" | "fill";
-  rounded?: "string";
+  rounded?: boolean;
   cursor?: boolean;
   onClick?: () => void;
 };
@@ -34,7 +34,11 @@ export default function BlurImage({
 
   return (
     <>
-      <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200  overflow-hidden xl:aspect-w-7 xl:aspect-h-8 ">
+      <div
+        className={`w-full aspect-w-1 aspect-h-1 bg-gray-200  overflow-hidden xl:aspect-w-7 xl:aspect-h-8 ${
+          rounded ? "rounded-xl" : ""
+        }`}
+      >
         <Image
           alt={alt}
           src={image}
@@ -45,11 +49,13 @@ export default function BlurImage({
           // height={height}
           objectFit="cover"
           className={cn(
-            `group-hover:opacity-75 duration-700 ease-in-out object-cover rounded-xl ${
+            `group-hover:opacity-75 duration-700 ease-in-out object-cover ${
+              rounded ? "rounded-xl" : ""
+            }  ${
               isLoading
                 ? "grayscale blur-2xl scale-110"
                 : "grayscale-0 blur-0 scale-100"
-            } cursor-${cursor}`
+            } ${cursor ? "cursor-pointer" : ""}`
           )}
           onLoadingComplete={() => setLoading(false)}
           onClick={onClick}

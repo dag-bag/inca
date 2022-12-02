@@ -44,7 +44,7 @@ function DottedCarousel({ features }: Props) {
       className="mySwiper flex justify-center items-center flex-col py-8 "
       navigation={true}
       autoplay={{
-        delay: 1000,
+        delay: 2000,
         disableOnInteraction: false,
       }}
     >
