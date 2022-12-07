@@ -1,12 +1,12 @@
 /** @format */
 
 import { useState, useRef, useEffect } from "react";
-import { FetchedProductType } from "../types/product";
+import { FetchedProductType } from "../../types/product";
 
-import Btn from "./buttons/Btn";
+import Btn from "../buttons/Btn";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import ProductCard from "./ProductCard";
-import FeatureCard from "./FeatureCard";
+import ProductCard from "../Product/ProductCard";
+import FeatureCard from "../Fav/FeatureCard";
 interface FeaturesProps {
   title: string;
   svg: any;
@@ -65,7 +65,7 @@ export default function Carousel({ products, features, title }: Props) {
   }, []);
 
   return (
-    <div className="md:py-14">
+    <div className="">
       <h2 className=" md:text-5xl text-black text-center font-bold my-4">
         {title}
       </h2>

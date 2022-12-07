@@ -4,10 +4,11 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
-import { cartQty, cartTotal } from "../../atoms/cart";
 import SmallMenu, { menuState } from "./SmallNavbar";
+import dynamic from "next/dynamic";
+const CartDetails = dynamic(() => import("./CartDetails"), { ssr: false });
 
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 
@@ -153,17 +154,14 @@ function Navbar() {
     },
   ];
 
-  const subTotal = useRecoilValue(cartTotal);
-  const cartItems = useRecoilValue(cartQty);
   const setHide = useSetRecoilState(menuState);
 
   return (
     <>
       <SmallMenu />
-      <div className="navbar bg-white md:max-w-[90%] m-auto" key={cartItems}>
+      <div className="navbar bg-white md:max-w-[90%] m-auto">
         <div className="navbar-start">
           <div className="relative w-7 sm:w-10 md:w-16 cursor-pointer ">
-            {" "}
             <Link href={"/"}>
               <Image
                 src={"/logo.png"}
@@ -216,7 +214,10 @@ function Navbar() {
         </div>
         <div className="navbar-end">
           <div className="dropdown dropdown-end hidden md:block">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <label
+              tabIndex={0}
+              className="btn btn-link btn-circle hover:no-animation"
+            >
               <div className="indicator">{rightDivData[0]?.svg}</div>
             </label>
             <div
@@ -233,7 +234,7 @@ function Navbar() {
             </div>
           </div>
           <Link href={`${rightDivData[1]?.link}`}>
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <label tabIndex={0} className="btn btn-link btn-circle">
               <div className="indicator">{rightDivData[1]?.svg}</div>
             </label>
           </Link>
@@ -274,7 +275,7 @@ function Navbar() {
               </>
             ) : (
               <>
-                <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <label tabIndex={0} className="btn btn-link btn-circle">
                   <div className="indicator">{rightDivData[2]?.svg}</div>
                 </label>
                 <ul
@@ -290,30 +291,7 @@ function Navbar() {
               </>
             )}
           </div>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                {rightDivData[3].svg}
-                <span className="badge badge-sm indicator-item">
-                  {cartItems}
-                </span>
-              </div>
-            </label>
-            <div
-              tabIndex={0}
-              className="mt-3 card card-compact dropdown-content w-52 bg-white shadow"
-            >
-              <div className="card-body">
-                <span className="font-bold text-lg">{cartItems} Items</span>
-                <span className="text-info">Subtotal: ${subTotal}</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block bg-pr1imary-1 hover:bg-black border-none">
-                    <Link href="/cart">View cart</Link>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CartDetails svg={rightDivData[3].svg} />
           <label
             tabIndex={0}
             className="btn btn-ghost lg:hidden"

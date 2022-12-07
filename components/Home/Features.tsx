@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import Carousel from "./Carosel";
+import Carousel from "../utils/Carosel";
 import DottedCarousel from "./DottedCarosel";
 
 type Props = {};
@@ -181,10 +181,10 @@ const FeaturedData = [
 ];
 function Features({}: Props) {
   return (
-    <div className="py-16 ">
+    <div className="py-16 mb-32 md:mb-32 bg-[#E8E8E8]">
       <div className=" m-auto md:px-6 text-gray-500   !w-full ">
         <div>
-          <h2 className="mt-4 text-2xl font-bold text-gray-700  md:text-4xl text-center">
+          <h2 className="mt-4 text-2xl font-bold text-primary  md:text-4xl text-center ">
             Sabemos que amas las
             <br className="lg:block" />
             alpacas

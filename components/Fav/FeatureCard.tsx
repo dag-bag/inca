@@ -14,10 +14,11 @@ function FeatureCard({ svg, title, description }: Props) {
       <div className="relative space-y-8 py-12 p-8 flex justify-center items-center flex-col">
         {svg}
         <div className="space-y-2">
-          <h5 className="text-xl font-medium   transition text-black">
+          <h5 className="text-xl font-medium   transition text-[#333]">
             {title}
           </h5>
-          <p className="text-sm text-gray-600 ">{description}</p>
+          <span className="w-[27.44px] h-[1.42px] rounded-[54px] bg-[#bd9575] block mx-auto my-10"></span>
+          <p className="text-sm text-[#333] ">{description}</p>
         </div>
         {/* <a
           href="#"

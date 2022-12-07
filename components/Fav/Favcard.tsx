@@ -3,38 +3,49 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { Variant } from "../types/product";
-import BlurImage from "./BlurImage";
-import { AiOutlineStar } from "react-icons/ai";
+
+import BlurImage from "../utils/BlurImage";
+import { AiOutlineStar, AiOutlineDelete, AiFillHeart } from "react-icons/ai";
+import { CartItem } from "../../types/cart";
+import RelativeBtn from "../buttons/RelativeBtn";
+import { useSetRecoilState } from "recoil";
+import { removeFav } from "../../atoms/favraites";
 type Props = {
-  _id: "string";
+  _id: string;
   active: boolean;
   category: string;
   desc: string;
   tag: string;
   title: string;
-  variant: Variant[];
+  img: string[];
+  metadesc: string;
+  price: number;
+  slug: string;
 };
 
-function ProductCard({ title, variant, tag }: Props) {
-  let { slug, price, color, availableQty, metadesc, img, sellPrice } =
-    variant[0];
+function FavCard({ title, img, desc, price, slug, uni }: CartItem) {
+  const removeFavItems = useSetRecoilState(removeFav);
   return (
     <div className="relative rounded-md">
+      <RelativeBtn
+        className="z-50 right-5 top-2 cursor-pointer"
+        Icon={AiFillHeart}
+        onClick={() => {
+          removeFavItems(uni);
+        }}
+      />
       <Link href={`/product/${slug}`}>
         <div className="relative ">
           {/* <span className="badge bg-primary text-white">{tag}</span> */}
-          <div
-            className="flex group relative  md:w-full bg-[#e8e8e8] h-[161.66px] md:h-[287.425px] justify-end items-center flex-col min-w-[161.66px] md:min-w-[287.425px] lg:min-w-[287.425px] lg:min-h-[287.425px] xl:min-w-[300.425px] xl:min-h-[300.425px] 2xl:min-w-[387.425px] 2xl:min-h-[387.425px] rounded-xl
-          "
-          >
+          <div className="flex group relative  md:w-full bg-[#e8e8e8]  justify-end items-center flex-col h-full w-full rounded-md">
             <BlurImage
               image={img[0]}
               height={200}
               width={200}
-              alt={metadesc}
-              type="fill"
+              alt={desc || title}
+              type="responsive"
               rounded={true}
+              className="rounded-md"
             />
           </div>
         </div>
@@ -56,4 +67,4 @@ function ProductCard({ title, variant, tag }: Props) {
   );
 }
 
-export default ProductCard;
+export default FavCard;

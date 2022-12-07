@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Pagination, Autoplay } from "swiper";
-import FeatureCard from "./FeatureCard";
+import FeatureCard from "../Fav/FeatureCard";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
@@ -24,16 +24,19 @@ function DottedCarousel({ features }: Props) {
   // };
   return (
     <Swiper
+      loop={true}
       breakpoints={{
         // when window width is >= 640px
         640: {
           width: 640,
           slidesPerView: 1,
+          slidesPerGroup: 1,
         },
         // when window width is >= 768px
         768: {
           width: 768,
           slidesPerView: 2,
+          slidesPerGroup: 2,
         },
       }}
       pagination={{
@@ -44,8 +47,9 @@ function DottedCarousel({ features }: Props) {
       className="mySwiper flex justify-center items-center flex-col py-8 "
       navigation={true}
       autoplay={{
-        delay: 2000,
+        delay: 3000,
         disableOnInteraction: false,
+        stopOnLastSlide: false,
       }}
     >
       {features.map((feature, index) => {

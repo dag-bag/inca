@@ -6,12 +6,12 @@ import { useRecoilValue } from "recoil";
 import { favAtom } from "../atoms/favraites";
 import Btn from "../components/buttons/Btn";
 import LinkBtn from "../components/buttons/LinkBtn";
-import FavCard from "../components/Favcard";
-import Flex from "../components/Flex";
+import FavCard from "../components/Fav/Favcard";
+import Flex from "../components/utils/Flex";
 // import Flex from "../components/";
-import Grid from "../components/Grid";
+import Grid from "../components/utils/Grid";
 import H1 from "../components/Headings/H1";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/Product/ProductCard";
 import { CartItem } from "../types/cart";
 
 function Favorites() {

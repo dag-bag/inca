@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import { GetStaticProps } from "next";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import BlurImage from "../../components/BlurImage";
+import BlurImage from "../../components/utils/BlurImage";
 
 import { BsCheckLg, BsSuitHeart } from "react-icons/bs";
 import Product from "../../models/Product";
@@ -17,8 +17,9 @@ import {
   Variant,
   VariantDetails,
 } from "../../types/product";
-import Carousel from "../../components/Carosel";
+import Carousel from "../../components/utils/Carosel";
 import { favSelector } from "../../atoms/favraites";
+import ProductCarousel from "../../components/Product/ProductCarousel";
 
 const hashTag = [
   {
@@ -77,7 +78,9 @@ function ProductDetails({
         </Head>
 
         {/* Left container */}
-        <div className={`flex-1 flex  relative justify-center   md:mt-10`}>
+        <div
+          className={`hidden  flex-1 md:flex  relative justify-center   md:mt-10`}
+        >
           <div className="grid grid-cols-1 w-[90%] justify-center gap-4 ">
             {variantDetails.img.map((item, index) => {
               return (
@@ -138,7 +141,7 @@ function ProductDetails({
             </div>
           </div>
         </div>
-
+        {/* <ProductCarousel /> */}
         {/* Right container */}
         <div
           className={`px-5 flex justify-end flex-col   space-y-12 mt-8 md:w-[40%] relative`}

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import Btn from "./buttons/Btn";
+import Btn from "../buttons/Btn";
 // import Btn2 from "../buttons/Btn2";
 type Props = {
   image: string;
@@ -16,7 +16,7 @@ function Story({ title, description, image, boxType, type }: Props) {
     <>
       {type === 1 && (
         <div
-          className={`flex  justify-evenly  flex-wrap-reverse pb-2 mt-[8rem] mb-20 md:mb-0 md:mt-0`}
+          className={`flex  justify-evenly  flex-wrap-reverse pb-2  mb-20 md:mt-16  `}
         >
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
             <div
@@ -70,7 +70,7 @@ function Story({ title, description, image, boxType, type }: Props) {
         </div>
       )}
       {type === 2 && (
-        <div className={`flex  justify-evenly  flex-wrap  py-16 `}>
+        <div className={`flex  justify-evenly  flex-wrap   md:my-16`}>
           <div className={`flex-1 flex  relative justify-center mr-2 ml-0  `}>
             <div
               className={`w-[70%] h-[100%] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
@@ -110,7 +110,7 @@ function Story({ title, description, image, boxType, type }: Props) {
         </div>
       )}
       {type === 3 && (
-        <div className={`flex  justify-evenly  flex-wrap-reverse  pt-16 `}>
+        <div className={`flex  justify-evenly  flex-wrap-reverse  md:pt-16 `}>
           <div
             className={`px-5 flex justify-start flex-col   space-y-12  md:w-[50%]`}
           >
