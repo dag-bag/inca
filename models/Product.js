@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var { Schema } = mongoose;
 let variantSchema = new Schema({
   img: {
-    type: [String],
+    type: [Object],
     required: true,
   },
   color: {
