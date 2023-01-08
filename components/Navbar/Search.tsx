@@ -11,6 +11,7 @@ const people = [
   { id: 4, name: "Tom Cook" },
   { id: 5, name: "Tanya Fox" },
   { id: 6, name: "Hellen Schmidt" },
+  { id: 7, name: "Hellen Schmidt" },
 ];
 
 export default function Search() {
