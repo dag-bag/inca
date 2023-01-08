@@ -7,10 +7,12 @@ import { isEmpty } from "lodash";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { cartAtom, cartTotal, removeCart } from "../atoms/cart";
 import { CartItem } from "../types/cart";
+import AddReMoveItem from "../components/Cart/AddReMoveItem";
 function Cart() {
   const subTotal = useRecoilValue(cartTotal);
   const cart = useRecoilValue<CartItem[]>(cartAtom);
   const removeItem = useSetRecoilState(removeCart);
+  console.log(cart);
 
   return (
     <>
@@ -104,10 +106,16 @@ function Cart() {
                                   </span>
                                   <br />
                                   <span className="text-lg font-medium text-left text-black">
-                                    Cantidad :{" "}
+                                    Qty :{" "}
                                   </span>
                                   <span className="  text-left text-black">
-                                    {item.qty}
+                                    <AddReMoveItem
+                                      uni={item.uni}
+                                      qty={item.qty}
+                                    >
+                                      {" "}
+                                      {item.qty}
+                                    </AddReMoveItem>
                                   </span>
                                   <br />
                                   <span className="text-lg font-medium text-left text-black">

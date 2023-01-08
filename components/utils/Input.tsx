@@ -13,6 +13,7 @@ type Props = {
   style?: 0 | 1 | 2;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   id?: string;
+  setTouched?: (value: boolean) => void;
 };
 
 /** @format */

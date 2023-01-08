@@ -67,7 +67,7 @@ function AddressCard({
     }
   );
   return (
-    <div className="mt-5 bg-white shadow cursor-pointer rounded-xl max-w-3xl border border-gray-300 p-3">
+    <div className="mt-5 bg-white shadow cursor-pointer rounded-xl max-w-3xl border border-gray-300 p-3  ">
       {/* <h3 className="text-2xl ml-4">{Title}</h3> */}
       <div className="flex">
         <div className="flex-1 grid grid-cols-2 py-5 pl-5 overflow-hidden gap-x-10 gap-y-3">
@@ -119,7 +119,7 @@ function AddressCard({
           </ul>
         </div>
 
-        <>
+        <div>
           <div className="flex-none  pt-2.5 pr-2.5 pl-1 ">
             <button
               className="px-2 py-2 font-medium tracking-wide  capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95"
@@ -163,7 +163,7 @@ function AddressCard({
               </svg>
             </button>
           </div>
-        </>
+        </div>
       </div>
     </div>
   );

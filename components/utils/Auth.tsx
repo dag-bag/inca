@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Input from "./Input";
 import { FormikValues, useFormik } from "formik";
 import Btn from "../buttons/Btn";
@@ -22,6 +22,7 @@ type Res = {
 
 function Auth({ type }: Props) {
   const router = useRouter();
+
   let InputsData = [
     type === "signup" && {
       type: "name",
@@ -97,8 +98,10 @@ function Auth({ type }: Props) {
 
     isSubmitting,
     isValidating,
-
+    isValid,
+    setTouched,
     values,
+    touched,
   } = useFormik({
     initialValues: InitialValue,
     validationSchema: formValidation(type),
@@ -109,11 +112,6 @@ function Auth({ type }: Props) {
     <section className="flex flex-col md:flex-row h-screen items-center">
       <div className="bg-white hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen relative">
         <BlurImage image="/login.JPG" alt="Random" width={200} height={200} />
-        {/* <img
-          src="https://source.unsplash.com/random"
-          alt=""
-          className="w-full h-full object-cover"
-        /> */}
       </div>
       <div
         className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
@@ -164,6 +162,7 @@ flex items-center justify-center"
               text={type === "login" ? "Log In" : "Sign Up"}
               className="btn-block mt-4"
               isLoading={isSubmitting}
+              disabled={isSubmitting || isValidating || !isValid}
             />
           </form>
           <hr className="my-6 border-gray-300 w-full" />

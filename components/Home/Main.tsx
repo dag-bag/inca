@@ -3,8 +3,8 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Banner from "./Banner";
-
 import { FetchedProductType } from "../../types/product";
+import Categories from "./Categories";
 const Carousel = dynamic(() => import("../utils/Carosel"));
 const Story = dynamic(() => import("./Story"));
 const SubFooter = dynamic(() => import("../Footers/SubFooter"));
@@ -15,7 +15,7 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
     <>
       <main>
         <Banner />
-        <Carousel products={products} />
+        <Categories />
         <Story
           title={"Somos"}
           description={
@@ -37,7 +37,7 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
           boxType="left-right"
           type={2}
         />
-        <Carousel products={products} />
+        <Carousel products={products} title="Dragon Ball Z" />
         <Story
           title={"¿Quieres comprar en grandes cantidades?"}
           description={

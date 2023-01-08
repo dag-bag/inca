@@ -6,9 +6,9 @@ type Props = {};
 
 function SubHeader({}: Props) {
   return (
-    <div>
-      <div className="w-full h-[33px] bg-primary" />
-    </div>
+    <p className="bg-primary h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+      Get free delivery on orders over $100
+    </p>
   );
 }
 

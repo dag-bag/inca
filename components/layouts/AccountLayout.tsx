@@ -11,6 +11,7 @@ import { accountAtom } from "../../atoms/account";
 import AccountBox from "../accountComponents/AccountBox";
 import Flex from "../utils/Flex";
 import Grid from "../utils/Grid";
+import AuthenticationLayout from "./AuthenticationLayout";
 
 type Props = {
   children?: React.ReactNode;
@@ -18,28 +19,15 @@ type Props = {
 
 function AccountLayout({ children }: Props) {
   const { data: session } = useSession();
-  if (!session) {
-    return (
-      <div className="h-[60vh] flex justify-center items-center flex-col">
-        <h1 className="mt-6 text-4xl font-bold text-center text-[#333] uppercase">
-          Please Login into your account
-        </h1>
-        <Link href={"/login"}>
-          <button className="bg-[#333] text-white rounded-sm py-2 px-3 mt-4">
-            Login Now
-          </button>
-        </Link>
-      </div>
-    );
-  }
+
   return (
-    <div>
+    <AuthenticationLayout>
       <UserDetail />
       <div className="flex flex-wrap-reverse  justify-center items-center md:justify-start md:items-end">
         <Sidebar />
         {children}
       </div>
-    </div>
+    </AuthenticationLayout>
   );
 }
 

@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     await mongoose.connect(`${process.env.MONGODB_URI}`);
   }
 
-  let products = await Product.find({ category: "slipers" });
+  let products = await Product.find();
 
   return {
     props: { products: JSON.parse(JSON.stringify(products)) },

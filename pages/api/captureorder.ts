@@ -5,8 +5,8 @@ import paypal from "@paypal/checkout-server-sdk";
 import Order from "../../models/Order";
 import connectDb from "../../libs/ConnectDb";
 import { NextApiRequest, NextApiResponse } from "next";
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+                                        
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {                                                                           
   //Capture order to complete payment
 
   const { orderID } = req.body;

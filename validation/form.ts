@@ -18,6 +18,11 @@ export const formValidationSchema = Yup.object().shape({
 });
 export const stringValidation = (properties: string[]) => {
   let a = properties.map((property) => {
+    if (property === "email") {
+      return {
+        [property]: Yup.string().required("Required").email("Invalid email"),
+      };
+    }
     let schema = {
       [property]: Yup.string().required("Required").min(2, "Too Short!"),
     };

@@ -25,7 +25,7 @@ function Addresses({}: Props) {
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something Wrong Went. Please Contact to Developer.</p>;
   return (
-    <div className="flex ">
+    <div className="flex mx-4">
       <div className=" my-8 space-y-5">
         <h1 className="font-bold text-[#333] text-3xl">Address book</h1>
         {data?.map((item, i) => {

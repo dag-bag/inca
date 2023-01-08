@@ -14,6 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
     const { Cart, userEmail, total, address } = req.body;
+    console.log(req.body);
 
     try {
       const PaypalClient = client();

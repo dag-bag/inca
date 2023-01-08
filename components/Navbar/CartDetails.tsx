@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { cartQty, cartTotal } from "../../atoms/cart";
+import PrimaryBtn from "../buttons/PrimaryBtn";
+import PoketCart from "../Cart/PoketCart";
 
 type Props = {
   svg: any;
@@ -26,13 +28,14 @@ function CartDetails({ svg }: Props) {
         tabIndex={0}
         className="mt-3 card card-compact dropdown-content w-52 bg-white shadow"
       >
+        {/* <PoketCart /> */}
         <div className="card-body">
           <span className="font-bold text-lg">{cartItems} Items</span>
           <span className="text-info">Subtotal: ${subTotal}</span>
           <div className="card-actions">
-            <button className="btn btn-primary btn-block bg-pr1imary-1 hover:bg-black border-none">
-              <Link href="/cart">View cart</Link>
-            </button>
+            <Link href="/cart">
+              <PrimaryBtn>View Cart</PrimaryBtn>
+            </Link>
           </div>
         </div>
       </div>

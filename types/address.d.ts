@@ -2,7 +2,7 @@
 
 import { interpolateAs } from "next/dist/shared/lib/router/router";
 
-export interface Address {
+export type Address = {
   _id?: string;
   address1: string;
   address2: string;
@@ -14,4 +14,4 @@ export interface Address {
   firstName: string;
   phone: number;
   email: string;
-}
+};

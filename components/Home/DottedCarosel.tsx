@@ -16,12 +16,6 @@ type Props = {
 };
 
 function DottedCarousel({ features }: Props) {
-  // const pagination = {
-  //   clickable: true,
-  //   renderBullet: function (index: number, className: string) {
-  //     return '<span class="  ' + className + '">' + (index + 1) + "</span>";
-  //   },
-  // };
   return (
     <Swiper
       loop={true}

@@ -16,7 +16,7 @@ function Story({ title, description, image, boxType, type }: Props) {
     <>
       {type === 1 && (
         <div
-          className={`flex  justify-evenly  flex-wrap-reverse pb-2  mb-20 md:mt-16  `}
+          className={`flex  justify-evenly  flex-wrap-reverse pb-2 md:p-0 mb-20 md:mt-32   md:mb-40`}
         >
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
             <div
@@ -52,7 +52,7 @@ function Story({ title, description, image, boxType, type }: Props) {
             <div
               className={`w-[70%] h-[100%] rounded-[3px]  ${
                 boxType === "center-center" ? "bg-[#e8e8e8]" : "bg-[#bd9575]"
-              } absolute md:w-1/2 -top-14  ${
+              } absolute md:w-1/2 -top-14   ${
                 boxType === "left-right" && "right-0"
               }      ${boxType === "center-left" && "left-0"} md:right-15`}
             ></div>
@@ -70,7 +70,9 @@ function Story({ title, description, image, boxType, type }: Props) {
         </div>
       )}
       {type === 2 && (
-        <div className={`flex  justify-evenly  flex-wrap   md:my-16`}>
+        <div
+          className={`flex  justify-evenly  flex-wrap   md:mt-52 md:mb-40  mb-20`}
+        >
           <div className={`flex-1 flex  relative justify-center mr-2 ml-0  `}>
             <div
               className={`w-[70%] h-[100%] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
@@ -110,7 +112,7 @@ function Story({ title, description, image, boxType, type }: Props) {
         </div>
       )}
       {type === 3 && (
-        <div className={`flex  justify-evenly  flex-wrap-reverse  md:pt-16 `}>
+        <div className={`flex  justify-evenly  flex-wrap-reverse  md:my-28 `}>
           <div
             className={`px-5 flex justify-start flex-col   space-y-12  md:w-[50%]`}
           >

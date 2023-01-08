@@ -4,6 +4,7 @@ import { selector, atom } from "recoil";
 import { find } from "lodash";
 import { recoilPersist } from "recoil-persist";
 import { CartItem } from "../types/cart";
+import { toast } from "react-hot-toast";
 
 const { persistAtom } = recoilPersist();
 
@@ -26,7 +27,7 @@ export const cartSelector = selector({
     const alreadyExists = find(cardItems, { uni: newValue.uni });
     if (alreadyExists) {
       let newCardItems = cardItems.map((i: any) => {
-        if (i.id === newValue.id) {
+        if (i.uni === newValue.uni) {
           return {
             ...i,
             qty: i.qty + 1,
@@ -38,6 +39,41 @@ export const cartSelector = selector({
       set(cartAtom, newCardItems);
     } else {
       set(cartAtom, [...cardItems, newValue]);
+    }
+    toast.success("Added to cart 🛒");
+  },
+});
+export const removeOneItemFromCart = selector({
+  key: "removeOneItemFromCart",
+  get: ({ get }) => {
+    let cardItems = get(cartAtom);
+    if (cardItems.length > 0) null;
+    // let localCardItems = JSON.parse(localStorage.getItem("cardItems"));
+    return cardItems;
+  },
+  set: ({ set, get }, newValue) => {
+    const cardItems = get(cartAtom);
+    const alreadyExists = find(cardItems, { uni: newValue.uni });
+    if (newValue.qty === 0) {
+      let newCartItems = cardItems.filter((i: any) => i.uni !== newValue.uni);
+      set(cartAtom, newCartItems);
+    } else {
+      if (alreadyExists) {
+        let newCardItems = cardItems.map((i: any) => {
+          if (i.uni === newValue.uni) {
+            return {
+              ...i,
+              qty: i.qty - 1,
+            };
+          } else {
+            return i;
+          }
+        });
+        set(cartAtom, newCardItems);
+      } else {
+        set(cartAtom, [...cardItems, newValue]);
+      }
+      toast.success("Removed Items successfully");
     }
   },
 });
@@ -59,7 +95,7 @@ export const cartQty = selector({
   get: ({ get }) => {
     const cartItems = get(cartAtom);
     let total = 0;
-    cartItems.map((i: any) => {
+    cartItems.map((i: CartItem) => {
       total += i.qty;
     });
     return total;

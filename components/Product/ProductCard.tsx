@@ -25,7 +25,7 @@ function ProductCard({ title, variant, tag }: Props) {
         <div className="relative ">
           {/* <span className="badge bg-primary text-white">{tag}</span> */}
           <div
-            className="flex group relative  md:w-full bg-[#e8e8e8] h-[161.66px] md:h-[287.425px] justify-end items-center flex-col min-w-[161.66px] md:min-w-[287.425px] lg:min-w-[287.425px] lg:min-h-[287.425px] xl:min-w-[300.425px] xl:min-h-[300.425px] 2xl:min-w-[387.425px] 2xl:min-h-[387.425px] rounded-xl
+            className="flex group relative  md:w-full bg-[#e8e8e8] h-[161.66px] md:h-[287.425px] justify-end items-center flex-col min-w-[161.66px] md:min-w-[287.425px] lg:min-w-[16rem] lg:min-h-auto xl:min-w-[300.425px] xl:min-h-[300.425px] rounded-xl
           "
           >
             <BlurImage

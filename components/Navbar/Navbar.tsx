@@ -8,31 +8,42 @@ import { useSetRecoilState } from "recoil";
 
 import SmallMenu, { menuState } from "./SmallNavbar";
 import dynamic from "next/dynamic";
+const PoketCart = dynamic(() => import("../Cart/PoketCart"), {
+  ssr: false,
+});
+
+import { SearchIcon } from "@heroicons/react/solid";
+import SeachForm from "../Search/SeachForm";
+
 const CartDetails = dynamic(() => import("./CartDetails"), { ssr: false });
 
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 
 const centerDivData = [
-  { title: "Alpaca Slippers", href: "/alpaca-toys" },
+  { title: "Stuffed Animals", href: "/category/alpaca-stuffed-animals" },
   {
-    title: "Alpaca Home  & decor",
-    href: "/wear",
-    dropdown: true,
-    DropDownData: ["Slipers", "Ponchos", "Scarves", "Pashminas"],
+    title: " Slippers",
+    href: "/category/alpaca-slippers",
   },
-  { title: "Home", href: "/" },
-  { title: "Alpaca Accesories", href: "/alpaca-accesories" },
+  {
+    title: " Clothing",
+    href: "/category/alpaca-clothing",
+    dropdown: true,
+    DropDownData: ["Alpaca Ponchos", "Scarves", "Alpaca Gloves", "Shawls"],
+  },
+  { title: "Home & deco", href: "/" },
+  { title: " Accesories", href: "/category/alpaca-accessories" },
   {
     title: "About Us",
     href: "/about",
-    dropdown: true,
-    DropDownData: [
-      "Our Story",
-      "Sustainability ",
-      "Our Values",
-      "Alpacas for good",
-      "Our Team",
-    ],
+    // dropdown: true,
+    // DropDownData: [
+    //   "Our Story",
+    //   "Sustainability ",
+    //   "Our Values",
+    //   "Alpacas for good",
+    //   "Our Team",
+    // ],
   },
 ];
 
@@ -159,7 +170,7 @@ function Navbar() {
   return (
     <>
       <SmallMenu />
-      <div className="navbar bg-white md:max-w-[90%] m-auto">
+      <div className="navbar bg-white md:max-w-[90%] m-auto relative ">
         <div className="navbar-start">
           <div className="relative w-7 sm:w-10 md:w-16 cursor-pointer ">
             <Link href={"/"}>
@@ -222,17 +233,13 @@ function Navbar() {
             </label>
             <div
               tabIndex={0}
-              className="mt-3 card card-compact dropdown-content w-52 bg-white shadow"
+              className="mt-7 card card-compact dropdown-content  bg-white shadow w-[80vw]"
             >
-              <div className="card-body">
-                <input
-                  type="text"
-                  placeholder="Search here"
-                  className="input input-bordered w-full max-w-xs"
-                />
-              </div>
+              {/* <Search /> */}
+              <SeachForm />
             </div>
           </div>
+          {/* <Search svg={rightDivData[0].svg} /> */}
           <Link href={`${rightDivData[1]?.link}`}>
             <label tabIndex={0} className="btn btn-link btn-circle">
               <div className="indicator">{rightDivData[1]?.svg}</div>
@@ -275,10 +282,12 @@ function Navbar() {
               </>
             ) : (
               <>
-                <label tabIndex={0} className="btn btn-link btn-circle">
-                  <div className="indicator">{rightDivData[2]?.svg}</div>
-                </label>
-                <ul
+                <Link href={"/login"}>
+                  <label tabIndex={0} className="btn btn-link btn-circle">
+                    <div className="indicator">{rightDivData[2]?.svg}</div>
+                  </label>
+                </Link>
+                {/* <ul
                   tabIndex={0}
                   className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
                 >
@@ -287,11 +296,12 @@ function Navbar() {
                       <span>login</span>
                     </Link>
                   </li>
-                </ul>
+                </ul> */}
               </>
             )}
           </div>
-          <CartDetails svg={rightDivData[3].svg} />
+          {/* <CartDetails svg={rightDivData[3].svg} /> */}
+          <PoketCart svg={rightDivData[3].svg} />
           <label
             tabIndex={0}
             className="btn btn-ghost lg:hidden"

@@ -7,6 +7,9 @@ import Btn from "../buttons/Btn";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import ProductCard from "../Product/ProductCard";
 import FeatureCard from "../Fav/FeatureCard";
+import CategoriesCard from "../Carosel/CategoriesCard";
+import { ICategories } from "../../types/category";
+import H2 from "../Headings/H2";
 interface FeaturesProps {
   title: string;
   svg: any;
@@ -17,8 +20,14 @@ type Props = {
   products?: FetchedProductType[];
   features?: FeaturesProps[];
   title?: string;
+  categories?: ICategories[];
 };
-export default function Carousel({ products, features, title }: Props) {
+export default function Carousel({
+  products,
+  features,
+  title,
+  categories,
+}: Props) {
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<any>(null);
@@ -65,11 +74,9 @@ export default function Carousel({ products, features, title }: Props) {
   }, []);
 
   return (
-    <div className="">
-      <h2 className=" md:text-5xl text-black text-center font-bold my-4">
-        {title}
-      </h2>
-      <div className="w-full md:w-[80%] mx-auto ">
+    <div className="max-w-7xl m-auto">
+      <div className="w-full md:max-w-7xl mx-auto ">
+        <H2 text={title} />
         <div className="flex items-center justify-center w-full h-full  relative  px-4">
           <button
             onClick={movePrev}
@@ -96,20 +103,25 @@ export default function Carousel({ products, features, title }: Props) {
             <span className="sr-only">Next</span>
           </button>
           {/* Carousel for desktop and large size devices */}
-          <div className="carousel my-12 mx-auto max-w-full relative  md:block">
+          <div className="carousel  my-6 mx-auto max-w-full relative  md:block">
             <div className="relative overflow-hidden ">
               <div
                 ref={carousel}
                 className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory  z-0 pb-16  md:!scrollbar-hide"
               >
-                {products &&
-                  products?.map((product, index) => {
-                    return <ProductCard {...product} key={index} />;
-                  })}
-                {features &&
-                  features.map((feature, index) => {
-                    return <FeatureCard {...feature} key={index} />;
-                  })}
+                {products
+                  ? products?.map((product, index) => {
+                      return <ProductCard {...product} key={index} />;
+                    })
+                  : null}
+                {features
+                  ? features.map((feature, index) => {
+                      return <FeatureCard {...feature} key={index} />;
+                    })
+                  : null}
+                {categories?.map((category, index) => {
+                  return <CategoriesCard {...category} key={index} />;
+                })}
               </div>
             </div>
           </div>

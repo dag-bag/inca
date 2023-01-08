@@ -1,6 +1,9 @@
 /** @format */
 
-import { selector, atom } from "recoil";
+import { toast } from "react-hot-toast";
+/** @format */
+
+import { selector, atom, selectorFamily } from "recoil";
 import { find } from "lodash";
 import { recoilPersist } from "recoil-persist";
 import { CartItem } from "../types/cart";
@@ -13,35 +16,63 @@ export const favAtom = atom<CartItem | any>({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const favSelector = selector({
+export const favSelector = selectorFamily({
   key: "favSelector",
-  get: ({ get }) => {
-    let cardItems = get(favAtom);
-    if (cardItems.length > 0) null;
-    // let localCardItems = JSON.parse(localStorage.getItem("cardItems"));
-    return cardItems;
-  },
-  set: ({ set, get }, newValue) => {
-    const cardItems = get(favAtom);
-    const alreadyExists = find(cardItems, { uni: newValue.uni });
-    if (alreadyExists) {
-      let newCardItems = cardItems.map((i: any) => {
-        if (i.id === newValue.id) {
-          return {
-            ...i,
-            qty: i.qty + 1,
-          };
-        } else {
-          return i;
-        }
-      });
-      set(favAtom, newCardItems);
-    } else {
-      set(favAtom, [...cardItems, newValue]);
-    }
-  },
+  get:
+    (uni) =>
+    ({ get }) => {
+      let cardItems = get(favAtom);
+      if (cardItems.length > 0) null;
+      const alreadyExists = find(cardItems, { uni: uni });
+      if (alreadyExists) {
+        return true;
+      } else {
+        return false;
+      }
+      // let localCardItems = JSON.parse(localStorage.getItem("cardItems"));
+    },
+  // @ts-ignore
+  set:
+    (P) =>
+    ({ set, get }, newValue: CartItem) => {
+      const cardItems = get(favAtom);
+      const alreadyExists = find(cardItems, { uni: newValue.uni });
+      if (alreadyExists) {
+        const deleteFavItem = cardItems.filter(
+          (item: CartItem) => item.uni !== newValue.uni
+        );
+        set(favAtom, deleteFavItem);
+        toast("Remove From favraites Items.", {
+          icon: "💓",
+        });
+      } else {
+        set(favAtom, [...cardItems, newValue]);
+        toast("Added to favraites Items.", {
+          icon: "💓",
+        });
+      }
+    },
 });
 
+export const isFavOrNotSelectorFamily = selectorFamily({
+  key: "isFavOrNotSelectorFamily",
+  get:
+    (uni) =>
+    ({ get }) => {
+      let cardItems = get(favAtom);
+      if (cardItems.length > 0) null;
+      const alreadyExists = find(cardItems, { uni: uni });
+      if (alreadyExists) {
+        return true;
+      } else {
+        return false;
+      }
+      // let localCardItems = JSON.parse(localStorage.getItem("cardItems"));
+    },
+  set:
+    () =>
+    ({ set, get }) => {},
+});
 export const favTotal = selector({
   key: "favTotal",
   get: ({ get }) => {
@@ -77,4 +108,8 @@ export const removeFav = selector({
     let newCartItems = cartItems.filter((i: CartItem) => i.uni !== newValue);
     set(favAtom, newCartItems);
   },
+});
+export const isFavOrNotAtom = atom({
+  key: "isFavOrNotAtom",
+  default: false,
 });
