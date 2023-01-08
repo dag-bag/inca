@@ -6,7 +6,7 @@ import PaypalComponent from "../../components/checkout/Paypal/PaypalComponent";
 type Props = {};
 
 function Pay({}: Props) {
-  return <PaypalComponent />;
+  // return <PaypalComponent />;
 }
 
 export default Pay;
