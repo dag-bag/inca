@@ -10,6 +10,7 @@ import { activeAddressCard, checkoutSteps } from "../../../atoms/checkout";
 import AddressCard from "../AddessCard";
 import PrimaryBtn from "../../buttons/PrimaryBtn";
 import { useSession } from "next-auth/react";
+import AccountModal from "../../accountComponents/AccountModal";
 
 type Props = {};
 
@@ -26,6 +27,29 @@ function Step1({}: Props) {
   );
   const setSelectedAddress = useSetRecoilState(activeAddressCard);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
+  const handleClick = () => {
+    let isEditAbleOrNot = checkoutState.find((item) => item.edit === true);
+    if (!isEditAbleOrNot) {
+      setCheckoutState(
+        checkoutState.map((i, index) => {
+          return i.status === "active"
+            ? { ...i, status: "completed" } // change the status of the active step to completed
+            : index === 1 // if the index is 1 then change the status of the next step to active
+            ? { ...i, status: "active" }
+            : i;
+        })
+      );
+    } else {
+      setCheckoutState(
+        checkoutState.map((i, index) => {
+          return i.edit === true && i.step === 1
+            ? { ...i, edit: !i.edit } // change the status of the active step to completed
+            : i;
+        })
+      );
+    }
+  };
+
   return (
     <>
       <Container
@@ -63,31 +87,8 @@ function Step1({}: Props) {
           })}
         </div>
       </div>
-      <PrimaryBtn
-        text="Continue"
-        onClick={() => {
-          setCheckoutState(
-            checkoutState.map((i, index) => {
-              return i.status === "active"
-                ? { ...i, status: "completed" } // change the status of the active step to completed
-                : index === 1 // if the index is 1 then change the status of the next step to active
-                ? { ...i, status: "active" }
-                : i;
-            })
-          );
-        }}
-      />
-      <button
-        className="absolute bottom-3 right-5 bg-primary-1 rounded-md py-2 px-4 text-white disabled:opacity-50 cursor-pointer"
-        // disabled={true ? !active : true}
-        // onClick={() => {
-        //   setState(2);
-        //   Setx({ ...x, 1: "Complete" });
-        //   setComplete(true);
-        // }}
-      >
-        Continue to delivery
-      </button>
+      <AccountModal className="ml-12" />
+      <PrimaryBtn text="Continue" onClick={handleClick} />
     </>
   );
 }

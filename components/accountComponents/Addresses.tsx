@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import React, { Suspense } from "react";
 import ModalBtn from "../buttons/ModalBtn";
 import Modal from "../utils/Modal";
+import AccountModal from "./AccountModal";
 import AddressCard from "./AddressCard";
 
 type Props = {};
@@ -33,10 +34,7 @@ function Addresses({}: Props) {
           return <AddressCard {...item} key={i} da={data} />;
         })}
 
-        <ModalBtn text={"Add another address"} />
-        <Suspense fallback={<p>Loading...</p>}>
-          <Modal />
-        </Suspense>
+        <AccountModal />
       </div>
     </div>
   );

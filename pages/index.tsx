@@ -6,12 +6,14 @@ import Product from "../models/Product";
 import { FetchedProductType } from "../types/product";
 
 import dynamic from "next/dynamic";
+import Skeleton from "../components/skeleton/Skeleton";
 const Main = dynamic(() => import("../components/Home/Main"));
 
 export default function Home({ products }: { products: FetchedProductType[] }) {
   console.log(products);
   return (
     <div>
+      {/* <Skeleton /> */}
       <Main products={products} />
     </div>
   );

@@ -81,7 +81,7 @@ function PoketCart({ svg }: Props) {
                         className="py-6 flex items-center cursor-pointer"
                       >
                         <Image
-                          src={product.img[0]}
+                          src={product.img[0].img}
                           alt={title}
                           height={200}
                           width={200}
@@ -89,7 +89,9 @@ function PoketCart({ svg }: Props) {
                         />
                         <div className="ml-4 flex-auto">
                           <h3 className="font-medium text-gray-900">
-                            <Link href={slug}>{title}</Link>
+                            <Link href={slug}>
+                              {title} ({size}/{color})
+                            </Link>
                           </h3>
                           <p className="text-gray-500">{color}</p>
                           <p className="text-gray-500 flex">

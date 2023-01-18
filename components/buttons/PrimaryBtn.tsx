@@ -22,9 +22,9 @@ function PrimaryBtn({
   onClick,
   type,
 }: Props) {
-  const btnClasses = `btn bg-[#333] text-white border-none outline-none ${className} disabled:opacity-50 ${
+  const btnClasses = ` btn bg-[#333] text-white border-none outline-none ${className} disabled:opacity-50 ${
     isLoading && "loading"
-  }`;
+  } `;
   return (
     <button
       type={type}

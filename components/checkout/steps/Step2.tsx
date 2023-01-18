@@ -18,6 +18,28 @@ type Props = {};
 function Step2({}: Props) {
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
+  const handleClick = () => {
+    let isEditAbleOrNot = checkoutState.find((item) => item.edit === true);
+    if (!isEditAbleOrNot) {
+      setCheckoutState(
+        checkoutState.map((i, index) => {
+          return i.status === "active"
+            ? { ...i, status: "completed" } // change the status of the active step to completed
+            : index === 2 // if the index is 1 then change the status of the next step to active
+            ? { ...i, status: "active" }
+            : i;
+        })
+      );
+    } else {
+      setCheckoutState(
+        checkoutState.map((i, index) => {
+          return i.edit === true && i.step === 2
+            ? { ...i, edit: !i.edit } // change the status of the active step to completed
+            : i;
+        })
+      );
+    }
+  };
 
   return (
     <>
@@ -47,7 +69,7 @@ function Step2({}: Props) {
             <li key={index} className="flex py-6 sm:py-10">
               <div className="flex-shrink-0 ">
                 <Image
-                  src={item.img[0]}
+                  src={item.img[0].img}
                   alt="Front of men's Basic Tee in sienna."
                   className="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48"
                   width={150}
@@ -139,20 +161,7 @@ function Step2({}: Props) {
           );
         })}
       </div>
-      <PrimaryBtn
-        text="Continue to Payment"
-        onClick={() => {
-          setCheckoutState(
-            checkoutState.map((i, index) => {
-              return i.status === "active"
-                ? { ...i, status: "completed" } // change the status of the active step to completed
-                : index === 2 // if the index is 1 then change the status of the next step to active
-                ? { ...i, status: "active" }
-                : i;
-            })
-          );
-        }}
-      />
+      <PrimaryBtn text="Continue to Payment" onClick={handleClick} />
     </>
   );
 }

@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Category/Layout";
 import dynamic from "next/dynamic";
 const Products = dynamic(() => import("../../components/Category/Products"), {
@@ -33,12 +33,13 @@ function DynamicCateGoryPage({ products }: Props) {
       initialData: products,
     }
   );
+  const [filterProducts, setFilterProducts] = useState(products);
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Layout>
+    <Layout setFilter={setFilterProducts}>
       <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:col-span-3 lg:gap-x-8">
-        {products.map((product, index) => (
+        {filterProducts.map((product: ProductType, index) => (
           <Link key={index} href={`/product/${product.variant[0].slug}`}>
             <div
               key={product._id}
@@ -46,11 +47,11 @@ function DynamicCateGoryPage({ products }: Props) {
             >
               <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
                 <Image
-                  src={product.variant[0].img[0]}
+                  src={product.variant[0].img[0].img}
                   alt={product.desc}
                   className="h-full w-full object-cover object-center"
-                  width={200}
-                  height={200}
+                  width={300}
+                  height={300}
                 />
               </div>
               <div className=" pb-4 text-center">

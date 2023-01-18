@@ -21,9 +21,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         let products = await Product.find();
-      return  res.status(200).json({ products });
+        return res.status(200).json({ products });
       } catch (error) {
-        return res.status(400).json({ success: false, error: "some went wrong." });
+        return res
+          .status(400)
+          .json({ success: false, error: "some went wrong." });
       }
       break;
     case "POST":

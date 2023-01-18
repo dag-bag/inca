@@ -49,7 +49,8 @@ import {
 import { StarIcon } from "@heroicons/react/solid";
 import ProductReviews from "../../components/Product/ProductReviews";
 import Link from "next/link";
-import { find } from "lodash";
+import Image from "next/image";
+import SkeLeTonImage from "../../components/skeleton/SkeletonImage";
 
 const productRaw = {
   sizes: ["10", "20", "30", "40", "50", "60", "70"],
@@ -143,22 +144,29 @@ export default function Example({
                   {variantDetails.img.map((image, index) => (
                     <Tab
                       key={index}
-                      className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
+                      className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none  "
                     >
                       {({ selected }) => (
                         <>
                           <span className="sr-only">{}</span>
-                          <span className="absolute inset-0 rounded-md overflow-hidden">
-                            <img
-                              src={image}
-                              alt=""
-                              className="w-full h-44 object-center object-cover"
+                          <div className="absolute inset-0 rounded-md overflow-hidden h-32">
+                            <BlurImage
+                              image={image.img}
+                              alt="product"
+                              key={index}
+                              className="h-14 w-14  cursor-pointer"
+                              width={50}
+                              height={50}
+                              rounded={true}
+                              cursor={true}
                             />
-                          </span>
+                          </div>
                           <span
                             className={classNames(
-                              selected ? "ring-primary" : "ring-transparent",
-                              "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none"
+                              selected
+                                ? "ring-primary outline-none"
+                                : "ring-transparent",
+                              "absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none h-32"
                             )}
                             aria-hidden="true"
                           />
@@ -172,9 +180,12 @@ export default function Example({
               <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
                 {variantDetails.img.map((image, index) => (
                   <Tab.Panel key={index}>
-                    <img
-                      src={image}
-                      alt={product.title}
+                    <SkeLeTonImage
+                      width={500}
+                      height={500}
+                      image={image.img}
+                      alt={image.alt}
+                      type="responsive"
                       className="w-full h-full object-center object-cover sm:rounded-lg"
                     />
                   </Tab.Panel>
@@ -250,7 +261,7 @@ export default function Example({
                             className="h-14 w-14 relative hover:opacity-75 duration-700 ease-in-out border border-gray-200 rounded-xl"
                           >
                             <BlurImage
-                              image={item.img[0]}
+                              image={item.img[0].img}
                               alt="product"
                               key={index}
                               className="h-14 w-14  cursor-pointer"
@@ -455,7 +466,7 @@ export default function Example({
                   <div className="relative">
                     <div className="relative w-full h-72 rounded-lg overflow-hidden">
                       <img
-                        src={product.variant[0].img[0]}
+                        src={product.variant[0].img[0].img}
                         alt={product.title}
                         className="w-full h-full object-center object-cover"
                       />

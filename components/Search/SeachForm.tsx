@@ -1,5 +1,6 @@
 /** @format */
 
+import { useQuery } from "@tanstack/react-query";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -10,13 +11,17 @@ type Props = {};
 
 function SeachForm({}: Props) {
   const { push } = useRouter();
+
   return (
     <Formik
       initialValues={{
         query: "",
       }}
       onSubmit={(values) => {
-        push(`/search/${values.query}`);
+        push({
+          pathname: "/search",
+          query: { keyword: values.query },
+        });
       }}
       validationSchema={stringValidation(["query"])}
     >

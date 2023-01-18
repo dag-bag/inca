@@ -20,42 +20,40 @@ const checkoutSteps = atom<ICheckoutStepType[]>({
       step: 1,
       status: "active",
       title: "Address",
+      edit: false,
     },
     {
       step: 2,
       status: "pending",
       title: "Delivery",
+      edit: false,
     },
     {
       step: 3,
       status: "pending",
       title: "Payment",
+      edit: false,
     },
   ],
-  effects_UNSTABLE: [persistAtom],
 });
 const selectedAddress = atom<Address | {}>({
   key: "selectedAddress",
   default: {},
-  effects_UNSTABLE: [persistAtom],
 });
 
 const selectedDeliveryCharges = atom({
   key: "selectedDeliveryAddress",
-  default: {},
-  effects_UNSTABLE: [persistAtom],
+  default: 0,
 });
 
 const selectedPaymentMethod = atom({
   key: "selectedPaymentMethod",
   default: {},
-  effects_UNSTABLE: [persistAtom],
 });
 
 const activeAddressCard = atom<Address | undefined>({
   key: "activeAddressCard",
   default: undefined,
-  effects_UNSTABLE: [persistAtom],
 });
 export {
   checkout,

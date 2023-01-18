@@ -2,8 +2,12 @@
 
 import React from "react";
 import { BsFillPatchCheckFill } from "react-icons/bs";
-import { useRecoilValue } from "recoil";
-import { activeAddressCard, selectedAddress } from "../../../atoms/checkout";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  activeAddressCard,
+  checkoutSteps,
+  selectedAddress,
+} from "../../../atoms/checkout";
 import { Address } from "../../../types/address";
 import AddressCard from "../AddessCard";
 
@@ -13,6 +17,8 @@ function Step1Complete({}: Props) {
   const selectedAddress = useRecoilValue<Address | undefined>(
     activeAddressCard
   );
+  const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
+
   return (
     <div className="min-w-[1040px] flex justify-start items-start space-x-2 relative">
       <h1 className="flex items-center  text-3xl font-semibold mt-6 mr-4">
@@ -28,10 +34,13 @@ function Step1Complete({}: Props) {
         <button
           type="button"
           className="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95 flex space-x-2"
-          //   onClick={() => {
-          //     setState(1);
-          //     Setx({ ...x, 1: "Pending" });
-          //   }}
+          onClick={(e) => {
+            let UpdatedSTate = checkoutState.map((item, i) => {
+              return item.step === 1 ? { ...item, edit: true } : item;
+            });
+            console.log(UpdatedSTate);
+            setCheckoutState(UpdatedSTate);
+          }}
         >
           <span>Edit</span>
           <svg

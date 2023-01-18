@@ -29,10 +29,10 @@ function ProductCard({ title, variant, tag }: Props) {
           "
           >
             <BlurImage
-              image={img[0]}
+              image={img[0].img}
               height={200}
               width={200}
-              alt={metadesc}
+              alt={img[0].alt}
               type="fill"
               rounded={true}
             />

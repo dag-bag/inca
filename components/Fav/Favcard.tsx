@@ -39,10 +39,10 @@ function FavCard({ title, img, desc, price, slug, uni }: CartItem) {
           {/* <span className="badge bg-primary text-white">{tag}</span> */}
           <div className="flex group relative  md:w-full bg-[#e8e8e8]  justify-end items-center flex-col h-full w-full rounded-md">
             <BlurImage
-              image={img[0]}
+              image={img[0].img}
               height={200}
               width={200}
-              alt={desc || title}
+              alt={img[0].alt}
               type="responsive"
               rounded={true}
               className="rounded-md"

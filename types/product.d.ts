@@ -2,7 +2,10 @@
 export interface Variant {
   title: string;
   slug: string;
-  img: string[];
+  img: {
+    img: string;
+    alt: string;
+  }[];
   availableQty: number;
   color: string;
   price: number;
@@ -34,7 +37,10 @@ export type VariantDetails = {
   active: boolean;
   availableQty: number;
   color: string;
-  img: string[];
+  img: {
+    img: string;
+    alt: string;
+  }[];
   price: number;
   sellPrice: string;
   size: string[];

@@ -3,8 +3,9 @@
 import Image from "next/image";
 import React from "react";
 import { BsFillCheckCircleFill } from "react-icons/bs";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { cartAtom } from "../../../atoms/cart";
+import { checkoutSteps } from "../../../atoms/checkout";
 import { CartItem } from "../../../types/cart";
 import BlurImage from "../../utils/BlurImage";
 
@@ -12,6 +13,14 @@ type Props = {};
 
 function Step2Completed({}: Props) {
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
+  const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
+  const handleClick = () => {
+    let UpdatedSTate = checkoutState.map((item, i) => {
+      return item.step === 2 ? { ...item, edit: true } : item;
+    });
+    console.log(UpdatedSTate);
+    setCheckoutState(UpdatedSTate);
+  };
   return (
     <div className="min-w-[1040px] flex justify-start items-start space-x-2 relative">
       <h1 className="flex items-center  text-3xl font-semibold mt-6 mr-4">
@@ -26,7 +35,7 @@ function Step2Completed({}: Props) {
               <li key={index} className="flex py-6 sm:py-10">
                 <div className="flex-shrink-0 ">
                   <Image
-                    src={item.img[0]}
+                    src={item.img[0].img}
                     alt="Front of men's Basic Tee in sienna."
                     className="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48"
                     width={150}
@@ -123,6 +132,7 @@ function Step2Completed({}: Props) {
         <button
           type="button"
           className="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95 flex space-x-2"
+          onClick={handleClick}
           //   onClick={() => {
           //     setState(2);
           //     Setx({ ...x, 2: "Pending" });
