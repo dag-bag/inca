@@ -20,7 +20,7 @@ function Products({ data }: Props) {
           >
             <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
               <Image
-                src={product.variant[0].img[0]}
+                src={product.variant[0].img[0].img}
                 alt={product.desc}
                 className="h-full w-full object-cover object-center"
                 width={200}
