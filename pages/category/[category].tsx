@@ -37,7 +37,7 @@ function DynamicCateGoryPage({ products }: Props) {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Layout setFilter={setFilterProducts}>
+    <Layout>
       <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:col-span-3 lg:gap-x-8">
         {filterProducts.map((product: ProductType, index) => (
           <Link key={index} href={`/product/${product.variant[0].slug}`}>

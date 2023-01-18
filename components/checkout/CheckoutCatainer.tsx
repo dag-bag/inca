@@ -13,7 +13,7 @@ type Props = {
     Text: string;
     Title: string;
     IconText?: string;
-    value?: number | string;
+    value?: number;
   }[];
 };
 function Container({ Question, Title, Level, ShipCardData }: Props) {

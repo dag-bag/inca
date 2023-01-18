@@ -133,11 +133,9 @@ function classNames(...classes: string[]) {
 export default function Layout({
   children,
   query,
-  setFilter,
 }: {
   children: React.ReactNode;
   query?: string;
-  setFilter?: () => void;
 }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const router = useRouter();
