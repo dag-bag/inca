@@ -5,7 +5,7 @@ import { Address } from "cluster";
 import { useSession } from "next-auth/react";
 import React, { Suspense } from "react";
 import ModalBtn from "../buttons/ModalBtn";
-import Modal from "../utils/Modal";
+import Modal from "../Modals/Modal";
 import AccountModal from "./AccountModal";
 import AddressCard from "./AddressCard";
 

@@ -36,7 +36,7 @@ function OrderHistory({ orders }: Props) {
                       </div>
                       <div>
                         <h5 className="text-lg text-gray-500">Date</h5>
-                        <p>14 January,</p>
+                        <p>{new Date(item.createdAt).toDateString()},</p>
                       </div>
                       <div>
                         <h5 className="text-lg text-gray-500">Total Amount</h5>
@@ -58,7 +58,7 @@ function OrderHistory({ orders }: Props) {
                             <li key={k} className="flex py-2 ">
                               <div className="flex-shrink-0 ">
                                 <Image
-                                  src={item?.products[k]?.img[0]}
+                                  src={item?.products[k]?.img[0].img}
                                   alt="Front of men's Basic Tee in sienna."
                                   className=" rounded-md object-center object-cover sm:w-48 sm:h-48"
                                   width={150}
@@ -147,20 +147,6 @@ function OrderHistory({ orders }: Props) {
             })
           : null}
       </div>
-      {/* </Container> */}
-
-      {/* {orders.length === 0 && (
-            <>
-              <p className="font-semibold text-[#333] text-xl">
-                you don&apos;t have orders yet.
-              </p>
-              <Link href={"/"}>
-                <button className="bg-[#333] text-white rounded-sm py-4 px-8 mt-4 w-[24rem]">
-                  Shop Now
-                </button>
-              </Link>
-            </>
-          )} */}
     </AccountLayout>
   );
 }

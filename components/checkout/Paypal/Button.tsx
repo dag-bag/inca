@@ -13,6 +13,7 @@ import { cartAtom, cartTotal } from "../../../atoms/cart";
 import { Address } from "../../../types/address";
 import { useSession } from "next-auth/react";
 import bcrypt from "bcryptjs";
+import { useRouter } from "next/router";
 // This values are the props in the UI
 const amount = 2;
 
@@ -24,6 +25,7 @@ type Props = {
 
 // Custom component to wrap the PayPalButtons and handle currency changes
 const ButtonWrapper = ({ currency, showSpinner }: Props) => {
+  const { push } = useRouter();
   const address = useRecoilValue(activeAddressCard);
   let hashAddress = bcrypt.hashSync(JSON.stringify(address), 10);
   const total = useRecoilValue(cartTotal);
@@ -78,10 +80,11 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
             }),
           });
           const order = await resp.json();
+          push({
+            pathname: "/checkout/success",
+            query: { orderId: order.id },
+          });
 
-          // router.push(`/checkout/success/${order.id}`);
-
-          console.log(order);
           // clearCart();
         }}
       />

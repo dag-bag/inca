@@ -11,6 +11,9 @@ import AddressCard from "../AddessCard";
 import PrimaryBtn from "../../buttons/PrimaryBtn";
 import { useSession } from "next-auth/react";
 import AccountModal from "../../accountComponents/AccountModal";
+import HeadLessUiComponent, {
+  HeadUiModalOpenAtom,
+} from "../../Modals/HeadLessUiModal";
 
 type Props = {};
 
@@ -25,7 +28,8 @@ function Step1({}: Props) {
     ["address"],
     fetchAddress
   );
-  const setSelectedAddress = useSetRecoilState(activeAddressCard);
+  const [selectedAddress, setSelectedAddress] =
+    useRecoilState(activeAddressCard);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
     let isEditAbleOrNot = checkoutState.find((item) => item.edit === true);
@@ -49,6 +53,7 @@ function Step1({}: Props) {
       );
     }
   };
+  const setOpenModal = useSetRecoilState(HeadUiModalOpenAtom);
 
   return (
     <>
@@ -64,7 +69,7 @@ function Step1({}: Props) {
           },
         ]}
       />
-      <div className="ml-14 mt">
+      <div className="ml-14 mt-4">
         <h4 className="font-semibold ">Ship to Your Location</h4>
         <p className="text-xs font-light">
           Have your order delivered to your home, office or anywhere. We work
@@ -88,7 +93,9 @@ function Step1({}: Props) {
         </div>
       </div>
       <AccountModal className="ml-12" />
-      <PrimaryBtn text="Continue" onClick={handleClick} />
+      {/* <button onClick={() => setOpenModal(true)}>Add New Address</button> */}
+      {/* <HeadLessUiComponent /> */}
+      <PrimaryBtn text="Continue" onClick={handleClick} className="ml-auto" />
     </>
   );
 }

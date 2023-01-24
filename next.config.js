@@ -11,6 +11,8 @@ const nextConfig = {
       "res.cloudinary.com",
       "images.unsplash.com",
       "source.unsplash.com",
+      "cdn.sanity.io",
+      "images.pexels.com",
     ],
   },
 };

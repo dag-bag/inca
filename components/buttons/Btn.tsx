@@ -24,7 +24,12 @@ function Btn({
     isLoading && "loading"
   }`;
   return (
-    <button className={btnClasses} disabled={disabled} onClick={onClick}>
+    <button
+      type="submit"
+      className={btnClasses}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {text || children}
     </button>
   );

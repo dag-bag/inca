@@ -40,10 +40,10 @@ function Step2({}: Props) {
       );
     }
   };
+  const selectedAddress = useRecoilValue(selectedDeliveryCharges);
 
   return (
     <>
-      {" "}
       <Container
         Title={"Delivery"}
         Question="How soon you would like to receive the products? ?"

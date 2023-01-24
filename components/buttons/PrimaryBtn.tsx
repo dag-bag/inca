@@ -1,7 +1,15 @@
 /** @format */
 
+import { find, isEmpty } from "lodash";
 import Link from "next/link";
 import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  activeAddressCard,
+  checkoutSteps,
+  IsDisAbledForButtonCheckOutSelector,
+  selectedDeliveryCharges,
+} from "../../atoms/checkout";
 
 type Props = {
   className?: string;
@@ -16,24 +24,55 @@ type Props = {
 function PrimaryBtn({
   className,
   text,
-  disabled,
+  // disabled,
   isLoading,
   children,
   onClick,
   type,
 }: Props) {
-  const btnClasses = ` btn bg-[#333] text-white border-none outline-none ${className} disabled:opacity-50 ${
+  const selectedAddress = useRecoilValue(activeAddressCard);
+  const selectedDeliveryCharge = useRecoilValue(selectedDeliveryCharges);
+  const checkOutStateData = useRecoilValue(checkoutSteps);
+
+  const btnClasses = ` btn bg-[#333] text-white border-none outline-none ${className} disabled:opacity-70 ${
     isLoading && "loading"
   } `;
+  const IsSelectedOrNot = () => {
+    let allData = [
+      {
+        step: 1,
+        data: selectedAddress,
+      },
+      {
+        step: 2,
+        data: selectedDeliveryCharge,
+      },
+    ];
+    const activeState = find(checkOutStateData, { status: "active" });
+
+    for (let i = 0; i < allData.length; i++) {
+      if (
+        allData[i].step === activeState?.step &&
+        allData[activeState.step - 1].data
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  let disabled = IsSelectedOrNot();
   return (
-    <button
-      type={type}
-      className={btnClasses}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      {text || children}
-    </button>
+    <div className="flex justify-end">
+      <button
+        type={type}
+        className={btnClasses}
+        disabled={disabled}
+        onClick={onClick}
+      >
+        {text || children}
+      </button>
+    </div>
   );
 }
 

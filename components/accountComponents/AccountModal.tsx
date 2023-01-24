@@ -2,7 +2,7 @@
 
 import React, { Suspense } from "react";
 import ModalBtn from "../buttons/ModalBtn";
-import Modal from "../utils/Modal";
+import Modal from "../Modals/Modal";
 
 type Props = {
   className?: string;

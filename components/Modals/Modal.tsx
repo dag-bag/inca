@@ -76,6 +76,7 @@ function Modal({}) {
     isSubmitting,
     validateOnBlur,
     values,
+    isValid,
   } = useFormik({
     initialValues: {
       address1: "",
@@ -221,35 +222,20 @@ function Modal({}) {
                   <div className="grid grid-cols-2 w-full">
                     {FormData.map((item, index) => {
                       return item.element === "select" ? (
-                        <Select
-                          key={item.name}
-                          label={item.label}
-                          name={item.name}
-                          placeholder={item.placeholder}
-                          value={item.value}
-                          error={item.error}
-                          options={item.options}
-                          title={""}
-                          onchange={handleChange}
-                        />
+                        <Select {...item} title={""} onchange={handleChange} />
                       ) : (
-                        <Input
-                          key={index}
-                          label={item.label}
-                          name={item.name}
-                          type={item.type}
-                          placeholder={item.placeholder}
-                          value={item.value}
-                          error={item.error}
-                          onChange={handleChange}
-                        />
+                        <Input key={index} {...item} onChange={handleChange} />
                       );
                     })}
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                    <Btn className="bg-black text-white border-none">
+                    <Btn
+                      className="bg-black text-white border-none"
+                      disabled={!isValid}
+                    >
+                      {/* <a href="#" type="button"> */}
                       Submit
-                      <a href="#"></a>
+                      {/* </a> */}
                     </Btn>
                     <a
                       href="#"
