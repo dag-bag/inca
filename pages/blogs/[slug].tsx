@@ -185,9 +185,8 @@ export async function getStaticPaths() {
   // We'll pre-render only these paths at build time.
   // { fallback: blocking } will server-render pages
   // on-demand if the path doesn't exist.
-  return { paths, fallback: "blocking" };
+  return paths;
 }
-
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postJson = await fetch(
