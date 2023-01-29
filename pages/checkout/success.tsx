@@ -12,14 +12,18 @@ import AuthenticationLayout from "../../components/layouts/AuthenticationLayout"
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Loader from "../../components/Loaders/Loader";
+import { OrderResponse } from "../../types/order";
 function Success() {
   const router = useRouter();
   const { orderId } = router.query;
-  const { data, isLoading } = useQuery(["/api/getorder", { orderId }], () => {
-    invariant(typeof orderId === "string", "orderId must be a string");
-    let result = fetchOrderById(orderId);
-    return result;
-  });
+  const { data, isLoading } = useQuery<OrderResponse>(
+    ["/api/getorder", { orderId }],
+    () => {
+      invariant(typeof orderId === "string", "orderId must be a string");
+      let result = fetchOrderById(orderId);
+      return result;
+    }
+  );
   if (isLoading) return <Loader />;
 
   return (
@@ -48,12 +52,8 @@ function Success() {
               You’ll get shipping and delivery updates by email.
             </p>
           </div>
-          <AddressCard
-            {...data?.address}
-            button={false}
-            paymentMethod="Paypal"
-            Title="Customer Details"
-          />
+          {/* @ts-ignore */}
+          <AddressCard {...data?.address} button={false} />
         </div>
       </div>
       <div className="bg-gray-50 py-12 md:py-15">
@@ -75,11 +75,11 @@ function Success() {
                             className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
                           />
                           <div className="ml-4">
-                            <p className="text-sm">{item.name}</p>
+                            <p className="text-sm">{item.title}</p>
                             <dl className="mt-1 space-y-1 text-xs text-gray-500">
                               <div>
                                 <dt className="inline">Color:</dt>
-                                <dd className="inline">{item.variant}</dd>
+                                <dd className="inline">{item.color}</dd>
                               </div>
                               <div>
                                 <dt className="inline">Size:</dt>
@@ -127,7 +127,7 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-xl">${data?.total + 40}.00</p>
+                    <p className="text-xl">${data?.total || 0 + 40}.00</p>
                   </div>
                 </li>
               </ul>

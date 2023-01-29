@@ -60,7 +60,7 @@ export default NextAuth({
           // console.log(verifiedUser);
           let fetchedUser = JSON.parse(JSON.stringify(verifiedUser));
           // console.log(fetchedUser);
-          session.image = verifiedUser.pic;
+          session.image = verifiedUser.image;
           session.name = verifiedUser.name;
           session.email = verifiedUser.email;
           session.userId = fetchedUser._id;

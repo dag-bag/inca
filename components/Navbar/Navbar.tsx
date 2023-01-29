@@ -12,7 +12,6 @@ const PoketCart = dynamic(() => import("../Cart/PoketCart"), {
   ssr: false,
 });
 
-import { SearchIcon } from "@heroicons/react/solid";
 import SeachForm from "../Search/SeachForm";
 
 const CartDetails = dynamic(() => import("./CartDetails"), { ssr: false });
@@ -251,7 +250,12 @@ function Navbar() {
               <>
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="https://placeimg.com/80/80/people" />
+                    <Image
+                      src={`${session?.user?.image}`}
+                      width={50}
+                      height={50}
+                      alt="user profile image"
+                    />
                   </div>
                 </label>
                 <ul

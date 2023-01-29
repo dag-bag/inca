@@ -13,6 +13,7 @@ const nextConfig = {
       "source.unsplash.com",
       "cdn.sanity.io",
       "images.pexels.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

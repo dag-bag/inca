@@ -3,11 +3,13 @@
 import React, { useEffect } from "react";
 
 import Image from "next/image";
-import CommentBox from "../../components/blog/CommentBox";
+import CommentBox from "../../components/blog/Comment/CommentBox";
 import Siderbar from "../../components/blog/Siderbar";
+import { IBlog } from "../../types/blog";
+import { GetServerSideProps, GetStaticProps } from "next";
 
-const Post = ({ post }) => {
-  const { title, text, img, date, category, author, createAt } = post;
+const Post = ({ post }: { post: IBlog }) => {
+  const { title, text, img, date, category, author, createdAt } = post;
 
   return (
     <div className="container mx-auto flex flex-wrap py-6">
@@ -34,12 +36,11 @@ const Post = ({ post }) => {
             <a href="#" className="text-3xl font-bold hover:text-gray-700 pb-4">
               {title}
             </a>
-            <p href="#" className="text-sm pb-8">
+            <p className="text-sm pb-8">
               By{" "}
               <a href="#" className="font-semibold hover:text-gray-800">
-                {author} <span className="text-gray-700 text-xs">— {date}</span>
+                {author} <span className="text-gray-700 text-xs ">{date}</span>{" "}
               </a>
-              {createAt}
             </p>
             <h1 className="text-2xl font-bold pb-3">Introduction</h1>
             <p className="pb-3">
@@ -172,24 +173,24 @@ const Post = ({ post }) => {
 
 export default Post;
 
-export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/params`);
-  const posts = await res.json();
+// export async function getStaticPaths() {
+//   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/params`);
+//   const posts = await res.json();
 
-  // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
+//   // Get the paths we want to pre-render based on posts
+//   const paths = posts.map((post: IBlog) => ({
+//     params: { slug: post.slug },
+//   }));
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: blocking } will server-render pages
-  // on-demand if the path doesn't exist.
-  return { paths, fallback: "blocking" };
-}
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: blocking } will server-render pages
+//   // on-demand if the path doesn't exist.
+//   return { paths, fallback: "blocking" };
+// }
 
-export async function getStaticProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const postJson = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/blog?slug=${params.slug}`
+    `${process.env.NEXTAUTH_URL}/api/blog?slug=${params?.slug}`
   );
   const post = await postJson.json();
   // console.log(post);
@@ -202,4 +203,20 @@ export async function getStaticProps({ params }) {
   return {
     props: { post },
   };
-}
+};
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   const postJson = await fetch(
+//     `${process.env.NEXTAUTH_URL}/api/blog?slug=${params?.slug}`
+//   );
+//   const post = await postJson.json();
+//   // console.log(post);
+//   if (!post) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return {
+//     props: { post },
+//   };
+// };

@@ -48,7 +48,9 @@ function PrimaryBtn({
         data: selectedDeliveryCharge,
       },
     ];
-    const activeState = find(checkOutStateData, { status: "active" });
+    const activeState = find(checkOutStateData, {
+      status: "active",
+    });
 
     for (let i = 0; i < allData.length; i++) {
       if (

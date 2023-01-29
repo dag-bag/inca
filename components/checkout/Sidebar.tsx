@@ -31,10 +31,10 @@ function Sidebar() {
           type="text"
           id="promo"
           placeholder="Enter your code"
-          className="p-2 text-sm w-full"
+          className="p-2 text-sm w-full focus:outline-none focus:border-none"
         />
       </div>
-      <button className="bg-primary-1 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
+      <button className="bg-primary hover:bg-black px-5 py-2 text-sm text-white uppercase">
         Apply
       </button>
       <div className="border-t mt-8">

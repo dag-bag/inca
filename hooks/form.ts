@@ -25,6 +25,7 @@ export const createUser = async (user: LoginUser) => {
       email: user.email,
       password: user.password,
       name: user?.name,
+      pic: "https://res.cloudinary.com/hellooworkd/image/upload/v1674820658/kindpng_248394_p90byz.png",
     }),
     headers: {
       "Content-Type": "application/json",

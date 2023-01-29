@@ -6,8 +6,10 @@ import Link from "next/link";
 
 import BlurImage from "../utils/BlurImage";
 import truncate from "../../libs/Ese";
+import { IBlog } from "../../types/blog";
 
-function BlogCard({ title, text, image, date, category, slug }) {
+function BlogCard(props: IBlog) {
+  const { title, text, img, date, category, slug } = props;
   return (
     <Link href={`/blogs/${slug}`}>
       <>
@@ -15,7 +17,7 @@ function BlogCard({ title, text, image, date, category, slug }) {
           <a href="#" />
           <div className="relative">
             <div className="relative w-full h-56">
-              <BlurImage image={image} alt="banner" width={200} height={200} />
+              <BlurImage image={img} alt="banner" width={200} height={200} />
               <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25" />
             </div>
             <a>

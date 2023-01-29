@@ -56,7 +56,7 @@ function AddressCard({
         <p className="text-sm font-light">{`${city} ${state} ${zipcode}`}</p>
         <p className="text-sm font-light">{country}</p>
         <p className="text-sm font-light">{phone}</p>
-        <p className="text-sm font-light">{email}</p>
+        <p className="text-sm font-light truncate">{email}</p>
       </div>
     </div>
   );

@@ -6,17 +6,21 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import TimeAgo from "timeago-react";
-import CommentInput from "./Comment/CommentInput";
-function CommentBox({ id }) {
+import { IComment } from "../../../types/comment";
+import CommentInput from "./CommentInput";
+function CommentBox({ id }: { id: string }) {
   const { data: session } = useSession();
+  console.log("session:", session);
 
   const getComments = async () => {
     const comment = await fetch(`/api/comment?id=${id}`);
     const data = await comment.json();
     return data;
   };
-  const { data, isLoading } = useQuery(["comment", { id }], getComments);
-  console.log(data);
+  const { data, isLoading } = useQuery<IComment[]>(
+    ["comment", { id }],
+    getComments
+  );
 
   return (
     <div className="w-full ">
@@ -39,7 +43,7 @@ function CommentBox({ id }) {
         <CommentInput id={id} />
       </div>
       <div>
-        {data?.map((comment) => {
+        {/* {data?.map((comment) => {
           return (
             <div key={comment._id} className="flex mt-4">
               <div className="mr-5">
@@ -54,7 +58,7 @@ function CommentBox({ id }) {
                   height={50}
                 />
               </div>
-              {comment.length === 0 && (
+              {data.length === 0 && (
                 <p className="text-red-500">Please add something in comment</p>
               )}
               <div className="border border-primary-1 p-4">
@@ -72,7 +76,7 @@ function CommentBox({ id }) {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

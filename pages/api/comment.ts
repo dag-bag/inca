@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "../../libs/ConnectDb";
 import Blog from "../../models/Blog";
 import Comment from "../../models/Comment";
+import User from "../../models/User";
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
@@ -12,9 +13,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       let query = req.query;
 
-      const comments = await Comment.find({ blog: query.id })
-        .populate("user", "name image")
-        .sort({ _id: -1 });
+      const comments = await Comment.find({ blog: query.id }).populate(
+        "email",
+        "name email image"
+      );
+
+      // .populate("user", "name image")
+      // .sort({ _id: -1 });
       res.status(200).json(comments);
     } catch (error: any) {
       res.status(500).json({ error: error.message });
@@ -22,7 +27,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === "POST") {
     try {
-      const { text, blog, user, createdAtPost } = req.body;
+      const { text, blog, email, createdAtPost } = req.body;
+      console.log(req.body);
 
       if (!text) {
         return res.status(400).json({
@@ -35,9 +41,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const comment = await Comment.create({
         text,
         blog,
-        user,
+        email,
         createdAtPost,
       });
+      console.log(comment);
 
       const postRelated = await Blog.findByIdAndUpdate(blog, {
         $push: { comments: comment },

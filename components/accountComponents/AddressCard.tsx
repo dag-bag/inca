@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { atom, useSetRecoilState } from "recoil";
+import { Address } from "../../types/address";
 export const modalAtom = atom({
   key: "modalAtom",
   default: false,
@@ -29,8 +30,7 @@ type Props = {
   phone: number;
   email: string;
   _id?: string;
-
-  da: any;
+  button?: boolean;
 };
 function AddressCard({
   address1,
@@ -44,7 +44,8 @@ function AddressCard({
   phone,
   email,
   _id,
-  da,
+
+  button,
 }: Props) {
   const setEditData = useSetRecoilState(EditAddressAtom);
   const setShowModal = useSetRecoilState(modalAtom);
@@ -59,8 +60,8 @@ function AddressCard({
     },
     {
       onSuccess: () => {
-        query.setQueryData(["address"], () => {
-          const newData = da.filter((task: any) => task._id !== _id);
+        query.setQueryData(["address"], (oldData: any) => {
+          const newData = oldData.filter((task: any) => task._id !== _id);
           return newData;
         });
       },
@@ -75,14 +76,14 @@ function AddressCard({
             <li className="text-xs text-gray-600 uppercase "> Name</li>
             <li className="max-w-2xl">{firstName + " " + lastName}</li>
           </ul>
-          {/* {paymentMethod && (
+          {
             <ul>
               <li className="text-xs text-gray-600 uppercase ">
                 Payment Method
               </li>
               <li className="max-w-2xl">PayPal</li>
             </ul>
-          )} */}
+          }
 
           <ul>
             <li className="text-xs text-gray-600 uppercase ">Address 1</li>
@@ -128,41 +129,43 @@ function AddressCard({
               <AiTwotoneDelete className="text-2xl text-red-400" />
             </button>
           </div>
-          <div className="flex-none  pt-2.5 pr-2.5 pl-1">
-            <button
-              type="button"
-              className="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95"
-              onClick={() => {
-                setEditData({
-                  _id,
-                  address1,
-                  address2,
-                  city,
-                  state,
-                  zipcode,
-                  country,
-                  lastName,
-                  firstName,
-                  phone,
-                  email,
-                });
-                setEdit(true);
-                setShowModal(true);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 0 24 24"
-                width="24px"
-                fill="#000000"
+          {button ? (
+            <div className="flex-none  pt-2.5 pr-2.5 pl-1">
+              <button
+                type="button"
+                className="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95"
+                onClick={() => {
+                  setEditData({
+                    _id,
+                    address1,
+                    address2,
+                    city,
+                    state,
+                    zipcode,
+                    country,
+                    lastName,
+                    firstName,
+                    phone,
+                    email,
+                  });
+                  setEdit(true);
+                  setShowModal(true);
+                }}
               >
-                <path d="M0 0h24v24H0V0z" fill="none" />
-                <path d="M5 18.08V19h.92l9.06-9.06-.92-.92z" opacity=".3" />
-                <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29s-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83zM3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM5.92 19H5v-.92l9.06-9.06.92.92L5.92 19z" />
-              </svg>
-            </button>
-          </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  width="24px"
+                  fill="#000000"
+                >
+                  <path d="M0 0h24v24H0V0z" fill="none" />
+                  <path d="M5 18.08V19h.92l9.06-9.06-.92-.92z" opacity=".3" />
+                  <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29s-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83zM3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM5.92 19H5v-.92l9.06-9.06.92.92L5.92 19z" />
+                </svg>
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

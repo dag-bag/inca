@@ -36,5 +36,12 @@ module.exports = {
       },
     ],
   },
-  plugins: [require("tailwind-scrollbar-hide"), require("daisyui")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("daisyui"),
+    require("@tailwindcss/forms")({
+      strategy: "base", // only generate global styles
+      // strategy: 'class', // only generate classes
+    }),
+  ],
 };

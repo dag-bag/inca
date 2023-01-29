@@ -1,8 +1,9 @@
 /** @format */
 
 import React, { Suspense } from "react";
-import ModalBtn from "../buttons/ModalBtn";
-import Modal from "../Modals/Modal";
+
+import HeadLessUiButton from "../Modals/Button/HeadLessUiButton";
+import HeadLessUiComponent from "../Modals/HeadLessUiModal";
 
 type Props = {
   className?: string;
@@ -11,9 +12,9 @@ type Props = {
 function AccountModal({ className }: Props) {
   return (
     <div className={className}>
-      <ModalBtn text={"Add another address"} />
+      <HeadLessUiButton text={"Add another address"} />
       <Suspense fallback={<p>Loading...</p>}>
-        <Modal />
+        <HeadLessUiComponent />
       </Suspense>
     </div>
   );

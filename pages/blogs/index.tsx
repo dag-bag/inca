@@ -1,19 +1,33 @@
 /** @format */
 
-import mongoose from "mongoose";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import BlogCard from "../../components/blog/BlogCard";
+
+// import BlogCard from "../../components/blog/BlogCard";
 import BlogContainer from "../../components/blog/BlogContainer";
-import Siderbar from "../../components/blog/Siderbar";
+import dynamic from "next/dynamic";
+const SideBar = dynamic(() => import("../../components/blog/Siderbar"), {
+  ssr: false,
+});
+const BlogCard = dynamic(() => import("../../components/blog/BlogCard"), {
+  ssr: false,
+});
+
 import H1 from "../../components/Headings/H1";
 import BlurImage from "../../components/utils/BlurImage";
 
 import BlogModel from "../../models/Blog";
+import { getAllBlogs } from "../../services/blogs/blogs";
+import { IBlog } from "../../types/blog";
 
-function Blog({ blogs }) {
+function Blog() {
+  const { data } = useQuery<IBlog[]>(["blogs"], getAllBlogs);
+
   return (
     <div>
       <Head>
@@ -29,22 +43,14 @@ function Blog({ blogs }) {
             className="p-3 bg-white"
           />
         </div>
-        {/* <Image
-          src="/frame.jpg"
-          alt=""
-          className="header-image w-full object-cover h-[80vh]"
-          layout="responsive"
-          objectFit="cover"
-          width={100}
-          height={35}
-        /> */}
+
         <div className="w-full h-[40vh] md:h-[50vh] relative">
-          <BlurImage
-            image={blogs[0].img}
+          {/* <BlurImage
+            image={blogs[0].img.img}
             width={500}
             height={200}
             alt={"Banner"}
-          />
+          /> */}
         </div>
       </div>
 
@@ -52,19 +58,10 @@ function Blog({ blogs }) {
         {/* Posts Section */}
         <section className="w-full md:w-2/3 ">
           <BlogContainer>
-            {blogs.map((blog) => {
-              return (
-                <BlogCard
-                  key={blog._id}
-                  title={blog.title}
-                  text={blog.text}
-                  image={blog.img}
-                  date={blog.date}
-                  slug={blog.slug}
-                  category={blog.category}
-                />
-              );
-            })}
+            {data &&
+              data?.map((blog) => {
+                return <BlogCard {...blog} key={blog._id} />;
+              })}
           </BlogContainer>
           {/* Pagination */}
           <div className="flex items-center py-8 ">
@@ -89,28 +86,29 @@ function Blog({ blogs }) {
             </a>
           </div>
         </section>
-        <Siderbar blogs={blogs} />
+        <SideBar />
       </div>
     </div>
   );
 }
 
 export default Blog;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const queryClient = new QueryClient();
 
-export async function getStaticProps({ res }) {
-  if (!mongoose.connections[0].readyState) {
-    mongoose.connect(process.env.MONGODB_URI);
-  }
+  await queryClient.prefetchQuery(["blogs"], getAllBlogs);
+
   // res.setHeader(
   //   "Cache-Control",
   //   "public, s-maxage=3600, stale-while-revalidate=60"f
   // );
-  let blogs = await BlogModel.find({});
+  // let blogs = await BlogModel.find({});
+  // console.log(blogs);
   // const resp = await fetch("http://localhost:3000/api/getproducts");
   // const products = await resp.json();
   return {
-    props: { blogs: JSON.parse(JSON.stringify(blogs)) },
+    props: { dehydratedState: dehydrate(queryClient) },
     // revalidate: 60,
     // will be passed to the page component as props
   };
-}
+};

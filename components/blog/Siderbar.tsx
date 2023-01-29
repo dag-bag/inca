@@ -3,6 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import { BlurHeader } from "./BlurHeader";
+import { useQuery } from "@tanstack/react-query";
+import { IBlog } from "../../types/blog";
+import { getAllBlogs } from "../../services/blogs/blogs";
 const categoryData = [
   {
     sig: 50,
@@ -25,7 +28,8 @@ const categoryData = [
     name: "Data Science",
   },
 ];
-function Siderbar({ blogs }) {
+function Siderbar() {
+  const { data } = useQuery<IBlog[]>(["blogs"], getAllBlogs);
   return (
     <aside className="w-full md:w-1/3 flex flex-col items-start px-3 max-w-sm mt-16">
       {/* Enter keyowrd here search your fav blogs */}
@@ -33,7 +37,7 @@ function Siderbar({ blogs }) {
         <div className="mt-1 relative">
           <label htmlFor="email">
             <div className="absolute top-2 right-4 z-30">
-              <Image src={"/assets/search.svg"} width={20} height={20} />
+              <Image src={"/assets/search.svg"} width={20} height={20} alt="" />
             </div>
           </label>
           <input
@@ -41,13 +45,9 @@ function Siderbar({ blogs }) {
             name="email"
             type="email"
             autoComplete="email"
-            required=""
+            required={true}
             placeholder="Enter you keyword?"
             className="block w-full px-5 py-3 text-xs text-gray-300  transition duration-500 ease-in-out transform    focus:outline-none focus:border-[#333]  focus:ring-offset-[#333] border-b border-gray-300 placeholder:text-[#333]"
-            // value={email}
-            // onChange={(e) => {
-            //   setEmail(e.target.value);
-            // }}
           />
 
           {/* <p className="text-red-500">{error}</p> */}
@@ -69,26 +69,25 @@ function Siderbar({ blogs }) {
       <div className="w-full bg-white  flex flex-col my-4 mt-8">
         <h4 className="text-left font-light mb-4">Recent Post</h4>
         <div className="space-y-5">
-          {blogs &&
-            blogs.slice(0, 4).map((blog) => {
-              return (
-                <div key={blog._id}>
-                  {/* Image div */}
-                  <div className="flex space-x-3">
-                    <div className="h-14 w-20 rounded-sm relative">
-                      <BlurHeader image={blog.img} />
-                    </div>
-                    <h4 className="text-sm font-light">
-                      {blog.title} <br />
-                      <span className="text-xs text-gray-400 ">
-                        {new Date(blog.date).toDateString()}
-                      </span>
-                    </h4>
+          {data?.slice(0, 4).map((blog) => {
+            return (
+              <div key={blog._id}>
+                {/* Image div */}
+                <div className="flex space-x-3">
+                  <div className="h-14 w-20 rounded-sm relative">
+                    <BlurHeader image={blog.img} />
                   </div>
-                  {/* Timing */}
+                  <h4 className="text-sm font-light">
+                    {blog.title} <br />
+                    <span className="text-xs text-gray-400 ">
+                      {new Date(blog.date).toDateString()}
+                    </span>
+                  </h4>
                 </div>
-              );
-            })}
+                {/* Timing */}
+              </div>
+            );
+          })}
         </div>
       </div>
       {/* Categories */}
@@ -113,22 +112,22 @@ function Siderbar({ blogs }) {
         <h4 className="text-left font-light mb-4">Follow me</h4>
         <div className="flex flex-wrap gap-4">
           <span>
-            <div className="  bg-primary-1 px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
+            <div className="  bg-primary px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
               Facebook
             </div>
           </span>
           <span>
-            <div className=" bg-primary-1 px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
+            <div className=" bg-primary px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
               Twitter
             </div>
           </span>
           <span>
-            <div className=" bg-primary-1 px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
+            <div className=" bg-primary px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
               Linkedin
             </div>
           </span>
           <span>
-            <div className=" bg-primary-1 px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
+            <div className=" bg-primary px-4 py-2 text-white text-sm hover:bg-white hover:text-amber-600 transition duration-500 ease-in-out">
               Instagram
             </div>
           </span>

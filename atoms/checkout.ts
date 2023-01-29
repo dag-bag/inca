@@ -40,20 +40,20 @@ const checkoutSteps = atom<ICheckoutStepType[]>({
     },
   ],
 });
-const CheckoutHandler = selector({
-  key: "checkouthandler",
-  get: () => {},
-  set: ({ set, get }) => {
-    let currentStep = 1;
-    const CheckoutState = get(checkoutSteps);
-    let NewState = CheckoutState.map((state, index) => {
-      if (currentStep === state.step) {
-        return { ...state, status: "active" };
-      }
-    });
-    set(checkoutSteps, NewState);
-  },
-});
+// const CheckoutHandler = selector({
+//   key: "checkouthandler",
+//   get: () => {},
+//   set: ({ set, get }) => {
+//     let currentStep = 1;
+//     const CheckoutState = get(checkoutSteps);
+//     let NewState = CheckoutState.map((state, index) => {
+//       if (currentStep === state.step) {
+//         return { ...state, status: "active" };
+//       }
+//     });
+//     set(checkoutSteps, NewState);
+//   },
+// });
 const selectedAddress = atom<Address | null>({
   key: "selectedAddress",
   default: null,

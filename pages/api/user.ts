@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === "POST") {
     try {
-      const { email, password, name } = req.body;
+      const { email, password, name, pic } = req.body;
 
       if (!email || !password) {
         return res.status(400).json({
@@ -50,6 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         name,
         email,
         password: secPassword,
+        image: pic,
       });
 
       if (user) {

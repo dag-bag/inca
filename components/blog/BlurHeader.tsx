@@ -8,7 +8,7 @@ import { useState } from "react";
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
-export function BlurHeader({ image }) {
+export function BlurHeader({ image }: { image: string }) {
   const [isLoading, setLoading] = useState(true);
 
   return (

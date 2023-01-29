@@ -1,18 +1,20 @@
 /** @format */
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import { IComment } from "../../../types/comment";
 import CommentBtn from "./CommentBtn";
 
 type Props = { id: string };
 
 function CommentInput({ id }: Props) {
   const { data: session } = useSession();
+
   const [comment, setComment] = useState<string>("");
   const IsDisAbled = isEmpty(comment);
-  const createComment = async (e) => {
+  const createComment = async (e: any) => {
     e.preventDefault();
     if (IsDisAbled) {
       console.log("Please Add something in comment box.");
@@ -23,7 +25,7 @@ function CommentInput({ id }: Props) {
         body: JSON.stringify({
           text: comment,
           blog: id,
-          user: session?.user?.name,
+          email: session?.user?.email,
           createdAtPost: new Date().getTime().toString(),
         }),
         headers: {
@@ -37,9 +39,23 @@ function CommentInput({ id }: Props) {
       // setFetchComments(true);
     }
   };
-  const mutation = useMutation({ mutationFn: createComment });
+  const queryClient = useQueryClient();
+  const mutation = useMutation(createComment, {
+    onSuccess: () => {
+      queryClient.setQueriesData(["comment", { id }], (old: any) => [
+        {
+          text: comment,
+          blog: id,
+          email: session?.user?.email,
+          createdAtPost: new Date().getTime().toString(),
+        },
+        ...old,
+      ]);
+    },
+  });
+
   return (
-    <form onSubmit={(e) => {}}>
+    <form onSubmit={(e) => mutation.mutate(e)}>
       <textarea
         name=""
         id=""

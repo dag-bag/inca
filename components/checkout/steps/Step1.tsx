@@ -14,6 +14,7 @@ import AccountModal from "../../accountComponents/AccountModal";
 import HeadLessUiComponent, {
   HeadUiModalOpenAtom,
 } from "../../Modals/HeadLessUiModal";
+import HeadLessUiButton from "../../Modals/Button/HeadLessUiButton";
 
 type Props = {};
 
@@ -53,7 +54,6 @@ function Step1({}: Props) {
       );
     }
   };
-  const setOpenModal = useSetRecoilState(HeadUiModalOpenAtom);
 
   return (
     <>
@@ -92,9 +92,10 @@ function Step1({}: Props) {
           })}
         </div>
       </div>
-      <AccountModal className="ml-12" />
+      {/* <AccountModal className="ml-12" /> */}
       {/* <button onClick={() => setOpenModal(true)}>Add New Address</button> */}
-      {/* <HeadLessUiComponent /> */}
+      <HeadLessUiButton text="Add New Address" />
+      <HeadLessUiComponent />
       <PrimaryBtn text="Continue" onClick={handleClick} className="ml-auto" />
     </>
   );
