@@ -174,7 +174,7 @@ const Post = ({ post }: { post: IBlog }) => {
 export default Post;
 
 export async function getStaticPaths() {
-  const res = await fetch(`/api/params`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/params`);
   const posts = await res.json();
 
   // Get the paths we want to pre-render based on posts
@@ -189,7 +189,9 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postJson = await fetch(`/api/blog?slug=${params?.slug}`);
+  const postJson = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/api/blog?slug=${params?.slug}`
+  );
   const post = await postJson.json();
   // console.log(post);
   if (!post) {
