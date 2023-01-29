@@ -15,6 +15,7 @@ import HeadLessUiComponent, {
   HeadUiModalOpenAtom,
 } from "../../Modals/HeadLessUiModal";
 import HeadLessUiButton from "../../Modals/Button/HeadLessUiButton";
+import Loader from "../../Loaders/Loader";
 
 type Props = {};
 
@@ -78,18 +79,22 @@ function Step1({}: Props) {
         </p>
         {/* <Btn className={"rounded-md"} text={"Add another address"} /> */}
         <div className="flex items-center space-x-2 flex-wrap">
-          {data?.map((item, i) => {
-            return (
-              <AddressCard
-                {...item}
-                key={i}
-                index={i}
-                onClick={() => {
-                  setSelectedAddress(item);
-                }}
-              />
-            );
-          })}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            data?.map((item, i) => {
+              return (
+                <AddressCard
+                  {...item}
+                  key={i}
+                  index={i}
+                  onClick={() => {
+                    setSelectedAddress(item);
+                  }}
+                />
+              );
+            })
+          )}
         </div>
       </div>
       {/* <AccountModal className="ml-12" /> */}

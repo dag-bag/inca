@@ -7,7 +7,7 @@ export default function PaypalComponent() {
     <div className="w-full flex justify-start items-center ml-16 my-10">
       <PayPalScriptProvider
         options={{
-          "client-id": "test",
+          "client-id": `${process.env.NEXT_PUBLIC_PAYPAL_CLINET_ID}`,
           components: "buttons",
           currency: "USD",
         }}

@@ -11,6 +11,7 @@ import { GetServerSideProps } from "next";
 import Order from "../../models/Order";
 import { OrderType } from "../../types/order";
 import { ProductType } from "../../types/product";
+import connectDb from "../../libs/ConnectDb";
 type Props = {
   orders: OrderType[];
 };
@@ -154,6 +155,7 @@ function OrderHistory({ orders }: Props) {
 export default OrderHistory;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  await connectDb;
   const session = await getSession(context);
 
   const orders = await Order.find({ userEmail: session?.user?.email });
