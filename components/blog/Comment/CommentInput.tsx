@@ -4,6 +4,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import { BiData } from "react-icons/bi";
+import { getUserData } from "../../../services/account/user";
 import { CreateComment } from "../../../services/comment/comment";
 import { IComment } from "../../../types/comment";
 import CommentBtn from "./CommentBtn";
@@ -12,6 +14,7 @@ type Props = { id: string };
 
 function CommentInput({ id }: Props) {
   const { data: session } = useSession();
+  const { data: user } = useQuery(["user"], getUserData);
 
   const [comment, setComment] = useState<string>("");
   const IsDisAbled = isEmpty(comment);
@@ -34,7 +37,7 @@ function CommentInput({ id }: Props) {
         {
           text: comment,
           blog: id,
-          user: data.user,
+          user,
           createdAtPost: new Date().getTime().toString(),
         },
         ...old,
