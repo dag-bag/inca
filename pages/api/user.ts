@@ -13,10 +13,10 @@ var bcrypt = require("bcryptjs");
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
-      const email = req.query.email;
+      const { email } = req.query;
 
       const user = await User.findOne({ email: email }).select(
-        "name email username"
+        "name email username image"
       );
 
       res.status(200).json(user);

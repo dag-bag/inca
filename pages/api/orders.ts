@@ -16,7 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       //This code is lifted from
       const { id } = req.query;
-      const orders = await Order.find({ userID: id });
+      const orders = await Order.find({ userEmail: id });
 
       res.json({ orders });
     } catch (error: any) {

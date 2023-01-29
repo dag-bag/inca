@@ -12,6 +12,7 @@ import { GetServerSideProps } from "next";
 import { UserProps } from "../../pages/account/personal-details";
 import { stringValidation } from "../../validation/form";
 import Error from "../utils/Error";
+import { getUserData } from "../../services/account/user";
 
 type Props = {
   user: UserProps;
@@ -19,11 +20,7 @@ type Props = {
 
 function PersonalUserDetails({ user }: Props) {
   var { data: session } = useSession();
-  const fetchUser = async () => {
-    const user = await fetch("/api/user?email=" + session?.user.email);
-    const userData = await user.json();
-    return userData;
-  };
+
   const updateUser = async () => {
     const update = await fetch("/api/user?id=" + session?.user.email, {
       method: "PUT",
@@ -39,12 +36,6 @@ function PersonalUserDetails({ user }: Props) {
     return upd;
   };
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["userDetails"],
-    queryFn: fetchUser,
-    initialData: user,
-  });
-
   const mutation = useMutation(updateUser);
   let onSubmit = () => {
     mutation.mutate();
@@ -55,9 +46,9 @@ function PersonalUserDetails({ user }: Props) {
     email: string;
   }>({
     initialValues: {
-      name: data?.name,
-      username: data?.username,
-      email: data?.email,
+      name: user?.name,
+      username: user?.username,
+      email: user?.email,
     },
     validationSchema: stringValidation(["name", "username"]),
     onSubmit: onSubmit,
@@ -116,11 +107,7 @@ function PersonalUserDetails({ user }: Props) {
           text="Save Now"
           className="bg-[#333] text-white"
           disabled={
-            errors.name || errors.username
-              ? true
-              : false || isLoading
-              ? true
-              : false
+            errors.name || errors.username ? true : false ? true : false
           }
           isLoading={mutation.isLoading}
         />
