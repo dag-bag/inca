@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       let query = req.query;
 
       const comments = await Comment.find({ blog: query.id }).populate(
-        "email",
+        "user",
         "name email image"
       );
 
@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === "POST") {
     try {
-      const { text, blog, email, createdAtPost } = req.body;
+      const { text, blog, user, createdAtPost } = req.body;
       console.log(req.body);
 
       if (!text) {
@@ -41,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const comment = await Comment.create({
         text,
         blog,
-        email,
+        user,
         createdAtPost,
       });
       console.log(comment);

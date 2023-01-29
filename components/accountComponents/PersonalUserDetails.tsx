@@ -40,19 +40,20 @@ function PersonalUserDetails({ user }: Props) {
   let onSubmit = () => {
     mutation.mutate();
   };
-  const { handleChange, handleSubmit, handleBlur, errors, values } = useFormik<{
-    name: string;
-    username: string;
-    email: string;
-  }>({
-    initialValues: {
-      name: user?.name,
-      username: user?.username,
-      email: user?.email,
-    },
-    validationSchema: stringValidation(["name", "username"]),
-    onSubmit: onSubmit,
-  });
+  const { handleChange, handleSubmit, handleBlur, errors, values, isValid } =
+    useFormik<{
+      name: string;
+      username: string;
+      email: string;
+    }>({
+      initialValues: {
+        name: user?.name,
+        username: user?.username,
+        email: user?.email,
+      },
+      validationSchema: stringValidation(["name", "username"]),
+      onSubmit: onSubmit,
+    });
   const UserInputData = [
     {
       label: "Username",
@@ -106,9 +107,7 @@ function PersonalUserDetails({ user }: Props) {
         <Btn
           text="Save Now"
           className="bg-[#333] text-white"
-          disabled={
-            errors.name || errors.username ? true : false ? true : false
-          }
+          disabled={!isValid}
           isLoading={mutation.isLoading}
         />
       </div>

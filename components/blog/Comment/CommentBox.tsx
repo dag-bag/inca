@@ -43,7 +43,7 @@ function CommentBox({ id }: { id: string }) {
         <CommentInput id={id} />
       </div>
       <div>
-        {/* {data?.map((comment) => {
+        {data?.map((comment) => {
           return (
             <div key={comment._id} className="flex mt-4">
               <div className="mr-5">
@@ -76,7 +76,7 @@ function CommentBox({ id }: { id: string }) {
               </div>
             </div>
           );
-        })} */}
+        })}
       </div>
     </div>
   );

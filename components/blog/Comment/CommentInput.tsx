@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { isEmpty } from "lodash";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import { CreateComment } from "../../../services/comment/comment";
 import { IComment } from "../../../types/comment";
 import CommentBtn from "./CommentBtn";
 
@@ -20,20 +21,7 @@ function CommentInput({ id }: Props) {
       console.log("Please Add something in comment box.");
       return;
     } else {
-      const res = await fetch("/api/comment", {
-        method: "POST",
-        body: JSON.stringify({
-          text: comment,
-          blog: id,
-          email: session?.user?.email,
-          createdAtPost: new Date().getTime().toString(),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      let respData = await res.json();
+      const respData = await CreateComment({ id, comment });
       setComment("");
       return respData;
       // setFetchComments(true);
@@ -41,12 +29,12 @@ function CommentInput({ id }: Props) {
   };
   const queryClient = useQueryClient();
   const mutation = useMutation(createComment, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.setQueriesData(["comment", { id }], (old: any) => [
         {
           text: comment,
           blog: id,
-          email: session?.user?.email,
+          user: data.user,
           createdAtPost: new Date().getTime().toString(),
         },
         ...old,
