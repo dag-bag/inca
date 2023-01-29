@@ -174,7 +174,7 @@ const Post = ({ post }: { post: IBlog }) => {
 export default Post;
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/params`);
+  const res = await fetch(`/api/params`);
   const posts = await res.json();
 
   // Get the paths we want to pre-render based on posts
@@ -185,13 +185,11 @@ export async function getStaticPaths() {
   // We'll pre-render only these paths at build time.
   // { fallback: blocking } will server-render pages
   // on-demand if the path doesn't exist.
-  return paths;
+  return { paths, fallback: "blocking" };
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postJson = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/blog?slug=${params?.slug}`
-  );
+  const postJson = await fetch(`/api/blog?slug=${params?.slug}`);
   const post = await postJson.json();
   // console.log(post);
   if (!post) {
