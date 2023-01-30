@@ -60,7 +60,7 @@ function Auth({ type }: Props) {
       case "login":
         let isVerified = await loginUser(loginUserDetails);
         if (isVerified?.status === 200) {
-          router.push(`${isVerified?.url}`);
+          router.push("/");
           resetForm();
         } else {
           setErrors({ email: isVerified?.error });

@@ -17,9 +17,9 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
         <Banner />
         <Categories />
         <Story
-          title={"Somos"}
+          title={"ABOUT US"}
           description={
-            "Fluffy alpaca wool plushies make the perfect cuddling companion Temperature-regulating slippers keep you comfortable year-round  Made with all-natural, sustainable materials Each purchase supports local Peruvian artisans"
+            "Incancestry is a charitable organization that is dedicated to supporting the Andean communities of Peru. We want to see them thrive as they maintain their deeply rooted ancestral traditions. We carry this out by bringing exposure to the finest artisans in these communities and sharing their handcrafted products with the whole world. "
           }
           image={"/assets/home/Artesano.jpg"}
           boxType="left-right"
