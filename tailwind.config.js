@@ -36,6 +36,11 @@ module.exports = {
       },
     ],
   },
+  variants: {
+    extent: {
+      lineClamp: ["hover"],
+    },
+  },
   plugins: [
     require("tailwind-scrollbar-hide"),
     require("daisyui"),
@@ -43,5 +48,6 @@ module.exports = {
       strategy: "base", // only generate global styles
       // strategy: 'class', // only generate classes
     }),
+    require("@tailwindcss/line-clamp"),
   ],
 };
