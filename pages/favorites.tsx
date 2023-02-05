@@ -13,16 +13,16 @@ import Grid from "../components/utils/Grid";
 import H1 from "../components/Headings/H1";
 import ProductCard from "../components/Product/ProductCard";
 import { CartItem } from "../types/cart";
+import { isEmpty } from "lodash";
 
 function Favorites() {
   const favItems = useRecoilValue<CartItem[]>(favAtom);
 
   return (
     <Flex className="">
-      <H1 text="Favrouites" />
+      <H1 text={!isEmpty(favItems) ? "Favrouites" : "No Favrouites Items"} />
       {favItems.length === 0 && (
         <Flex className="justify-center items-center mt-14">
-          <H1 text="No Favrouites Items" />
           <LinkBtn text="Explore Now" link="products" className="mt-2" />
         </Flex>
       )}

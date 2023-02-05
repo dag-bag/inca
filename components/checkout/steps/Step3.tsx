@@ -3,7 +3,13 @@
 import React from "react";
 import Container from "../CheckoutCatainer";
 import { BsPaypal } from "react-icons/bs";
-import PaypalComponent from "../Paypal/PaypalComponent";
+import dynamic from "next/dynamic";
+import Loader from "../../Loaders/Loader";
+const PaypalComponent = dynamic(() => import("../Paypal/PaypalComponent"), {
+  ssr: true,
+  loading: () => <Loader />,
+});
+// import PaypalComponent from "../Paypal/PaypalComponent";
 type Props = {};
 
 function Step3({}: Props) {

@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 
 type Props = {
-  features: {
+  features?: {
     title: string;
     description: string;
     svg: any;
@@ -16,29 +16,30 @@ type Props = {
 };
 
 function DottedCarousel({ features }: Props) {
+  let breakPoints = {
+    // when window width is >= 640px
+    640: {
+      width: 640,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+    },
+    // when window width is >= 768px
+    768: {
+      width: 768,
+      slidesPerView: 1,
+      slidesPerGroup: 3,
+    },
+  };
   return (
     <Swiper
       loop={true}
-      breakpoints={{
-        // when window width is >= 640px
-        640: {
-          width: 640,
-          slidesPerView: 1,
-          slidesPerGroup: 1,
-        },
-        // when window width is >= 768px
-        768: {
-          width: 768,
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-        },
-      }}
+      breakpoints={breakPoints}
       pagination={{
         clickable: true,
       }}
       slidesPerView={"auto"}
       modules={[Pagination, Autoplay]}
-      className="mySwiper flex justify-center items-center flex-col py-8 "
+      className=" flex justify-center items-center flex-col  "
       navigation={true}
       autoplay={{
         delay: 3000,
@@ -46,7 +47,7 @@ function DottedCarousel({ features }: Props) {
         stopOnLastSlide: false,
       }}
     >
-      {features.map((feature, index) => {
+      {features?.map((feature, index) => {
         return (
           <SwiperSlide key={index}>
             <FeatureCard

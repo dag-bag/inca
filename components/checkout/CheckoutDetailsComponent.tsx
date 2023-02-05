@@ -10,14 +10,19 @@ import HeaderComponent from "./HeaderComponent";
 
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
-import Step3 from "./steps/Step3";
+// import Step3 from "./steps/Step3";
 import Step1Complete from "./steps/Step1Complete";
 import Step2Completed from "./steps/Step2Completed";
-import { ICheckoutStepType } from "../../types/checkout";
+import dynamic from "next/dynamic";
+const Step3 = dynamic(() => import("./steps/Step3"), {
+  ssr: false,
+  loading: () => <Loader />,
+});
 import { cartQty } from "../../atoms/cart";
 import CartEmpty from "../Cart/CartEmpty";
 import Sidebar from "./Sidebar";
-import Flex from "../utils/Flex";
+import Loader from "../Loaders/Loader";
+
 type Props = {};
 
 // Create a smooth payment experience for your customers.

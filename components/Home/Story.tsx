@@ -1,8 +1,10 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Btn from "../buttons/Btn";
+import DottedCarousel from "./DottedCarosel";
+import Testimonials from "./Testimonials/Testimonials";
 // import Btn2 from "../buttons/Btn2";
 type Props = {
   image: string;
@@ -12,6 +14,8 @@ type Props = {
   type: 1 | 2 | 3;
 };
 function Story({ title, description, image, boxType, type }: Props) {
+  const [readMore, setReadMore] = useState(false);
+
   return (
     <>
       {type === 1 && (
@@ -24,28 +28,13 @@ function Story({ title, description, image, boxType, type }: Props) {
                 boxType === "center-left" ? "text-left" : "text-right"
               } mb-6 md:w-[70%] ml-auto`}
             >
-              <p className="relative  text-2xl  lg:text-4xl  text-[#333]">
+              <p className="relative  text-2xl  lg:text-4xl  text-[#333] underline underline-offset-4">
                 {title}
-                <svg
-                  width={60}
-                  height={2}
-                  viewBox="0 0 60 2"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`absolute  right-0 ${
-                    boxType === "center-center" ? "top-18" : "top-10"
-                  }  ${
-                    boxType === "center-left" ? "left-0" : "right-0"
-                  } md:top-14`}
-                  preserveAspectRatio="none"
-                >
-                  <path d="M0 1L60 0.999995" stroke="#333333" />
-                </svg>
               </p>
 
               <p className=" text-base  text-[#333] mt-12 ">{description}</p>
             </div>
-            <Btn text="Cosmos" className="btn-wide btn-outline ml-auto" />
+            <Btn text="Read More" className="btn-wide btn-outline ml-auto" />
             {/* <Btn2>Cosmos</Btn2> */}
           </div>
           <div className={`flex-1 flex  ml-2 relative justify-center  `}>
@@ -75,7 +64,7 @@ function Story({ title, description, image, boxType, type }: Props) {
         >
           <div className={`flex-1 flex  relative justify-center mr-2 ml-0  `}>
             <div
-              className={`w-[70%] h-[100%] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
+              className={`w-[70%] h-[100%] max-h-[475.133px] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
             ></div>
             <div className="w-[70%] rounded-[3px]  md:w-1/2 z-10">
               <Image
@@ -89,9 +78,9 @@ function Story({ title, description, image, boxType, type }: Props) {
           </div>
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
             <div className={` text-left mb-6 md:w-[70%] mr-auto`}>
-              <p className="relative  text-2xl  lg:text-4xl  text-[#333]">
+              <p className="relative  text-2xl  lg:text-4xl  text-[#333] underline underline-offset-4">
                 {title}
-                <svg
+                {/* <svg
                   width={60}
                   height={2}
                   viewBox="0 0 60 2"
@@ -101,13 +90,23 @@ function Story({ title, description, image, boxType, type }: Props) {
                   preserveAspectRatio="none"
                 >
                   <path d="M0 1L60 0.999995" stroke="#333333" />
-                </svg>
+                </svg> */}
               </p>
 
-              <p className=" text-base  text-[#333] mt-12 ">{description}</p>
+              <p
+                className={` text-base  text-[#333] mt-12 ${
+                  readMore ? "line-clamp-none" : "line-clamp-6"
+                } `}
+              >
+                {description}
+              </p>
             </div>
 
-            <Btn text="Cosmos" className=" btn-outline btn-wide mr-auto" />
+            <Btn
+              text={`${readMore ? "Read Less" : "Read More"} `}
+              className=" btn-outline btn-wide mr-auto"
+              onClick={() => setReadMore((value) => !value)}
+            />
           </div>
         </div>
       )}
@@ -116,30 +115,16 @@ function Story({ title, description, image, boxType, type }: Props) {
           <div
             className={`px-5 flex justify-start flex-col   space-y-12  md:w-[50%]`}
           >
-            <div className={` text-right mb-6 md:w-[70%] ml-auto`}>
-              <p className="relative  text-2xl  lg:text-4xl  text-[#333]">
+            <Testimonials />
+            {/* <div className={` text-right mb-6 md:w-[70%] ml-auto`}>
+              <p className="relative  text-2xl  lg:text-4xl  text-[#333] underline underline-offset-4">
                 {title}
-                <svg
-                  width={60}
-                  height={2}
-                  viewBox="0 0 60 2"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`absolute  right-0 ${
-                    boxType === "center-center" ? "top-18" : "top-10"
-                  }  ${
-                    boxType === "center-left" ? "left-0" : "right-0"
-                  } md:top-14`}
-                  preserveAspectRatio="none"
-                >
-                  <path d="M0 1L60 0.999995" stroke="#333333" />
-                </svg>
               </p>
 
               <p className=" text-base  text-[#333] mt-12 ">{description}</p>
             </div>
 
-            <Btn text="Cosmos" className="btn-wide btn-outline ml-auto" />
+            <Btn text="Cosmos" className="btn-wide btn-outline ml-auto" /> */}
           </div>
           <div className={`flex-1 flex  ml-2 justify-center  relative pt-10`}>
             <div

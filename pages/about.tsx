@@ -1,5 +1,6 @@
 /** @format */
 
+import Image from "next/legacy/image";
 import React from "react";
 const para = {
   styles: "font-normal text-base leading-6 text-gray-600",
@@ -36,9 +37,11 @@ const About1 = () => {
             </p>
           </div>
           <div className="w-full lg:w-8/12 ">
-            <img
+            <Image
+              width={800}
+              height={500}
               className="w-full h-full"
-              src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
+              src="https://res.cloudinary.com/hellooworkd/image/upload/v1675155115/IMG_9581-2_dhf9vw.jpg"
               alt="A group of People"
             />
           </div>

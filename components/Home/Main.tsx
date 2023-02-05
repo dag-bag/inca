@@ -5,17 +5,28 @@ import { Suspense } from "react";
 import Banner from "./Banner";
 import { FetchedProductType } from "../../types/product";
 import Categories from "./Categories";
-const Carousel = dynamic(() => import("../utils/Carosel"));
-const Story = dynamic(() => import("./Story"));
-const SubFooter = dynamic(() => import("../Footers/SubFooter"));
-const Features = dynamic(() => import("./Features"));
+import Loader from "../Loaders/Loader";
+
+const Carousel = dynamic(() => import("../utils/Carosel"), {
+  loading: () => <Loader />,
+});
+const Story = dynamic(() => import("./Story"), {
+  loading: () => <Loader />,
+});
+const SubFooter = dynamic(() => import("../Footers/SubFooter"), {
+  loading: () => <Loader />,
+});
+const Features = dynamic(() => import("./Features"), {
+  loading: () => <Loader />,
+});
 
 export default function Main({ products }: { products: FetchedProductType[] }) {
   return (
     <>
       <main>
-        <Banner />
+        {/* <Banner /> */}
         <Categories />
+
         <Story
           title={"ABOUT US"}
           description={
@@ -29,11 +40,13 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
         <Features />
 
         <Story
-          title={"Nuestros productos"}
+          title={"CONNECTING THE WORLD WITH A SUSTAINABLE LIFESTYLE"}
           description={
-            "At Incancestory, our vision is to not only support the local Peruvians that make our products, but their communities as a whole. We’re inspired by their connection to nature and their simple lifestyle. However, many of these traditional communities live far below the poverty line and their way of life is under threat. Our commitment to fair trading means the local shepherds can afford to continue looking after their alpacas and artisans can support their families. We also invest a portion of our profits back into the community to provide education and skill training for a better future for generations to come."
+            "At Incancestry, we support fashion and lifestyle by protecting, not harming the planet. Making it our mission to promote a sustainable environment, we work with the Andean communities to create products that don't damage the beautiful world around us. Our products are made of 100% natural materials, with ethically raised alpaca fiber and wool. The dyes in our products are natural and undertaken by local Andean weavers who work from home. We work with and listen to the advice and instructions of the artisans we work with, who are experts in the field of farming, harvesting and producing sustainable products."
           }
-          image={"/assets/home/Group.png"}
+          image={
+            "https://res.cloudinary.com/hellooworkd/image/upload/v1675092246/Inca_kkenr5.jpg"
+          }
           boxType="left-right"
           type={2}
         />

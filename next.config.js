@@ -14,6 +14,7 @@ const nextConfig = {
       "cdn.sanity.io",
       "images.pexels.com",
       "lh3.googleusercontent.com",
+      "mdbootstrap.com",
     ],
   },
 };

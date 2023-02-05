@@ -56,17 +56,16 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
         }}
         disabled={false}
         forceReRender={[amount, currency, style]}
-        fundingSource={undefined}
+        // fundingSource={undefined}
         createOrder={async () => {
-          let orderId =
-            address &&
-            session?.user?.email &&
-            (await createOrderFn({
-              userEmail: session?.user.email,
-              cart,
-              address,
-              total,
-            }));
+          let orderId = await createOrderFn({
+            cart,
+            address,
+            total,
+          });
+          // address &&
+          // session?.user?.email &&
+
           return orderId;
         }}
         onApprove={async (data, actions) => {

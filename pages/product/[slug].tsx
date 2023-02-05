@@ -140,7 +140,7 @@ export default function Example({
             <Tab.Group as="div" className="flex flex-col-reverse">
               {/* Image selector */}
               <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
-                <Tab.List className="grid grid-cols-4 gap-6">
+                <Tab.List className="grid grid-cols-4 gap-6 gap-y-10">
                   {variantDetails.img.map((image, index) => (
                     <Tab
                       key={index}

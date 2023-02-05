@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import Carousel from "../utils/Carosel";
+
 import DottedCarousel from "./DottedCarosel";
 
 type Props = {};

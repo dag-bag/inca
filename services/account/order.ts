@@ -2,11 +2,11 @@
 
 import { Order } from "@paypal/checkout-server-sdk/lib/orders/lib";
 import { Address } from "../../types/address";
+import { getUserData } from "./user";
 
 interface OrderType {
   address: Address;
   cart: any;
-  userEmail: string;
   total: number;
 }
 const gerAllOrderDetails = async () => {
@@ -15,7 +15,15 @@ const gerAllOrderDetails = async () => {
   return orderData;
 };
 const createOrderFn = async (OrderData: OrderType) => {
-  const { address, cart, total, userEmail } = OrderData;
+  let session = await getUserData();
+  let userEmail = "";
+  if (!session) {
+    userEmail = "guest@gmail.com";
+  }
+  if (session) {
+    userEmail = session?.email;
+  }
+  const { address, cart, total } = OrderData;
   const resp = await fetch("/api/preorder", {
     method: "POST",
     headers: {
