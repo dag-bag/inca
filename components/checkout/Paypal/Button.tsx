@@ -14,6 +14,7 @@ import { Address } from "../../../types/address";
 import { useSession } from "next-auth/react";
 import bcrypt from "bcryptjs";
 import { useRouter } from "next/router";
+import invariant from "tiny-invariant";
 // This values are the props in the UI
 const amount = 2;
 
@@ -58,6 +59,7 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
         forceReRender={[amount, currency, style]}
         // fundingSource={undefined}
         createOrder={async () => {
+          invariant(typeof address === "object", "Address must be an object");
           let orderId = await createOrderFn({
             cart,
             address,
