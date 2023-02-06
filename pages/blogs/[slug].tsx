@@ -3,8 +3,10 @@
 import React, { useEffect } from "react";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
+const Sidebar = dynamic(() => import("../../components/blog/Siderbar"));
 import CommentBox from "../../components/blog/Comment/CommentBox";
-import Siderbar from "../../components/blog/Siderbar";
+
 import { IBlog } from "../../types/blog";
 import { GetServerSideProps, GetStaticProps } from "next";
 
@@ -166,7 +168,7 @@ const Post = ({ post }: { post: IBlog }) => {
         </div>
       </section>
       {/* Sidebar Section */}
-      <Siderbar />
+      <Sidebar />
     </div>
   );
 };

@@ -133,16 +133,20 @@ function classNames(...classes: string[]) {
 export default function Layout({
   children,
   query,
+  disabled,
 }: {
   children: React.ReactNode;
   query?: string;
+  disabled?: boolean;
 }) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const router = useRouter();
   let Title = router.query.title;
 
   return (
-    <div className="bg-white">
+    <div
+      className={`${disabled ? "cursor-not-allowed opacity-50" : ""} bg-white`}
+    >
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>

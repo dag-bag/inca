@@ -351,21 +351,6 @@ export default function Example({
                   <button
                     type="button"
                     className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                    // className={({
-                    //   active,
-                    //   checked,
-                    // }): { active: string; checked: string } =>
-                    //   classNames(
-                    //     // isAvail
-                    //     //   ? "cursor-pointer focus:outline-none"
-                    //     //   : "opacity-25 cursor-not-allowed",
-                    //     active ? "ring-2 ring-offset-2 ring-primary" : "",
-                    //     checked
-                    //       ? "bg-primary border-transparent text-white hover:bg-[#8B5801]"
-                    //       : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                    //     "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                    //   )
-                    // }
                     onClick={(e) => {
                       e.stopPropagation();
 
@@ -400,51 +385,7 @@ export default function Example({
                   Additional details
                 </h2>
 
-                <div className="border-t divide-y divide-gray-200">
-                  {/* {product.details.map((detail) => (
-                    <Disclosure as="div" key={detail.name}>
-                      {({ open }) => (
-                        <>
-                          <h3>
-                            <Disclosure.Button className="group relative w-full py-6 flex justify-between items-center text-left">
-                              <span
-                                className={classNames(
-                                  open ? "text-primary" : "text-gray-900",
-                                  "text-sm font-medium"
-                                )}
-                              >
-                                {detail.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                {open ? (
-                                  <MinusSmIcon
-                                    className="block h-6 w-6 text-indigo-400 group-hover:text-primary"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <PlusSmIcon
-                                    className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                  />
-                                )}
-                              </span>
-                            </Disclosure.Button>
-                          </h3>
-                          <Disclosure.Panel
-                            as="div"
-                            className="pb-6 prose prose-sm"
-                          >
-                            <ul role="list">
-                              {detail.items.map((item) => (
-                                <li key={item}>{item}</li>
-                              ))}
-                            </ul>
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  ))} */}
-                </div>
+                <div className="border-t divide-y divide-gray-200"></div>
               </section>
             </div>
           </div>
@@ -465,7 +406,9 @@ export default function Example({
                 <div key={product._id}>
                   <div className="relative">
                     <div className="relative w-full h-72 rounded-lg overflow-hidden">
-                      <img
+                      <Image
+                        width={200}
+                        height={200}
                         src={product.variant[0].img[0].img}
                         alt={product.title}
                         className="w-full h-full object-center object-cover"
