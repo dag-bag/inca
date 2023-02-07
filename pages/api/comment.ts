@@ -27,7 +27,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
       const { text, blog, user, createdAtPost } = req.body;
-      console.log(req.body);
 
       if (!text) {
         return res.status(400).json({
@@ -43,7 +42,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         user,
         createdAtPost,
       });
-      console.log(comment);
 
       const postRelated = await Blog.findByIdAndUpdate(blog, {
         $push: { comments: comment },

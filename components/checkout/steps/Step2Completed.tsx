@@ -18,7 +18,7 @@ function Step2Completed({}: Props) {
     let UpdatedSTate = checkoutState.map((item, i) => {
       return item.step === 2 ? { ...item, edit: true } : item;
     });
-    console.log(UpdatedSTate);
+  
     setCheckoutState(UpdatedSTate);
   };
   return (

@@ -15,6 +15,7 @@ const nextConfig = {
       "images.pexels.com",
       "lh3.googleusercontent.com",
       "mdbootstrap.com",
+      "i.ibb.co",
     ],
   },
 };

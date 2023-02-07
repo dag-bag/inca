@@ -10,7 +10,7 @@ import { IComment } from "../../../types/comment";
 import CommentInput from "./CommentInput";
 function CommentBox({ id }: { id: string }) {
   const { data: session } = useSession();
-  console.log("session:", session);
+
 
   const getComments = async () => {
     const comment = await fetch(`/api/comment?id=${id}`);

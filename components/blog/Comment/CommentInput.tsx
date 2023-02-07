@@ -13,7 +13,7 @@ import CommentBtn from "./CommentBtn";
 type Props = { id: string };
 
 function CommentInput({ id }: Props) {
-  const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
   const { data: user } = useQuery(["user"], getUserData);
 
   const [comment, setComment] = useState<string>("");
@@ -24,8 +24,10 @@ function CommentInput({ id }: Props) {
       console.log("Please Add something in comment box.");
       return;
     } else {
+      setLoading(true);
       const respData = await CreateComment({ id, comment });
       setComment("");
+      setLoading(false);
       return respData;
       // setFetchComments(true);
     }
@@ -57,7 +59,7 @@ function CommentInput({ id }: Props) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       ></textarea>
-      <CommentBtn IsDisAbled={IsDisAbled} />
+      <CommentBtn IsDisAbled={IsDisAbled} isLoading={loading} />
     </form>
   );
 }

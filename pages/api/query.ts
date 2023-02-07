@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
       const { title } = req.query;
-      console.log(req.query);
+
       const products = await Product.find({
         title: { $regex: title, $options: "i" },
       });

@@ -14,7 +14,6 @@ const Main = dynamic(() => import("../components/Home/Main"), {
 });
 
 export default function Home({ products }: { products: FetchedProductType[] }) {
-  console.log(products);
   return (
     <div>
       {/* <Skeleton /> */}

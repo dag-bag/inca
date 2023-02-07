@@ -40,7 +40,7 @@ function Story({ title, description, image, boxType, type }: Props) {
           <div className={`flex-1 flex  ml-2 relative justify-center  `}>
             <div className="w-[70%] rounded-[3px]   md:w-1/2 z-10">
               <div
-                className={`w-[400px] h-[400px] rounded-[3px]   absolute md:w-1/2 -top-14 bg-[#bd9575]  right-0 md:right-15`}
+                className={`w-[400px] h-[400px] rounded-[3px]   absolute md:w-1/2 -top-14 bg-[#bd9575]  right-0 md:right-15 -z-10`}
               ></div>
               <Image src={image} alt="Artesano" width={596} height={682} />
               {/* <BlurImage image={image} /> */}

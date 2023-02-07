@@ -35,8 +35,8 @@ function CheckoutDetailsComponent({}: Props) {
     if (!session) router.push("/checkout");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
-  console.log(checkoutState);
+  const checkoutState = useRecoilValue(checkoutSteps);
+
   const CartQty = useRecoilValue(cartQty);
   if (!CartQty) return <CartEmpty />;
 

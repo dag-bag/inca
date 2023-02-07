@@ -4,6 +4,8 @@
  * @format
  */
 
+import Image from "next/image";
+
 export default function Example() {
   return (
     <>
@@ -22,7 +24,9 @@ export default function Example() {
               <div className="flex-shrink-0 pt-10 sm:pt-16">
                 <a href="#" className="inline-flex">
                   <span className="sr-only">Workflow</span>
-                  <img
+                  <Image
+                    width={500}
+                    height={500}
                     className="h-12 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
                     alt=""

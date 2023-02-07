@@ -5,10 +5,17 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 const Sidebar = dynamic(() => import("../../components/blog/Siderbar"));
-import CommentBox from "../../components/blog/Comment/CommentBox";
+const CommentBox = dynamic(
+  () => import("../../components/blog/Comment/CommentBox"),
+  {
+    ssr: false,
+    loading: () => <Loader />,
+  }
+);
 
 import { IBlog } from "../../types/blog";
 import { GetServerSideProps, GetStaticProps } from "next";
+import Loader from "../../components/Loaders/Loader";
 
 const Post = ({ post }: { post: IBlog }) => {
   const { title, text, img, date, category, author, createdAt } = post;
