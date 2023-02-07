@@ -38,21 +38,11 @@ function Story({ title, description, image, boxType, type }: Props) {
             {/* <Btn2>Cosmos</Btn2> */}
           </div>
           <div className={`flex-1 flex  ml-2 relative justify-center  `}>
-            <div
-              className={`w-[70%] h-[100%] rounded-[3px]  ${
-                boxType === "center-center" ? "bg-[#e8e8e8]" : "bg-[#bd9575]"
-              } absolute md:w-1/2 -top-14   ${
-                boxType === "left-right" && "right-0"
-              }      ${boxType === "center-left" && "left-0"} md:right-15`}
-            ></div>
             <div className="w-[70%] rounded-[3px]   md:w-1/2 z-10">
-              <Image
-                src={image}
-                alt="Artesano"
-                width={596}
-                height={682}
-                layout="responsive"
-              />
+              <div
+                className={`w-[400px] h-[400px] rounded-[3px]   absolute md:w-1/2 -top-14 bg-[#bd9575]  right-0 md:right-15`}
+              ></div>
+              <Image src={image} alt="Artesano" width={596} height={682} />
               {/* <BlurImage image={image} /> */}
             </div>
           </div>

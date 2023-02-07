@@ -22,9 +22,8 @@ type Props = {
 
 function PoketCart({ svg }: Props) {
   const cartItems = useRecoilValue(cartAtom);
-  const SetCart = useSetRecoilState(cartSelector);
+
   const Qty = useRecoilValue(cartQty);
-  const subTotal = useRecoilValue(cartTotal);
 
   return (
     <Popover className="flow-root text-sm lg:relative  z-50">

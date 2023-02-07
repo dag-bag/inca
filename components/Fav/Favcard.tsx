@@ -37,7 +37,7 @@ function FavCard({ title, img, desc, price, slug, uni }: CartItem) {
       <Link href={`/product/${slug}`}>
         <div className="relative ">
           {/* <span className="badge bg-primary text-white">{tag}</span> */}
-          <div className="flex group relative  md:w-full bg-[#e8e8e8]  justify-end items-center flex-col h-full w-full rounded-md">
+          <div className="flex group relative  md:w-full bg-[#e8e8e8]  justify-end items-center flex-col h-full w-full rounded-2xl">
             <BlurImage
               image={img[0].img}
               height={200}

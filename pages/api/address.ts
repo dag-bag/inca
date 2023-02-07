@@ -11,7 +11,13 @@ import Blog from "../../models/Blog";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
-      const { email } = req.query;
+      const ip = req.connection.remoteAddress;
+
+      let { email } = req.query;
+      if (email === "guest@gmail.com") {
+        email = `guest${ip}@gmail.com`;
+      }
+
       const address = await Address.find({ userEmail: email });
       return res.status(200).json(address);
     } catch (error) {
@@ -21,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === "POST") {
     try {
-      const {
+      let {
         userEmail: userEmail,
         address1,
         city,
@@ -34,6 +40,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         email,
         address2,
       } = req.body;
+      const ip = req.connection.remoteAddress;
 
       if (
         !address1 ||
@@ -51,7 +58,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           msg: "Please provide name, email and password",
         });
       }
-
+      if (userEmail === "guest@gmail.com") {
+        userEmail = `guest${ip}@gmail.com`;
+      }
       const blog = await Address.create({
         userEmail: userEmail,
         address1,
@@ -70,7 +79,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(201).json({
           success: true,
           msg: "address created successfully",
-          //   token: generateToken(user._id),
         });
       } else {
         return res.status(400).json({

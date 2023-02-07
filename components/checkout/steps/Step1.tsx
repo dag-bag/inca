@@ -16,13 +16,18 @@ import HeadLessUiComponent, {
 } from "../../Modals/HeadLessUiModal";
 import HeadLessUiButton from "../../Modals/Button/HeadLessUiButton";
 import Loader from "../../Loaders/Loader";
+import Skeleton from "../../skeleton/Skeleton";
 
 type Props = {};
 
 function Step1({}: Props) {
   const { data: session } = useSession();
   const fetchAddress = async () => {
-    const res = await fetch("/api/address?email=" + session?.user?.email);
+    let email = session?.user?.email;
+    if (!session) {
+      email = "guest@gmail.com";
+    }
+    const res = await fetch("/api/address?email=" + email);
     const data = await res.json();
     return data;
   };
@@ -80,7 +85,7 @@ function Step1({}: Props) {
         {/* <Btn className={"rounded-md"} text={"Add another address"} /> */}
         <div className="flex items-center space-x-2 flex-wrap">
           {isLoading ? (
-            <Loader />
+            <Skeleton />
           ) : (
             data?.map((item, i) => {
               return (

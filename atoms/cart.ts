@@ -40,7 +40,9 @@ export const cartSelector = selector({
     } else {
       set(cartAtom, [...cardItems, newValue]);
     }
-    toast.success("Added to cart 🛒");
+    toast.success("Added to cart 🛒", {
+      duration: 5000,
+    });
   },
 });
 export const removeOneItemFromCart = selector({
@@ -73,7 +75,9 @@ export const removeOneItemFromCart = selector({
       } else {
         set(cartAtom, [...cardItems, newValue]);
       }
-      toast.success("Removed Items successfully");
+      toast.success("Removed Items successfully", {
+        duration: 5000,
+      });
     }
   },
 });
@@ -94,11 +98,7 @@ export const cartQty = selector({
   key: "cartQty",
   get: ({ get }) => {
     const cartItems = get(cartAtom);
-    let total = 0;
-    cartItems.map((i: CartItem) => {
-      total += i.qty;
-    });
-    return total;
+    return cartItems.length;
   },
 });
 

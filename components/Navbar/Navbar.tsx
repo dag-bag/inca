@@ -19,19 +19,22 @@ const CartDetails = dynamic(() => import("./CartDetails"), { ssr: false });
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 
 const centerDivData = [
-  { title: "Stuffed Animals", href: "/category/alpaca-stuffed-animals" },
+  {
+    title: "Stuffed Animals",
+    href: "/category?category=alpaca-stuffed-animals",
+  },
   {
     title: " Slippers",
-    href: "/category/alpaca-slippers",
+    href: "/category?category=alpaca-slippers",
   },
   {
     title: " Clothing",
-    href: "/category/alpaca-clothing",
+    href: "/category?category=alpaca-clothing",
     dropdown: true,
     DropDownData: ["Alpaca Ponchos", "Scarves", "Alpaca Gloves", "Shawls"],
   },
   { title: "Home & deco", href: "/" },
-  { title: " Accesories", href: "/category/alpaca-accessories" },
+  { title: " Accesories", href: "/category?category=alpaca-accessories" },
   {
     title: "About Us",
     href: "/about",
@@ -291,16 +294,6 @@ function Navbar() {
                     <div className="indicator">{rightDivData[2]?.svg}</div>
                   </label>
                 </Link>
-                {/* <ul
-                  tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
-                >
-                  <li>
-                    <Link href={"/login"}>
-                      <span>login</span>
-                    </Link>
-                  </li>
-                </ul> */}
               </>
             )}
           </div>

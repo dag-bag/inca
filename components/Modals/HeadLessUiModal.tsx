@@ -6,10 +6,9 @@
 
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationCircleIcon, HomeIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/outline";
 import { atom, useRecoilState } from "recoil";
-import AddRessBookForm from "../accountComponents/Forms/AddRessForm";
-import CheckoutLayout from "../checkout/layout/CheckoutLayout";
+
 import FormLayout from "../accountComponents/Forms/FormLayou";
 export const HeadUiModalOpenAtom = atom({
   key: "HeadUiModal",

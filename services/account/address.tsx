@@ -11,7 +11,7 @@ export let createAddress = async (Data: Data) => {
   const { values, userEmail } = Data;
   let email = userEmail;
   if (!session) {
-    email = values.email;
+    email = "guest@gmail.com";
   }
 
   const resp = await fetch("/api/address", {

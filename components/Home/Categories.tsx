@@ -21,12 +21,6 @@ export default function Categories() {
           <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
             Our Categories
           </h2>
-          <a
-            href="#"
-            className="hidden sm:block text-sm font-semibold text-indigo-600 hover:text-indigo-500"
-          >
-            See everything<span aria-hidden="true"> &rarr;</span>
-          </a>
         </div>
 
         <div className="mt-8 relative">

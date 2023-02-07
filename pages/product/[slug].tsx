@@ -327,7 +327,7 @@ export default function Example({
                   </RadioGroup>
                 </div>
                 <div className="mt-10 flex sm:flex-col1">
-                  <Toaster position="bottom-right" reverseOrder={false} />
+                  <Toaster position="top-right" reverseOrder={false} />
                   <button
                     className="max-w-xs flex-1 bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#8B5801] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary sm:w-full"
                     onClick={() => {
