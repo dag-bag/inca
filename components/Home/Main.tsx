@@ -50,7 +50,7 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
           boxType="left-right"
           type={2}
         />
-        <Carousel products={products} title="Dragon Ball Z" />
+        <Carousel products={products} title="Trending Products" />
         <Story
           title={"¿Quieres comprar en grandes cantidades?"}
           description={

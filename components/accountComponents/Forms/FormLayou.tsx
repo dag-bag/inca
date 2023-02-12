@@ -7,6 +7,7 @@ import { Form, FormikProps, Formik } from "formik";
 import { FormValues } from "../../../types/checkout";
 import { ICity, ICountry, IState } from "country-state-city";
 import { Country, State, City } from "country-state-city";
+import { postcodeValidator } from "postcode-validator";
 import {
   checkoutSchema,
   formValidationSchema,
@@ -35,7 +36,7 @@ function FormLayout({ cancelButtonRef }: Props) {
         city: "",
         state: "",
         zipcode: 0,
-        country: "",
+        country: "US",
         lastName: "",
         firstName: "",
         phone: 0,

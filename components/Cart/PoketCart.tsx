@@ -26,7 +26,7 @@ function PoketCart({ svg }: Props) {
   const Qty = useRecoilValue(cartQty);
 
   return (
-    <Popover className="flow-root text-sm lg:relative  z-50">
+    <Popover className="flow-root text-sm lg:relative  ">
       <Popover.Button className="group  p-2 flex items-center relative">
         {svg}
         <span className="absolute top-0 -right-2 border border-black rounded-full px-1">
@@ -44,7 +44,7 @@ function PoketCart({ svg }: Props) {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <Popover.Panel className="absolute top-16 inset-x-0 mt-px pb-6 bg-white shadow-lg sm:px-2 lg:top-full lg:left-auto lg:right-0 lg:mt-3 lg:-mr-1.5 lg:w-80 lg:rounded-lg lg:ring-1 lg:ring-black lg:ring-opacity-5">
+        <Popover.Panel className="absolute top-16 inset-x-0 mt-px pb-6 bg-white shadow-lg sm:px-2 lg:top-full lg:left-auto lg:right-0 lg:mt-3 lg:-mr-1.5 lg:w-80 lg:rounded-lg lg:ring-1 lg:ring-black lg:ring-opacity-5 z-50">
           <form className="max-w-2xl mx-auto px-4">
             {!Qty ? (
               <div className="p-3">

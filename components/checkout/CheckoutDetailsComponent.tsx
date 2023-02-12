@@ -41,7 +41,7 @@ function CheckoutDetailsComponent({}: Props) {
   if (!CartQty) return <CartEmpty />;
 
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       <div>
         {checkoutState.map((item, index) => {
           return (

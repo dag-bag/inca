@@ -13,6 +13,7 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Loader from "../../components/Loaders/Loader";
 import { OrderResponse } from "../../types/order";
+import Image from "next/image";
 function Success() {
   const router = useRouter();
   const { orderId } = router.query;
@@ -25,9 +26,10 @@ function Success() {
     }
   );
   if (isLoading) return <Loader />;
+  console.log("data:", data);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 mt-10">
       <div className="md:w-[85%] md:ml-auto p-5">
         <div className="flex space-x-2">
           <AiOutlineCheckCircle className="text-6xl text-green-500" />
@@ -69,7 +71,9 @@ function Success() {
                         key={index}
                       >
                         <div className="flex items-start">
-                          <img
+                          <Image
+                            width={50}
+                            height={50}
                             alt="Trainer"
                             src={item.img[0].img}
                             className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
@@ -107,7 +111,7 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm">${data?.total}.00</p>
+                    <p className="text-sm">${data?.subTotal}.00</p>
                   </div>
                 </li>
                 <li className="flex items-center justify-between py-4">
@@ -117,7 +121,7 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm">$40.00</p>
+                    <p className="text-sm">${data?.deliveryCost}</p>
                   </div>
                 </li>
                 <li className="flex items-center justify-between py-4 ">
@@ -127,7 +131,10 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-xl">${data?.total || 0 + 40}.00</p>
+                    <p className="text-xl">
+                      ${data?.total}
+                      .00
+                    </p>
                   </div>
                 </li>
               </ul>
@@ -141,19 +148,19 @@ function Success() {
 
 export default Success;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/login",
-      },
-    };
-  } else {
-    return {
-      props: {},
-    };
-  }
-};
+//   if (!session) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: "/login",
+//       },
+//     };
+//   } else {
+//     return {
+//       props: {},
+//     };
+//   }
+// };

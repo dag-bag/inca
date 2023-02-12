@@ -75,7 +75,7 @@ function Step1({}: Props) {
           },
         ]}
       />
-      <div className="ml-14 mt-4">
+      <div className="md:ml-14 mt-4">
         <h4 className="font-semibold ">Ship to Your Location</h4>
         <p className="text-xs font-light">
           Have your order delivered to your home, office or anywhere. We work

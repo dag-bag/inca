@@ -12,20 +12,16 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import Card from "./Card";
 export default function Testimonials() {
-  let breakPoints = {
-    // when window width is >= 640px
-    640: {
-      width: 640,
-      slidesPerView: 1,
-      slidesPerGroup: 1,
+  let TestimonialsData = [
+    {
+      name: "Sherlene Soon",
+      text: "“Bought 2 alpaca toys and they arrived in perfect condition. The floofiest, softest toys I have ever owned. Made with real alpaca fur but they don't smell at all! The owner gives loads of tips on how to take care of them and make them fluffier. He even sent me photos of the alpacas when I asked for it, cutest things ever!! Thank you so much for all your help and for making the most amazing floofs.” ",
     },
-    // when window width is >= 768px
-    768: {
-      width: 768,
-      slidesPerView: 1,
-      slidesPerGroup: 3,
+    {
+      name: "Lindsey Buckingham",
+      text: "“Amazing quality and detail in my custom order of alpaca toys for my little ones! These are the most soft and fuzzy toys, they are perfect!!!  ",
     },
-  };
+  ];
   return (
     <Swiper
       spaceBetween={10}
@@ -35,19 +31,13 @@ export default function Testimonials() {
       cssMode={true}
       // pagination={true}
       modules={[Pagination]}
-      className="mySwiper "
+      className="mySwiper max-w-xs sm:max-w-lg md:max-w-max"
     >
-      <SwiperSlide className="flex  ">
-        <Card />
-      </SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-      <SwiperSlide>Slide 5</SwiperSlide>
-      <SwiperSlide>Slide 6</SwiperSlide>
-      <SwiperSlide>Slide 7</SwiperSlide>
-      <SwiperSlide>Slide 8</SwiperSlide>
-      <SwiperSlide>Slide 9</SwiperSlide>
+      {TestimonialsData.map((item, index) => (
+        <SwiperSlide className="block  " key={index}>
+          <Card {...item} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

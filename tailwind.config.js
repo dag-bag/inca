@@ -49,5 +49,6 @@ module.exports = {
       // strategy: 'class', // only generate classes
     }),
     require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/aspect-ratio"),
   ],
 };

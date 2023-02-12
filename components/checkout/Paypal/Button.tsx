@@ -8,7 +8,11 @@ import {
 } from "@paypal/react-paypal-js";
 import { createOrderFn } from "../../../services/account/order";
 import { useRecoilValue } from "recoil";
-import { activeAddressCard, selectedAddress } from "../../../atoms/checkout";
+import {
+  activeAddressCard,
+  selectedAddress,
+  selectedDeliveryCharges,
+} from "../../../atoms/checkout";
 import { cartAtom, cartTotal } from "../../../atoms/cart";
 import { Address } from "../../../types/address";
 import { useSession } from "next-auth/react";
@@ -30,6 +34,7 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
   const address = useRecoilValue(activeAddressCard);
   let hashAddress = bcrypt.hashSync(JSON.stringify(address), 10);
   const total = useRecoilValue(cartTotal);
+  const deliveryCharges = useRecoilValue(selectedDeliveryCharges);
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
@@ -63,7 +68,8 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
           let orderId = await createOrderFn({
             cart,
             address,
-            total,
+            subTotal: total,
+            deliveryCost: deliveryCharges,
           });
           // address &&
           // session?.user?.email &&

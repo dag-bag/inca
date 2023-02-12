@@ -22,6 +22,8 @@ export interface OrderResponse {
   address: Address;
   total: number;
   status: string;
+  deliveryCost: number;
+  subTotal: number;
   createdAt: Date;
   updatedAt: Date;
   __v: number;

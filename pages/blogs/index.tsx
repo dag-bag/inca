@@ -45,12 +45,12 @@ function Blog() {
         </div>
 
         <div className="w-full h-[40vh] md:h-[50vh] relative">
-          {/* <BlurImage
-            image={blogs[0].img.img}
+          <BlurImage
+            image={`${data && data[0]?.img}`}
             width={500}
             height={200}
             alt={"Banner"}
-          /> */}
+          />
         </div>
       </div>
 

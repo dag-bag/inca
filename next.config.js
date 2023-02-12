@@ -16,6 +16,8 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "mdbootstrap.com",
       "i.ibb.co",
+      "tailwindui.com",
+      "cdn.shopify.com",
     ],
   },
 };

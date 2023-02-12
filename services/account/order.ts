@@ -7,7 +7,8 @@ import { getUserData } from "./user";
 interface OrderType {
   address: Address;
   cart: any;
-  total: number;
+  subTotal: number;
+  deliveryCost: number;
 }
 const gerAllOrderDetails = async () => {
   const orderResp = await fetch(`/api/orders`);
@@ -23,7 +24,7 @@ const createOrderFn = async (OrderData: OrderType) => {
   if (session) {
     userEmail = session?.email;
   }
-  const { address, cart, total } = OrderData;
+  const { address, cart, subTotal, deliveryCost } = OrderData;
   const resp = await fetch("/api/preorder", {
     method: "POST",
     headers: {
@@ -33,7 +34,8 @@ const createOrderFn = async (OrderData: OrderType) => {
       address,
       Cart: cart,
       userEmail,
-      total,
+      subTotal,
+      deliveryCost,
     }),
   });
   const order = await resp.json();

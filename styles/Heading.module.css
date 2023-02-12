@@ -1,0 +1,5 @@
+/** @format */
+
+.heading {
+  @apply relative  text-2xl  lg:text-4xl  text-[#333] font-medium;
+}

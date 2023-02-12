@@ -10,7 +10,6 @@ const CheckoutDetailsComponent = dynamic(
     ssr: false,
   }
 );
-// import CheckoutDetailsComponent from "../../components/checkout/CheckoutDetailsComponent";
 
 type Props = {};
 

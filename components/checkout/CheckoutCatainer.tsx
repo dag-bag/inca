@@ -20,7 +20,7 @@ function Container({ Question, Title, Level, ShipCardData }: Props) {
   return (
     <>
       <HeaderComponent Title={Title} Level={Level} />
-      <div className="bg-gray-200 h-52 w-full mt-2 max-w-4xl ml-14 p-7 rounded-md">
+      <div className="bg-gray-200 h-52 w-full mt-2 max-w-4xl md:ml-14 p-7 rounded-md">
         <h4 className="text-xl font-medium">{Question}</h4>
         <div className="flex space-x-4">
           {ShipCardData?.map((item, i) => {

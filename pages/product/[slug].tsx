@@ -7,18 +7,15 @@ import { Toaster } from "react-hot-toast";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import BlurImage from "../../components/utils/BlurImage";
 
-import { BsCheckLg, BsSuitHeart } from "react-icons/bs";
 import Product from "../../models/Product";
 
-import Head from "next/head";
 import { cartSelector, cartTotal } from "../../atoms/cart";
 import {
   FetchedProductType,
   Variant,
   VariantDetails,
 } from "../../types/product";
-import Carousel from "../../components/utils/Carosel";
-import { favSelector, isFavOrNotAtom } from "../../atoms/favraites";
+import { favSelector } from "../../atoms/favraites";
 
 type Props = {
   product: FetchedProductType;
@@ -51,9 +48,13 @@ import ProductReviews from "../../components/Product/ProductReviews";
 import Link from "next/link";
 import Image from "next/image";
 import SkeLeTonImage from "../../components/skeleton/SkeletonImage";
+import SizeGuide, {
+  SizeGuideOpenAtom,
+} from "../../components/Product/SizeGuide";
+import ProductImage from "../../components/Product/ProductImage";
 
 const productRaw = {
-  sizes: ["10", "20", "30", "40", "50", "60", "70"],
+  sizes: ["XS", "S", "M", "L", "XL"],
   name: "Zip Tote Basket",
   price: "$140",
   rating: 4,
@@ -116,7 +117,7 @@ export default function Example({
   variants,
 }: Props) {
   let rating = 4;
-
+  console.log(product);
   const [selectedSize, setSelectedSize] = useState(variantDetails.size[0]);
   const [selectedColor, setSelectedColor] = useState(variantDetails.size[0]);
 
@@ -127,6 +128,7 @@ export default function Example({
   const [cart, SetCart] = useRecoilState(cartSelector);
   const uni = `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`;
   const [isfav, favSet] = useRecoilState(favSelector(uni));
+  const setModalOpen = useSetRecoilState(SizeGuideOpenAtom);
 
   return (
     <div className="bg-white">
@@ -181,8 +183,8 @@ export default function Example({
                 {variantDetails.img.map((image, index) => (
                   <Tab.Panel key={index}>
                     <SkeLeTonImage
-                      width={500}
-                      height={500}
+                      width={600}
+                      height={600}
                       image={image.img}
                       alt={image.alt}
                       type="responsive"
@@ -201,8 +203,11 @@ export default function Example({
 
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl text-gray-900">
-                  {variantDetails.price}$
+                <p className="text-3xl text-gray-700">
+                  <span className="text-orange-500 text-xl line-through mr-2">
+                    ${variantDetails.price}
+                  </span>
+                  ${variantDetails.sellPrice}
                 </p>
               </div>
 
@@ -215,7 +220,7 @@ export default function Example({
                       <StarIcon
                         key={rating}
                         className={classNames(
-                          rating > rating ? "text-primary" : "text-gray-300",
+                          rating > rating ? "text-primary" : "text-yellow-500",
                           "h-5 w-5 flex-shrink-0"
                         )}
                         aria-hidden="true"
@@ -260,7 +265,7 @@ export default function Example({
                             key={index}
                             className="h-14 w-14 relative hover:opacity-75 duration-700 ease-in-out border border-gray-200 rounded-xl"
                           >
-                            <BlurImage
+                            <ProductImage
                               image={item.img[0].img}
                               alt="product"
                               key={index}
@@ -280,12 +285,13 @@ export default function Example({
                 <div className="mt-8">
                   <div className="flex items-center justify-between">
                     <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setModalOpen(true)}
                       className="text-sm font-medium text-primary hover:text-primary"
                     >
                       See sizing chart
-                    </a>
+                    </button>
+                    <SizeGuide currentCategories={product.category} />
                   </div>
 
                   <RadioGroup
@@ -319,7 +325,7 @@ export default function Example({
                             }
                             disabled={!isAvail}
                           >
-                            <RadioGroup.Label as="p">{size}CM</RadioGroup.Label>
+                            <RadioGroup.Label as="p">{size}</RadioGroup.Label>
                           </RadioGroup.Option>
                         );
                       })}

@@ -2,36 +2,6 @@
 
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-// const stringRequired = {
-//   type: String,
-//   required: true,
-// };
-// const addressSchema = new Schema({
-//   userID: {
-//     type: String,
-//   },
-//   userEmail: {
-//     type: String,
-//     required: true,
-//   },
-
-//   address1: stringRequired,
-//   address2: String,
-//   city: stringRequired,
-//   state: stringRequired,
-//   zipcode: {
-//     type: Number,
-//     required: true,
-//   },
-//   country: stringRequired,
-//   lastName: String,
-//   firstName: stringRequired,
-//   phone: {
-//     type: Number,
-//     required: true,
-//   },
-//   email: String,
-// });
 const orderSchema = new Schema(
   {
     userID: {
@@ -48,6 +18,10 @@ const orderSchema = new Schema(
     products: Object,
 
     address: {},
+    subTotal: {
+      type: Number,
+      required: true,
+    },
     total: {
       type: Number,
       required: true,
@@ -55,6 +29,10 @@ const orderSchema = new Schema(
     status: {
       type: String,
       default: "PENDING",
+      required: true,
+    },
+    deliveryCost: {
+      type: Number,
       required: true,
     },
     paymentInfo: {

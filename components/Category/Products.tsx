@@ -23,8 +23,9 @@ function Products({ data }: Props) {
                 src={product.variant[0].img[0].img}
                 alt={product.desc}
                 className="h-full w-full object-cover object-center"
-                width={200}
-                height={200}
+                width={500}
+                height={500}
+                quality={100}
               />
             </div>
             <div className=" pb-4 text-center">

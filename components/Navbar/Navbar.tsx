@@ -174,10 +174,12 @@ function Navbar() {
       <SmallMenu />
       <div className="navbar bg-white md:max-w-[90%] m-auto relative ">
         <div className="navbar-start">
-          <div className="relative w-7 sm:w-10 md:w-16 cursor-pointer ">
+          <div className="relative w-7 sm:w-10 md:w-20 cursor-pointer ">
             <Link href={"/"}>
               <Image
-                src={"/logo.png"}
+                src={
+                  "https://res.cloudinary.com/dthpcwn8r/image/upload/v1675856646/Logo_solo_imagen_q1wwbz.png"
+                }
                 alt="logo"
                 width={97}
                 height={139}

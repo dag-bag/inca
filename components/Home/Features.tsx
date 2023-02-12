@@ -48,7 +48,7 @@ const FeaturedData = [
       </svg>
     ),
     title: "Hypoallergenic ",
-    description: "All-natural alpaca wool is gentle on your skin",
+    description: "Ensuring the comfort of your skin.",
   },
   {
     svg: (
@@ -80,7 +80,8 @@ const FeaturedData = [
       </svg>
     ),
     title: "Fluffy",
-    description: "Alpaca wool is unbelievably cushy.",
+    description:
+      "    Incredibly cushy and cozy material that will make you feel at home.",
   },
   {
     svg: (
@@ -100,7 +101,8 @@ const FeaturedData = [
       </svg>
     ),
     title: "Fairtrade",
-    description: "Support Peruvians & their traditional way of life",
+    description:
+      "Giving back to the local Andean community with each purchase you make.",
   },
   {
     svg: (
@@ -124,8 +126,7 @@ const FeaturedData = [
       </svg>
     ),
     title: "Soft as a cloud",
-    description:
-      "Feathery alpaca wool is one of the softest natural materials.",
+    description: "Alpaca wool is one of the softest materials that exist.",
   },
   {
     svg: (
@@ -176,7 +177,8 @@ const FeaturedData = [
       </svg>
     ),
     title: "Sustainable",
-    description: "Wool is renewable & kind to the planet .",
+    description:
+      "Alpaca wool is harmless and contributes to an eco-friendly world.",
   },
 ];
 function Features({}: Props) {

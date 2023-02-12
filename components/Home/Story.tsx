@@ -1,10 +1,11 @@
 /** @format */
 
 import React, { useState } from "react";
+import style from "../../styles/Heading.module.css";
 import Image from "next/image";
 import Btn from "../buttons/Btn";
-import DottedCarousel from "./DottedCarosel";
 import Testimonials from "./Testimonials/Testimonials";
+import Router from "next/router";
 // import Btn2 from "../buttons/Btn2";
 type Props = {
   image: string;
@@ -15,26 +16,27 @@ type Props = {
 };
 function Story({ title, description, image, boxType, type }: Props) {
   const [readMore, setReadMore] = useState(false);
-
   return (
     <>
       {type === 1 && (
         <div
-          className={`flex  justify-evenly  flex-wrap-reverse pb-2 md:p-0 mb-20 md:mt-32   md:mb-40`}
+          className={`flex  justify-evenly  flex-wrap-reverse pb-2 md:p-0 mb-20 md:mt-32   md:mb-40 max-w-7xl m-auto`}
         >
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
             <div
               className={` ${
                 boxType === "center-left" ? "text-left" : "text-right"
-              } mb-6 md:w-[70%] ml-auto`}
+              } mb-6  ml-auto`}
             >
-              <p className="relative  text-2xl  lg:text-4xl  text-[#333] underline underline-offset-4">
-                {title}
-              </p>
+              <h1 className={`text-right ${style.heading} `}>{title}</h1>
 
               <p className=" text-base  text-[#333] mt-12 ">{description}</p>
             </div>
-            <Btn text="Read More" className="btn-wide btn-outline ml-auto" />
+            <Btn
+              text="Read More"
+              className="btn-wide btn-outline ml-auto"
+              onClick={() => Router.push("/about")}
+            />
             {/* <Btn2>Cosmos</Btn2> */}
           </div>
           <div className={`flex-1 flex  ml-2 relative justify-center  `}>
@@ -50,25 +52,19 @@ function Story({ title, description, image, boxType, type }: Props) {
       )}
       {type === 2 && (
         <div
-          className={`flex  justify-evenly  flex-wrap   md:mt-52 md:mb-40  mb-20`}
+          className={`flex  justify-evenly  flex-wrap   md:mt-52 md:mb-40  mb-20 max-w-7xl m-auto`}
         >
           <div className={`flex-1 flex  relative justify-center mr-2 ml-0  `}>
             <div
-              className={`w-[70%] h-[100%] max-h-[475.133px] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
+              className={` h-[100%] max-h-[475.133px] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
             ></div>
             <div className="w-[70%] rounded-[3px]  md:w-1/2 z-10">
-              <Image
-                src={image}
-                alt="Artesano"
-                width={576}
-                height={620}
-                layout="responsive"
-              />
+              <Image src={image} alt="Artesano" width={576} height={620} />
             </div>
           </div>
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
-            <div className={` text-left mb-6 md:w-[70%] mr-auto`}>
-              <p className="relative  text-2xl  lg:text-4xl  text-[#333] underline underline-offset-4">
+            <div className={` text-left mb-6  mr-auto`}>
+              <h1 className={`${style.heading} `}>
                 {title}
                 {/* <svg
                   width={60}
@@ -81,7 +77,7 @@ function Story({ title, description, image, boxType, type }: Props) {
                 >
                   <path d="M0 1L60 0.999995" stroke="#333333" />
                 </svg> */}
-              </p>
+              </h1>
 
               <p
                 className={` text-base  text-[#333] mt-12 ${
@@ -103,18 +99,12 @@ function Story({ title, description, image, boxType, type }: Props) {
       {type === 3 && (
         <div className={`flex  justify-evenly  flex-wrap-reverse  md:my-28 `}>
           <div
-            className={`px-5 flex justify-start flex-col   space-y-12  md:w-[50%]`}
+            className={`px-5 flex justify-start flex-col   w-full   md:w-[50%]`}
           >
+            <h1 className="relative  text-2xl  lg:text-4xl  text-[#333] font-medium text-center mb-6">
+              HERE&apos;S WHAT PEOPLE HAVE <br /> TO SAY ABOUT US
+            </h1>
             <Testimonials />
-            {/* <div className={` text-right mb-6 md:w-[70%] ml-auto`}>
-              <p className="relative  text-2xl  lg:text-4xl  text-[#333] underline underline-offset-4">
-                {title}
-              </p>
-
-              <p className=" text-base  text-[#333] mt-12 ">{description}</p>
-            </div>
-
-            <Btn text="Cosmos" className="btn-wide btn-outline ml-auto" /> */}
           </div>
           <div className={`flex-1 flex  ml-2 justify-center  relative pt-10`}>
             <div

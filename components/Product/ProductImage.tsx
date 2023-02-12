@@ -20,7 +20,7 @@ type Props = {
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
-export default function BlurImage({
+export default function ProductImage({
   image,
   rounded,
   cursor,
@@ -35,23 +35,19 @@ export default function BlurImage({
   return (
     <>
       <div
-        className={`w-full  bg-gray-200  overflow-hidden   ${
+        className={`w-full aspect-w-1 aspect-h-1 bg-gray-200  overflow-hidden  ${
           rounded ? "rounded-xl" : ""
         }`}
       >
         <Image
           alt={alt}
           src={image}
-          fill={true}
+          //   fill={true}
           style={{
             objectFit: "cover",
           }}
-          // layout={type === "responsive" ? "responsive" : "fill"}
-          {...(type === "responsive" ? { width, height } : {})}
-          // width={width}
-          // // width={width}
-          // height={height}
-          // objectFit="cover"
+          width={300}
+          height={300}
           quality={100}
           className={cn(
             `group-hover:opacity-75 duration-700 ease-in-out object-cover ${

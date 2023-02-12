@@ -19,8 +19,8 @@ function Favorites() {
   const favItems = useRecoilValue<CartItem[]>(favAtom);
 
   return (
-    <Flex className="">
-      <H1 text={!isEmpty(favItems) ? "Favrouites" : "No Favrouites Items"} />
+    <Flex className="mt-4">
+      <H1 text={!isEmpty(favItems) ? "Favourites" : "No favourites Items"} />
       {favItems.length === 0 && (
         <Flex className="justify-center items-center mt-14">
           <LinkBtn text="Explore Now" link="products" className="mt-2" />

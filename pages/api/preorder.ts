@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // request.prefer("return=representation");
 
   if (req.method === "POST") {
-    const { Cart, userEmail, total, address } = req.body;
+    const { Cart, userEmail, subTotal, address, deliveryCost } = req.body;
 
     try {
       const PaypalClient = client();
@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           {
             amount: {
               currency_code: "USD",
-              value: "100.00",
+              value: `${subTotal + deliveryCost}`,
             },
           },
         ],
@@ -41,7 +41,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         address: address,
         products: Cart,
         userEmail: userEmail,
-        total: total,
+        total: subTotal + deliveryCost,
+        subTotal,
+        deliveryCost,
       });
 
       res.json({ orderID: response.result.id });

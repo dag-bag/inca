@@ -32,20 +32,15 @@ function DottedCarousel({ features }: Props) {
   };
   return (
     <Swiper
-      loop={true}
       breakpoints={breakPoints}
       pagination={{
         clickable: true,
       }}
+      loop={true}
       slidesPerView={"auto"}
       modules={[Pagination, Autoplay]}
       className=" flex justify-center items-center flex-col  "
       navigation={true}
-      autoplay={{
-        delay: 3000,
-        disableOnInteraction: false,
-        stopOnLastSlide: false,
-      }}
     >
       {features?.map((feature, index) => {
         return (

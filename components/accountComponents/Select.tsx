@@ -52,30 +52,6 @@ function Select({
           })}
         </select>
       </div>{" "}
-      {/* <div className="">
-        <div className="mb-3 w-full md:w-96">
-          <label
-            className="block  text-sm text-gray-600 mt-4 pb-1"
-            htmlFor={name}
-          >
-            {placeholder}
-          </label>
-          <select
-            id="name"
-            disabled={disabled}
-            className={classs}
-            aria-label="Default select example"
-            value={value}
-            onChange={onchange}
-            name={name}
-          >
-            <option value="Select Country">Select Country</option>
-            {options.map((option) => {
-              return <option key={option}>{option}</option>;
-            })}
-          </select>
-        </div>
-      </div> */}
     </Suspense>
   );
 }

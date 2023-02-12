@@ -24,9 +24,13 @@ function AddReMoveItem({ uni, children, className, qty }: Props) {
 
   return (
     <p className={`${className} text-gray-500 inline-flex`}>
-      <button disabled={qty == 1} type="button">
+      <button
+        disabled={qty === 1}
+        type="button"
+        className={`${qty === 1 && "cursor-not-allowed pointer-events-none"}`}
+      >
         <MinusIcon
-          className="w-3 cursor-pointer text-black hover:scale-110 mx-1 "
+          className={`w-3 cursor-pointer text-black hover:scale-110 mx-1  `}
           onClick={() => {
             removeItem({ uni });
           }}
