@@ -19,6 +19,7 @@ import { useSession } from "next-auth/react";
 import bcrypt from "bcryptjs";
 import { useRouter } from "next/router";
 import invariant from "tiny-invariant";
+import client from "../../../libs/paypal";
 // This values are the props in the UI
 const amount = 2;
 
@@ -32,14 +33,13 @@ type Props = {
 const ButtonWrapper = ({ currency, showSpinner }: Props) => {
   const { push } = useRouter();
   const address = useRecoilValue(activeAddressCard);
-  let hashAddress = bcrypt.hashSync(JSON.stringify(address), 10);
+
   const total = useRecoilValue(cartTotal);
   const deliveryCharges = useRecoilValue(selectedDeliveryCharges);
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
 
-  const { data: session, status } = useSession();
   const cart = useRecoilValue(cartAtom);
 
   useEffect(() => {
@@ -51,7 +51,6 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
       },
     });
   }, [currency, showSpinner]);
-  if (status === "loading") return <div>Loading....</div>;
 
   return (
     <>

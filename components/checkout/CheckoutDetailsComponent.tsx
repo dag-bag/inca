@@ -16,6 +16,7 @@ import Step2Completed from "./steps/Step2Completed";
 import dynamic from "next/dynamic";
 const Step3 = dynamic(() => import("./steps/Step3"), {
   ssr: false,
+
   loading: () => <Loader />,
 });
 import { cartQty } from "../../atoms/cart";
@@ -41,7 +42,7 @@ function CheckoutDetailsComponent({}: Props) {
   if (!CartQty) return <CartEmpty />;
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap max-w-screen-2xl m-auto">
       <div>
         {checkoutState.map((item, index) => {
           return (
