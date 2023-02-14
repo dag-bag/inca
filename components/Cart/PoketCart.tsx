@@ -51,7 +51,7 @@ function PoketCart({ svg }: Props) {
                 <p className="font-semibold text-xl my-3">
                   No Items In the cart.
                 </p>
-                <Link href={"/products"}>
+                <Link href={"/category?category=alpaca-stuffed-animals"}>
                   <button className="w-full bg-black border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-black">
                     View Products
                   </button>

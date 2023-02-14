@@ -31,7 +31,7 @@ export default function Testimonials() {
       cssMode={true}
       // pagination={true}
       modules={[Pagination]}
-      className="mySwiper max-w-xs sm:max-w-lg md:max-w-max"
+      className="mySwiper max-w-xs sm:max-w-lg md:max-w-max h-80"
     >
       {TestimonialsData.map((item, index) => (
         <SwiperSlide className="block  " key={index}>

@@ -23,7 +23,7 @@ const FooterFeaturesData = [
         />
       </svg>
     ),
-    p: `Amamos las alpacas  igual  que tú`,
+    p: `We love alpacas as much as you do.`,
   },
   {
     svg: (
@@ -66,7 +66,7 @@ const FooterFeaturesData = [
         />
       </svg>
     ),
-    p: "Preparación de pedido por artesanos.",
+    p: "Handmade and packed by artisans.",
   },
   {
     svg: (
@@ -109,7 +109,7 @@ const FooterFeaturesData = [
         />
       </svg>
     ),
-    p: "Compra con total seguridad",
+    p: "Security at every step",
   },
   {
     svg: (
@@ -159,7 +159,7 @@ const FooterFeaturesData = [
         />
       </svg>
     ),
-    p: "Líder mayorisya constock real",
+    p: "Worldwide shipping",
   },
   {
     svg: (
@@ -206,20 +206,22 @@ const FooterFeaturesData = [
         />
       </svg>
     ),
-    p: "Si no te convence  ¡Devuélvelo!",
+    p: "30 Day money back guarantee",
   },
 ];
 function HomeFooter() {
   return (
     <div className=" bg-[#e8e8e8]/80  flex justify-evenly items-center flex-wrap h-[500px] md:h-[200px] py-5 border-b-2 border-[#bd9575] mt-10 md:mt-0">
-      {FooterFeaturesData.map((item) => {
+      {FooterFeaturesData.map((item, index) => {
         return (
           <div
-            key={item.p}
-            className="w-[45%] md:w-auto md:h-auto flex justify-center items-center flex-col text-center space-y-5"
+            key={index}
+            className={
+              "flex items-center justify-center flex-col w-40 text-center h-[96px]"
+            }
           >
-            {item.svg}
-            <p className="text-xs  text-center text-[#333] w-36">{item.p}</p>
+            <div className="h-16">{item.svg}</div>
+            <p className="text-xs h-8">{item.p}</p>
           </div>
         );
       })}

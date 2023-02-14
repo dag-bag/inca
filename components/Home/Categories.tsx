@@ -82,15 +82,6 @@ export default function Categories() {
             </ul>
           </div>
         </div>
-
-        <div className="mt-12 flex px-4 sm:hidden">
-          <a
-            href="#"
-            className="text-sm font-semibold text-primary-1 hover:text-"
-          >
-            See everything<span aria-hidden="true"> &rarr;</span>
-          </a>
-        </div>
       </div>
     </div>
   );

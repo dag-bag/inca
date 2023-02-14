@@ -421,7 +421,7 @@ export default function Example({
                       />
                     </div>
                     <div className="relative mt-4">
-                      <h3 className="text-sm font-medium text-gray-900">
+                      <h3 className="text-sm font-medium text-gray-900 h-[40px]">
                         {product.title}
                       </h3>
                       <p className="mt-1 text-sm text-gray-500">

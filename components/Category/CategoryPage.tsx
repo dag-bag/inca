@@ -46,7 +46,7 @@ function CategoryPage({ products }: Props) {
                   <span className="text-orange-500 text-sm line-through mr-2">
                     ${product.variant[0].price}
                   </span>{" "}
-                  ${product.variant[0].price}
+                  ${product.variant[0].sellPrice}
                 </p>
               </div>
             </div>

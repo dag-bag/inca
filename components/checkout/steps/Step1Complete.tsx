@@ -20,8 +20,8 @@ function Step1Complete({}: Props) {
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
 
   return (
-    <div className="min-w-[1040px] flex justify-start items-start space-x-2 relative">
-      <h1 className="flex items-center  text-3xl font-semibold mt-6 mr-4">
+    <div className="max-w-[1040px] grid grid-cols-1 md:flex justify-start items-start space-x-2 relative ">
+      <h1 className=" flex items-center  text-3xl font-semibold mt-6 mr-4 ">
         <BsFillPatchCheckFill className=" text-green-600 w-10 h-10 rounded-full flex justify-center items-center mr-4"></BsFillPatchCheckFill>
         {"Address"}
       </h1>

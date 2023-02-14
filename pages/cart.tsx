@@ -47,7 +47,7 @@ function Cart() {
                           width={150}
                           height={150}
                         />
-                        <div className="w-[77px] h-[21px] flex space-x-1 items-center mt-2 cursor-pointer">
+                        <div className="w-[77px] h-[21px] flex space-x-1 items-center mt-2 cursor-pointer md:mt-8">
                           <svg
                             width={12}
                             height={12}
@@ -70,7 +70,7 @@ function Cart() {
                           </svg>
 
                           <p
-                            className=" text-sm font-light text-left text-black"
+                            className=" text-sm font-light text-left text-black "
                             onClick={() => {
                               let removedItem = {
                                 id: item.id,
@@ -83,7 +83,7 @@ function Cart() {
                               removeItem(removedItem);
                             }}
                           >
-                            Eliminar
+                            Remove
                           </p>
                         </div>
                       </div>

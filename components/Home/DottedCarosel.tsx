@@ -29,6 +29,11 @@ function DottedCarousel({ features }: Props) {
       slidesPerView: 1,
       slidesPerGroup: 3,
     },
+    1280: {
+      width: 768,
+      slidesPerView: 2,
+      slidesPerGroup: 3,
+    },
   };
   return (
     <Swiper
@@ -39,7 +44,7 @@ function DottedCarousel({ features }: Props) {
       loop={true}
       slidesPerView={"auto"}
       modules={[Pagination, Autoplay]}
-      className=" flex justify-center items-center flex-col  "
+      className=" flex justify-center items-center flex-col  max-w-screen-xl"
       navigation={true}
     >
       {features?.map((feature, index) => {

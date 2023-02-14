@@ -104,7 +104,7 @@ function Step1({}: Props) {
       </div>
       {/* <AccountModal className="ml-12" /> */}
       {/* <button onClick={() => setOpenModal(true)}>Add New Address</button> */}
-      <HeadLessUiButton text="Add New Address" />
+      <HeadLessUiButton text="Add New Address" className="md:ml-14" />
       <HeadLessUiComponent />
       <PrimaryBtn text="Continue" onClick={handleClick} className="ml-auto" />
     </>

@@ -1,11 +1,9 @@
 /** @format */
 
-import { UserProp } from "./../../types/user";
-/** @format */
-
 import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "../../libs/ConnectDb";
 import User from "../../models/User";
+import { UserNameIdentifyFire } from "../server/User_Middle_wares";
 
 var bcrypt = require("bcryptjs");
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
@@ -43,6 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           ok: false,
         });
       }
+
       let salt = bcrypt.genSaltSync(10);
 
       const secPassword = bcrypt.hashSync(password, salt);
@@ -76,6 +75,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   if (req.method === "PUT") {
     try {
+      // await UserNameIdentifyFire({ username: req.body.username }, res);
       const user = await User.findOneAndUpdate(
         { email: req.query.id },
         req.body

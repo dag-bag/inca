@@ -174,7 +174,7 @@ function Navbar() {
       <SmallMenu />
       <div className="navbar bg-white md:max-w-[90%] m-auto relative ">
         <div className="navbar-start">
-          <div className="relative w-7 sm:w-10 md:w-20 cursor-pointer ">
+          <div className="relative w-12 sm:w-10 md:w-20 cursor-pointer ">
             <Link href={"/"}>
               <Image
                 src={

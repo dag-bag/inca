@@ -17,7 +17,7 @@ function Card({ text, name }: Props) {
       <div className="flex flex-wrap justify-center text-center">
         <div className="grow-0 shrink-0 basis-auto w-full lg:w-8/12 px-3">
           <h5 className="text-lg font-bold mb-3">{name}</h5>
-          <p className="text-gray-500 mb-6">
+          <p className="text-gray-500 mb-6 line-clamp-6">
             <svg
               aria-hidden="true"
               focusable="false"
