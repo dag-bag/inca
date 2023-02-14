@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "GET":
       try {
-        let Orders = await Order.find({});
+        let Orders = await Order.find({}).sort({ updatedAt: -1 });
         return res.status(200).json(Orders);
       } catch (error) {
         return res
