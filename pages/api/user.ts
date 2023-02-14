@@ -3,7 +3,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "../../libs/ConnectDb";
 import User from "../../models/User";
-import { UserNameIdentifyFire } from "../server/User_Middle_wares";
 
 var bcrypt = require("bcryptjs");
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
