@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "GET":
       try {
         let Orders = await Order.find({});
-        return res.status(200).json({ Orders });
+        return res.status(200).json(Orders);
       } catch (error) {
         return res
           .status(400)
