@@ -4,6 +4,7 @@ import Order from "../../models/Order";
 
 import connectDb from "../../libs/ConnectDb";
 import { NextApiRequest, NextApiResponse } from "next";
+import initMiddleware from "../../libs/inititateMiddleWare";
 
 const cors = initMiddleware(
   Cors({
