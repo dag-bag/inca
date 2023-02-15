@@ -1,5 +1,5 @@
 /** @format */
-
+import Cors from "cors";
 import Order from "../../models/Order";
 
 import connectDb from "../../libs/ConnectDb";
