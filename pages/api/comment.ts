@@ -13,7 +13,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       let query = req.query;
 
-      const comments = await Comment.find({ blog: query.id })
+      const comments = await Comment.find({
+        $or: [{ blog: query.id, verified: true }],
+      })
         .populate("user", "name email image")
         .sort({ createdAtPost: -1 });
 

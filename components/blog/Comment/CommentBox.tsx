@@ -11,7 +11,6 @@ import CommentInput from "./CommentInput";
 function CommentBox({ id }: { id: string }) {
   const { data: session } = useSession();
 
-
   const getComments = async () => {
     const comment = await fetch(`/api/comment?id=${id}`);
     const data = await comment.json();
@@ -43,9 +42,9 @@ function CommentBox({ id }: { id: string }) {
         <CommentInput id={id} />
       </div>
       <div>
-        {data?.map((comment) => {
+        {data?.map((comment, index) => {
           return (
-            <div key={comment._id} className="flex mt-4">
+            <div key={index} className="flex mt-4">
               <div className="mr-5">
                 <Image
                   src={

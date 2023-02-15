@@ -13,7 +13,7 @@ function Card({ text, name }: Props) {
     styles: "text-yellow-500 text-lg",
   };
   return (
-    <div className="carousel-item active relative float-left w-full flex flex-col max-w-xs:">
+    <div className="carousel-item active relative float-left w-full flex flex-col md:max-w-4xl max-w-xs mb-10 md:mb-0">
       <div className="flex flex-wrap justify-center text-center">
         <div className="grow-0 shrink-0 basis-auto w-full lg:w-8/12 px-3">
           <h5 className="text-lg font-bold mb-3">{name}</h5>

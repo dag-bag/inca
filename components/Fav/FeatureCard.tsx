@@ -12,7 +12,7 @@ function FeatureCard({ svg, title, description }: Props) {
   return (
     <div className="group relative   transition z-[1]   text-center w-[90%] m-auto h-72 my-8 lg:my-10">
       <div className="relative space-y-8 py-12 p-8 flex justify-center items-center flex-col">
-        {svg}
+        <div className="h-20">{svg}</div>
         <div className="space-y-2">
           <h5 className="text-xl font-medium   transition text-[#333]">
             {title}

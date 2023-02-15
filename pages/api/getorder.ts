@@ -5,7 +5,15 @@ import Order from "../../models/Order";
 import connectDb from "../../libs/ConnectDb";
 import { NextApiRequest, NextApiResponse } from "next";
 
+const cors = initMiddleware(
+  Cors({
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200,
+  })
+);
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  await cors(req, res);
   if (req.method === "GET") {
     try {
       //This code is lifted from

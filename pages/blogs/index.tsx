@@ -27,7 +27,8 @@ import { IBlog } from "../../types/blog";
 
 function Blog() {
   const { data } = useQuery<IBlog[]>(["blogs"], getAllBlogs);
-
+  let img = data && data[0];
+  console.log(img);
   return (
     <div>
       <Head>
@@ -46,7 +47,9 @@ function Blog() {
 
         <div className="w-full h-[40vh] md:h-[50vh] relative">
           <BlurImage
-            image={`${data && data[0]?.img}`}
+            image={
+              "https://res.cloudinary.com/dthpcwn8r/image/upload/v1675167196/samples/landscapes/nature-mountains.jpg"
+            }
             width={500}
             height={200}
             alt={"Banner"}

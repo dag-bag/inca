@@ -41,7 +41,7 @@ function BlogCard(props: IBlog) {
             >
               {title}
             </a>
-            <p className="text-gray-500 text-sm">{truncate(text, 100)}</p>
+            <p className="text-gray-500 text-sm h-10">{truncate(text, 100)}</p>
           </div>
           <div className="px-6 ">
             <Link href={`/blogs/${slug}`}>

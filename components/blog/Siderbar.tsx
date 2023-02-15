@@ -6,6 +6,8 @@ import { BlurHeader } from "./BlurHeader";
 import { useQuery } from "@tanstack/react-query";
 import { IBlog } from "../../types/blog";
 import { getAllBlogs } from "../../services/blogs/blogs";
+import BlurImage from "../utils/BlurImage";
+import ProductImage from "../Product/ProductImage";
 const categoryData = [
   {
     sig: 50,
@@ -57,10 +59,13 @@ function Siderbar() {
       <div className="space-y-3 mt-4">
         <h4 className="text-left font-light">Popular Post</h4>
         <div className="w-72 h-44 relative">
-          <BlurHeader
+          <BlurImage
             image={
               "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=600"
             }
+            alt="blogs"
+            width={200}
+            height={200}
           />
         </div>
       </div>
@@ -75,7 +80,12 @@ function Siderbar() {
                 {/* Image div */}
                 <div className="flex space-x-3">
                   <div className="h-14 w-20 rounded-sm relative">
-                    <BlurHeader image={blog.img} />
+                    <BlurImage
+                      image={blog.img}
+                      width={50}
+                      height={50}
+                      alt="Ads"
+                    />
                   </div>
                   <h4 className="text-sm font-light">
                     {blog.title} <br />

@@ -26,11 +26,6 @@ function DottedCarousel({ features }: Props) {
     // when window width is >= 768px
     768: {
       width: 768,
-      slidesPerView: 1,
-      slidesPerGroup: 3,
-    },
-    1280: {
-      width: 768,
       slidesPerView: 2,
       slidesPerGroup: 3,
     },
@@ -44,7 +39,7 @@ function DottedCarousel({ features }: Props) {
       loop={true}
       slidesPerView={"auto"}
       modules={[Pagination, Autoplay]}
-      className=" flex justify-center items-center flex-col  max-w-screen-xl"
+      className=" flex justify-center items-center flex-col  max-w-6xl"
       navigation={true}
     >
       {features?.map((feature, index) => {

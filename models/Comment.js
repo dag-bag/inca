@@ -1,6 +1,7 @@
 /** @format */
 
 const mongoose = require("mongoose");
+const { boolean } = require("yup");
 
 const commentSchema = new mongoose.Schema({
   text: {
@@ -18,6 +19,10 @@ const commentSchema = new mongoose.Schema({
   blog: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Blog",
+  },
+  verified: {
+    type: Boolean,
+    default: false,
   },
 });
 mongoose.models = {};

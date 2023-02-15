@@ -9,7 +9,7 @@ import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 import Card from "./Card";
 export default function Testimonials() {
   let TestimonialsData = [
@@ -28,10 +28,12 @@ export default function Testimonials() {
       pagination={{
         clickable: true,
       }}
-      cssMode={true}
+      loop={true}
+      slidesPerView={"auto"}
+      modules={[Pagination, Autoplay]}
       // pagination={true}
-      modules={[Pagination]}
-      className="mySwiper max-w-xs sm:max-w-lg md:max-w-max h-80"
+
+      className="mySwiper max-w-xs sm:max-w-lg md:max-w-max "
     >
       {TestimonialsData.map((item, index) => (
         <SwiperSlide className="block  " key={index}>
