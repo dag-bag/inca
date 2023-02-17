@@ -3,6 +3,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import React from "react";
+import { XIcon, PlusIcon, MinusIcon } from "@heroicons/react/outline";
 
 type Props = {};
 const sortOptions = [
@@ -127,12 +128,12 @@ function SideCart({}: Props) {
                           </span>
                           <span className="ml-6 flex items-center">
                             {open ? (
-                              <MinusSmIcon
+                              <MinusIcon
                                 className="h-5 w-5"
                                 aria-hidden="true"
                               />
                             ) : (
-                              <PlusSmIcon
+                              <PlusIcon
                                 className="h-5 w-5"
                                 aria-hidden="true"
                               />
