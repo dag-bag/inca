@@ -28,7 +28,7 @@ function AddressCard({
 
   return (
     <div
-      className="h-[20rem] w-[20rem] border border-gray-400 mt-3 p-5 rounded-md cursor-pointer"
+      className="md:h-[20rem] md:w-[20rem] w-full h-full border border-gray-400 mt-3 p-5 rounded-md cursor-pointer"
       onClick={onClick}
     >
       {" "}

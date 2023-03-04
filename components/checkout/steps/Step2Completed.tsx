@@ -11,29 +11,29 @@ import BlurImage from "../../utils/BlurImage";
 
 type Props = {};
 
-function Step2Completed({}: Props) {
+function Step2Completed({ }: Props) {
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
     let UpdatedSTate = checkoutState.map((item, i) => {
       return item.step === 2 ? { ...item, edit: true } : item;
     });
-  
+
     setCheckoutState(UpdatedSTate);
   };
   return (
-    <div className="min-w-[1040px] flex justify-start items-start space-x-2 relative">
-      <h1 className="flex items-center  text-3xl font-semibold mt-6 mr-4">
+    <div className="--min-w-[1040px] flex flex-col justify-start items-start space-x-2 relative ">
+      <h1 className="flex items-center  text-3xl font-semibold mt-6 mr-4 ">
         <BsFillCheckCircleFill className=" text-green-500 w-10 h-10 rounded-full flex justify-center items-center mr-4"></BsFillCheckCircleFill>
         {"Delivery"}
       </h1>
-      <div>
-        <h4 className="font-semibold mt-8">Expected Thu, Oct 13 </h4>
-        <div className="mx-16">
+      <div >
+        <h4 className="font-semibold mt-5">Expected Thu, Oct 13 </h4>
+        <div className="0">
           {cartItems?.map((item, index) => {
             return (
-              <li key={index} className="flex py-6 sm:py-10">
-                <div className="flex-shrink-0 ">
+              <li key={index} className="mt-5 rounded-md p-3 flex  w-full  flex-col lg:flex-row border-2">
+                <div >
                   <Image
                     src={item.img[0].img}
                     alt="Front of men's Basic Tee in sienna."
@@ -41,15 +41,6 @@ function Step2Completed({}: Props) {
                     width={150}
                     height={150}
                   />
-                  <div className="w-[77px] h-[21px] flex space-x-1 items-center mt-2 cursor-pointer relative justify-center ml-10">
-                    {/* <img src="/cart.png" alt="" /> */}
-                    <BlurImage
-                      image={"/cart.png"}
-                      alt=""
-                      width={100}
-                      height={100}
-                    />
-                  </div>
                 </div>
                 <div className="ml-4 flex-1 flex flex-col justify-between sm:ml-6">
                   <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
@@ -133,10 +124,10 @@ function Step2Completed({}: Props) {
           type="button"
           className="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95 flex space-x-2"
           onClick={handleClick}
-          //   onClick={() => {
-          //     setState(2);
-          //     Setx({ ...x, 2: "Pending" });
-          //   }}
+        //   onClick={() => {
+        //     setState(2);
+        //     Setx({ ...x, 2: "Pending" });
+        //   }}
         >
           <span>Edit</span>
           <svg

@@ -29,7 +29,7 @@ type Props = {};
 // Create a smooth payment experience for your customers.
 // 1 change the status of first step to active
 // 2 change the status of second step to active
-function CheckoutDetailsComponent({}: Props) {
+function CheckoutDetailsComponent({ }: Props) {
   const { data: session } = useSession();
   const router = useRouter();
   useEffect(() => {
@@ -42,15 +42,15 @@ function CheckoutDetailsComponent({}: Props) {
   if (!CartQty) return <CartEmpty />;
 
   return (
-    <div className="flex flex-wrap max-w-screen-2xl m-auto ">
-      <div>
+    <div className="flex flex-wrap md:max-w-[90%] xl:grid xl:grid-cols-custom w-full m-auto ">
+      <div className="w-full">
         {checkoutState.map((item, index) => {
           return (
             <>
               <>
                 {item.status === "completed" &&
-                item.step === 1 &&
-                item.edit === false ? (
+                  item.step === 1 &&
+                  item.edit === false ? (
                   <CheckoutLayout>
                     <Step1Complete />
                   </CheckoutLayout>
@@ -60,8 +60,8 @@ function CheckoutDetailsComponent({}: Props) {
                   </CheckoutLayout>
                 ) : null}
                 {item.status === "completed" &&
-                item.step === 2 &&
-                item.edit === false ? (
+                  item.step === 2 &&
+                  item.edit === false ? (
                   <CheckoutLayout>
                     <Step2Completed />
                   </CheckoutLayout>

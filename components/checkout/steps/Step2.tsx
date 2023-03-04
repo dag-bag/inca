@@ -15,7 +15,7 @@ import Container from "../CheckoutCatainer";
 
 type Props = {};
 
-function Step2({}: Props) {
+function Step2({ }: Props) {
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
@@ -26,8 +26,8 @@ function Step2({}: Props) {
           return i.status === "active"
             ? { ...i, status: "completed" } // change the status of the active step to completed
             : index === 2 // if the index is 1 then change the status of the next step to active
-            ? { ...i, status: "active" }
-            : i;
+              ? { ...i, status: "active" }
+              : i;
         })
       );
     } else {
@@ -63,11 +63,11 @@ function Step2({}: Props) {
           },
         ]}
       />
-      <div className="mx-16">
+      <div className="lg:mx-16 max-w-4xl mb-5">
         {cartItems?.map((item, index) => {
           return (
-            <li key={index} className="flex py-6 sm:py-10">
-              <div className="flex-shrink-0 ">
+            <li key={index} className="mt-5 rounded-md pr-5 flex py-2 w-full sm:py-5 flex-col lg:flex-row border-2">
+              <div >
                 <Image
                   src={item.img[0].img}
                   alt="Front of men's Basic Tee in sienna."
@@ -75,15 +75,6 @@ function Step2({}: Props) {
                   width={150}
                   height={150}
                 />
-                <div className="w-[77px] h-[21px] flex space-x-1 items-center mt-2 cursor-pointer relative justify-center ml-10">
-                  {/* <img src="/cart.png" alt="" /> */}
-                  <BlurImage
-                    image={"/cart.png"}
-                    width={100}
-                    height={100}
-                    alt=""
-                  />
-                </div>
               </div>
               <div className="ml-4 flex-1 flex flex-col justify-between sm:ml-6">
                 <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">

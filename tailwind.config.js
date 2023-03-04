@@ -9,7 +9,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        custom: 'calc(100% - 400px) 400px'
+      }
+
+    },
   },
   daisyui: {
     themes: [
