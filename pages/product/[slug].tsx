@@ -52,6 +52,9 @@ import SizeGuide, {
   SizeGuideOpenAtom,
 } from "../../components/Product/SizeGuide";
 import ProductImage from "../../components/Product/ProductImage";
+import { SideCartOpenAtom } from "../../atoms/cart";
+import Carousel from "../../components/utils/Carosel";
+import { useRouter } from "next/dist/client/router";
 
 const productRaw = {
   sizes: ["XS", "S", "M", "L", "XL"],
@@ -117,7 +120,7 @@ export default function Example({
   variants,
 }: Props) {
   let rating = 4;
-  console.log(product);
+
   const [selectedSize, setSelectedSize] = useState(variantDetails.size[0]);
   const [selectedColor, setSelectedColor] = useState(variantDetails.size[0]);
 
@@ -129,12 +132,46 @@ export default function Example({
   const uni = `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`;
   const [isfav, favSet] = useRecoilState(favSelector(uni));
   const setModalOpen = useSetRecoilState(SizeGuideOpenAtom);
+  const setCartOpen = useSetRecoilState(SideCartOpenAtom);
+  const addedToCart = () => {
+    let newProduct = {
+      title: product.title,
+      uni: `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`,
+      price: variantDetails.price,
+      color: variantDetails.color,
+      size: selectedSize,
+      img: variantDetails.img,
+      slug: variantDetails.slug,
+      id: variantDetails._id,
+      qty: 1,
+      category: product.category,
+      sellPrice: variantDetails.sellPrice,
+    };
+    SetCart(newProduct);
+    setCartOpen(true);
+  };
 
   return (
     <div className="bg-white">
       {/* Mobile menu */}
 
       <main className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
+        <div className="text-sm breadcrumbs">
+          <ul>
+            <li>
+              <a>Home</a>
+            </li>
+            <li>
+              <Link
+                href={`/category?category=${product.category}`}
+                className="capitalize"
+              >
+                {product?.category?.split("-").join(" ")}
+              </Link>
+            </li>
+            <li>{product.title}</li>
+          </ul>
+        </div>
         <div className="max-w-2xl mx-auto lg:max-w-none">
           {/* Product */}
           <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
@@ -231,14 +268,6 @@ export default function Example({
                 </div>
               </div>
 
-              <div className="mt-6">
-                <h3 className="sr-only">Description</h3>
-
-                <div className="text-base text-gray-700 space-y-6">
-                  {product.desc}
-                </div>
-              </div>
-
               <form
                 className="mt-6"
                 onSubmit={(e) => {
@@ -266,7 +295,7 @@ export default function Example({
                             className="h-14 w-14 relative hover:opacity-75 duration-700 ease-in-out border border-gray-200 rounded-xl"
                           >
                             <ProductImage
-                              image={item.img[0].img}
+                              image={item.img}
                               alt="product"
                               key={index}
                               className="h-14 w-14  cursor-pointer"
@@ -333,23 +362,9 @@ export default function Example({
                   </RadioGroup>
                 </div>
                 <div className="mt-10 flex sm:flex-col1">
-                  <Toaster position="top-right" reverseOrder={false} />
                   <button
                     className="max-w-xs flex-1 bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#8B5801] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary sm:w-full"
-                    onClick={() => {
-                      let newProduct = {
-                        title: product.title,
-                        uni: `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`,
-                        price: variantDetails.price,
-                        color: variantDetails.color,
-                        size: selectedSize,
-                        img: variantDetails.img,
-                        slug: variantDetails.slug,
-                        id: variantDetails._id,
-                        qty: 1,
-                      };
-                      SetCart(newProduct);
-                    }}
+                    onClick={addedToCart}
                   >
                     Add to bag
                   </button>
@@ -385,6 +400,13 @@ export default function Example({
                   </button>
                 </div>
               </form>
+              <div className="mt-6">
+                <h3 className="sr-only">Description</h3>
+
+                <div className="text-base text-gray-700 space-y-6">
+                  {product.desc}
+                </div>
+              </div>
 
               <section aria-labelledby="details-heading" className="mt-12">
                 <h2 id="details-heading" className="sr-only">
@@ -400,7 +422,8 @@ export default function Example({
             aria-labelledby="related-heading"
             className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
           >
-            <h2
+            <Carousel products={relatedProducts} title="You May Also Like" />
+            {/* <h2
               id="related-heading"
               className="text-xl font-bold text-gray-900"
             >
@@ -448,7 +471,7 @@ export default function Example({
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </section>
           <ProductReviews />
         </div>

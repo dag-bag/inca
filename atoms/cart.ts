@@ -25,6 +25,7 @@ export const cartSelector = selector({
   set: ({ set, get }, newValue) => {
     const cardItems = get(cartAtom);
     const alreadyExists = find(cardItems, { uni: newValue.uni });
+
     if (alreadyExists) {
       let newCardItems = cardItems.map((i: any) => {
         if (i.uni === newValue.uni) {
@@ -40,9 +41,6 @@ export const cartSelector = selector({
     } else {
       set(cartAtom, [...cardItems, newValue]);
     }
-    toast.success("Added to cart 🛒", {
-      duration: 5000,
-    });
   },
 });
 export const removeOneItemFromCart = selector({
@@ -75,9 +73,6 @@ export const removeOneItemFromCart = selector({
       } else {
         set(cartAtom, [...cardItems, newValue]);
       }
-      toast.success("Removed Items successfully", {
-        duration: 5000,
-      });
     }
   },
 });
@@ -88,7 +83,7 @@ export const cartTotal = selector({
     const cartItems = get(cartAtom);
     let total = 0;
     cartItems.map((i: any) => {
-      total += i.price * i.qty;
+      total += i.sellPrice * i.qty;
     });
     return total;
   },
@@ -113,4 +108,9 @@ export const removeCart = selector({
     let newCartItems = cartItems.filter((i: any) => i.uni !== newValue.uni);
     set(cartAtom, newCartItems);
   },
+});
+
+export const SideCartOpenAtom = atom({
+  key: "SideCartOpenAtom",
+  default: false,
 });

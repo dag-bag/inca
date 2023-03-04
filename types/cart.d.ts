@@ -11,4 +11,5 @@ export interface CartItem {
   id: string;
   qty: number;
   desc?: string;
+  sellPrice: number;
 }

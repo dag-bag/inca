@@ -10,8 +10,8 @@ import { CartItem } from "../types/cart";
 import AddReMoveItem from "../components/Cart/AddReMoveItem";
 function Cart() {
   const subTotal = useRecoilValue(cartTotal);
-  const cart = useRecoilValue<CartItem[]>(cartAtom);
   const removeItem = useSetRecoilState(removeCart);
+  const cart = useRecoilValue<CartItem[]>(cartAtom);
   console.log(cart);
 
   return (

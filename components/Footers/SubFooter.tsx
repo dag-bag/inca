@@ -23,7 +23,7 @@ const FooterFeaturesData = [
         />
       </svg>
     ),
-    p: `We love alpacas as much as you do.`,
+    p: `We love alpacas as much as you do.`,
   },
   {
     svg: (
@@ -209,7 +209,7 @@ const FooterFeaturesData = [
     p: "30 Day money back guarantee",
   },
 ];
-function HomeFooter() {
+export default function HomeFooter() {
   return (
     <div className=" bg-[#e8e8e8]/80  flex justify-evenly items-center flex-wrap h-[500px] md:h-[200px] py-5 border-b-2 border-[#bd9575] mt-10 md:mt-0">
       {FooterFeaturesData.map((item, index) => {
@@ -228,5 +228,3 @@ function HomeFooter() {
     </div>
   );
 }
-
-export default HomeFooter;

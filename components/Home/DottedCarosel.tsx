@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Pagination, Autoplay } from "swiper";
+import { Pagination, Autoplay, Navigation } from "swiper";
 import FeatureCard from "../Fav/FeatureCard";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -41,6 +41,7 @@ function DottedCarousel({ features }: Props) {
       modules={[Pagination, Autoplay]}
       className=" flex justify-center items-center flex-col  max-w-6xl"
       navigation={true}
+      speed={1000}
     >
       {features?.map((feature, index) => {
         return (

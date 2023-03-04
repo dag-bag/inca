@@ -4,8 +4,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { motion } from "framer-motion";
 type Props = {
-  image: string;
+  image: { img: string; alt: string }[];
   alt: string;
   width: number;
   height: number;
@@ -31,17 +32,25 @@ export default function ProductImage({
   height,
 }: Props) {
   const [isLoading, setLoading] = useState(true);
+  const [currentImage, setCurrentImage] = useState(0);
 
   return (
     <>
-      <div
+      <motion.div
         className={`w-full aspect-w-1 aspect-h-1 bg-gray-200  overflow-hidden  ${
           rounded ? "rounded-xl" : ""
         }`}
+        key={currentImage}
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ delay: 0.1 }}
+        onMouseEnter={() => setCurrentImage(1)}
+        onMouseLeave={() => setCurrentImage(0)}
       >
         <Image
-          alt={alt}
-          src={image}
+          alt={image[currentImage].alt}
+          src={image[currentImage].img}
           //   fill={true}
           style={{
             objectFit: "cover",
@@ -61,7 +70,7 @@ export default function ProductImage({
           onLoadingComplete={() => setLoading(false)}
           onClick={onClick}
         />
-      </div>
+      </motion.div>
     </>
   );
 }

@@ -20,7 +20,7 @@ function Story({ title, description, image, boxType, type }: Props) {
     <>
       {type === 1 && (
         <div
-          className={`flex  justify-evenly  flex-wrap-reverse pb-2 md:p-0 mb-20 md:mt-32   md:mb-40 max-w-7xl m-auto`}
+          className={`flex  justify-evenly  flex-wrap-reverse pb-2 mt-16  md:p-0 mb-20 md:mt-32   md:mb-40 max-w-7xl m-auto`}
         >
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
             <div
@@ -33,7 +33,7 @@ function Story({ title, description, image, boxType, type }: Props) {
               <p className=" text-base  text-[#333] mt-12 ">{description}</p>
             </div>
             <Btn
-              text="Read More"
+              text="Learn More"
               className="btn-wide btn-outline ml-auto"
               onClick={() => Router.push("/about")}
             />
@@ -44,7 +44,7 @@ function Story({ title, description, image, boxType, type }: Props) {
           >
             <div className="w-[70%] rounded-[3px]   md:w-1/2 z-10">
               <div
-                className={`w-[400px] h-[360px] rounded-[3px]   absolute md:w-1/2 -top-14 bg-[#bd9575]  right-0 md:right-15 -z-10`}
+                className={`w-[250px] h-[300px] sm:w-[400px] sm:h-[360px] rounded-[3px]   absolute md:w-1/2 -top-14 bg-[#bd9575]  right-0 md:right-15 -z-10`}
               ></div>
               <Image src={image} alt="Artesano" width={596} height={682} />
               {/* <BlurImage image={image} /> */}
@@ -60,7 +60,7 @@ function Story({ title, description, image, boxType, type }: Props) {
             className={`flex-1 flex  relative justify-center mr-2 ml-0  md:mt-24`}
           >
             <div
-              className={` h-[100%] max-h-[390px] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
+              className={`w-[250px] h-[320px] sm:w-[400px] sm:h-[360px] rounded-[3px] absolute md:w-1/2 -top-14  bg-[#bd9575] left-0 md:left-14`}
             ></div>
             <div className="w-[70%] rounded-[3px]  md:w-1/2 z-10">
               <Image src={image} alt="Artesano" width={576} height={620} />
@@ -93,7 +93,7 @@ function Story({ title, description, image, boxType, type }: Props) {
             </div>
 
             <Btn
-              text={`${readMore ? "Read Less" : "Read More"} `}
+              text={`${readMore ? "Read Less" : "Learn More"} `}
               className=" btn-outline btn-wide mr-auto"
               onClick={() => setReadMore((value) => !value)}
             />
@@ -102,7 +102,7 @@ function Story({ title, description, image, boxType, type }: Props) {
       )}
       {type === 3 && (
         <div
-          className={`flex  justify-evenly  flex-wrap-reverse  md:my-28 max-w-7xl m-auto`}
+          className={`flex  justify-evenly mt-16  flex-wrap-reverse  md:my-28 max-w-7xl m-auto`}
         >
           <div
             className={`px-5 flex justify-start flex-col   w-full   md:w-[50%]`}

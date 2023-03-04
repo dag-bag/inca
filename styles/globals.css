@@ -72,4 +72,8 @@
     color: #fff;
     background: #483900 !important;
   }
+  .swiper-button-prev {
+    font-size: 10px !important;
+    color: #131212 !important;
+  }
 }

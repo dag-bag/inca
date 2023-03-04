@@ -17,9 +17,9 @@ export default function Categories() {
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 lg:max-w-7xl lg:mx-auto lg:px-8">
-        <div className="px-4 flex items-center justify-between sm:px-6 lg:px-0">
-          <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
-            Our Categories
+        <div className="px-4 flex items-center justify-center sm:px-6 lg:px-0">
+          <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 text-center">
+            Shop By Category
           </h2>
         </div>
 
