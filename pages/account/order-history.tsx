@@ -26,9 +26,11 @@ function OrderHistory({ orders }: Props) {
 
   return (
     <AccountLayout>
-      {/* <Container> */}
       {isLoading ? (
-        <Loader />
+        <div className="w-full">
+          <Loader />
+        </div>
+
       ) : (
         <div className="mt-10 space-y-4">
           <h1 className="font-bold text-[#333] text-3xl">Order History</h1>
