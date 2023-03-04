@@ -17,16 +17,16 @@ type Props = {
   onClick?: () => void;
 };
 
-
 type imageComponenetProps = {
   cursor: boolean;
   rounded: boolean;
+  trigger: boolean
   isLoading: boolean;
   onClick: () => void;
   image: { img: string; alt: string };
   setLoading: Dispatch<SetStateAction<boolean>>
-
 }
+
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -42,41 +42,34 @@ export default function ProductImage({
 }: Props) {
   const [isLoading, setLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
-  const imageProps = { image: image[currentImage], rounded, isLoading, cursor, setLoading, onClick } as imageComponenetProps
 
   return (
     <>
       <motion.div
-        className={`w-full aspect-w-1 aspect-h-1 --bg-gray-200 overflow-hidden  ${rounded ? "rounded-xl" : ""
-          }`}
-        onMouseEnter={() => setCurrentImage(1)}
-        onMouseLeave={() => setCurrentImage(0)}>
-
-        {currentImage == 0 && <ImageComponent {...imageProps} />}
-        {currentImage == 1 && <ImageComponent {...imageProps} />}
-
+        className={`w-full aspect-w-1 aspect-h-1 --bg-gray-200 overflow-hidden  ${rounded ? "rounded-xl" : ""}`}
+        onMouseEnter={() => setCurrentImage(1)} onMouseLeave={() => setCurrentImage(0)}>
+        <ImageComponent {...{ image: image[0], rounded, isLoading, cursor, setLoading, onClick, trigger: currentImage == 0 } as imageComponenetProps} />
+        <ImageComponent {...{ image: image[1], rounded, isLoading, cursor, setLoading, onClick, trigger: currentImage == 1 } as imageComponenetProps} />
       </motion.div>
     </>
   );
 }
 
-const ImageComponent: React.FC<imageComponenetProps> = ({ image, rounded, isLoading, cursor, setLoading, onClick }) => {
+const ImageComponent: React.FC<imageComponenetProps> = ({ image, rounded, isLoading, cursor, setLoading, onClick, trigger }) => {
   const MotionImage = motion(Image)
   return (
     <MotionImage
       alt={image.alt}
       src={image.img}
-      animate={{ opacity: 1 }}
-      initial={{ opacity: .8 }}
-      transition={{ duration: .1 }}
-      style={{
-        objectFit: "cover",
-      }}
+      transition={{ duration: .2 }}
+      initial={trigger ? { opacity: 0 } : { opacity: 1 }}
+      animate={trigger ? { opacity: 1 } : { opacity: 0 }}
+      style={{ objectFit: "cover" }}
       width={300}
       height={300}
       quality={100}
       className={cn(
-        `group-hover:opacity-75 duration-700 ease-in-out object-cover ${rounded ? "rounded-xl" : ""
+        `group-hover:opacity-75 duration-700 ease-in-out absolute object-cover border border-red-500 ${rounded ? "rounded-xl" : ""
         }  ${isLoading
           ? "grayscale blur-2xl scale-110"
           : "grayscale-0 blur-0 scale-100"
