@@ -97,7 +97,7 @@ function Ads() {
 
   return (
     <div>
-      <h1 className="text-center text-[#333] font-semibold mt-8">
+      <h1 className="mb-6 text-center text-[#333] font-semibold mt-8">
         Complete the Look
       </h1>
       <Swiper
