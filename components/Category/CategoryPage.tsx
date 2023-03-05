@@ -44,7 +44,7 @@ function CategoryPage({ products }: Props) {
             <div className=" pb-4 text-center">
               <h3 className="text-sm font-medium text-gray-900">
                 <a href={"#"}>
-                  <span aria-hidden="true" className="absolute inset-0" />
+                  <span aria-hidden="true" />
                   {product.variant[0].title}
                 </a>
               </h3>

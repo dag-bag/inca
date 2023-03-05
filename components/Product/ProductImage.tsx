@@ -42,12 +42,17 @@ export default function ProductImage({
 }: Props) {
   const [isLoading, setLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
-
+  const onMouseEnter = () => {
+    setCurrentImage(1)
+  }
+  const onMouseLeave = () => {
+    setCurrentImage(0)
+  }
   return (
     <>
       <motion.div
         className={`w-full aspect-w-1 aspect-h-1 --bg-gray-200 overflow-hidden  ${rounded ? "rounded-xl" : ""}`}
-        onMouseEnter={() => setCurrentImage(1)} onMouseLeave={() => setCurrentImage(0)}>
+        onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         <ImageComponent {...{ image: image[0], rounded, isLoading, cursor, setLoading, onClick, trigger: currentImage == 0 } as imageComponenetProps} />
         <ImageComponent {...{ image: image[1], rounded, isLoading, cursor, setLoading, onClick, trigger: currentImage == 1 } as imageComponenetProps} />
       </motion.div>
