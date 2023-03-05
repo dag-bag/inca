@@ -311,56 +311,7 @@ export default function Example({
                     </ul>
                   </RadioGroup>
                 </div>
-                <div className="mt-8">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium text-gray-900">Size</h2>
-                    <button
-                      onClick={() => setModalOpen(true)}
-                      className="text-sm font-medium text-primary hover:text-primary"
-                    >
-                      See sizing chart
-                    </button>
-                    <SizeGuide currentCategories={product.category} />
-                  </div>
 
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-2"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                      {productRaw.sizes.map((size) => {
-                        const isAvail = variantDetails.size.includes(size);
-                        return (
-                          <RadioGroup.Option
-                            key={size}
-                            value={size}
-                            className={({ active, checked }) =>
-                              classNames(
-                                isAvail
-                                  ? "cursor-pointer focus:outline-none"
-                                  : "opacity-25 cursor-not-allowed",
-                                active
-                                  ? "ring-2 ring-offset-2 ring-primary"
-                                  : "",
-                                checked
-                                  ? "bg-primary border-transparent text-white hover:bg-[#8B5801]"
-                                  : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
-                                "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
-                              )
-                            }
-                            disabled={!isAvail}
-                          >
-                            <RadioGroup.Label as="p">{size}</RadioGroup.Label>
-                          </RadioGroup.Option>
-                        );
-                      })}
-                    </div>
-                  </RadioGroup>
-                </div>
                 <div className="mt-10 flex sm:flex-col1">
                   <button
                     className="max-w-xs flex-1 bg-primary border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-[#8B5801] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary sm:w-full"
