@@ -17,29 +17,23 @@ type Props = {
   onClick: () => void;
 };
 function MenuLi({ title, more, link, DropDownData, onClick }: Props) {
-  const [hide, setHide] = useRecoilState(menuState);
   const router = useRouter();
 
   return (
     <div
-      className={` ${
-        router.pathname === link && "bg-gray-200 rounded-lg"
-      } p-4 cursor-pointer `}
+      className={` ${router.pathname === link && "bg-gray-200 rounded-lg"
+        } p-4 cursor-pointer `}
 
-      // onClick={() => {
-      //   setHide(!hide);
-      // }}
     >
       {more ? (
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full justify-between rounded-lg bg-white px-4 py-2 text-left text-sm font-medium text-black hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 flex-row">
+              <Disclosure.Button className=" flex w-full justify-between rounded-lg bg-white px-4 py-2 text-left text-sm font-medium text-black hover:bg-primary hover:text-white focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 flex-row">
                 <li className="text-2xl">{title}</li>
                 <ChevronDownIcon
-                  className={`${
-                    open ? "rotate-180 transform" : ""
-                  } h-5 w-5 text-black mt-2`}
+                  className={`${open ? "rotate-180 transform" : ""
+                    } h-5 w-5 text-black mt-2`}
                 />
               </Disclosure.Button>
               <Disclosure.Panel className=" pt-4  text-sm text-gray-500">
