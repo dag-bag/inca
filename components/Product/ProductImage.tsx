@@ -69,7 +69,7 @@ const ImageComponent: React.FC<imageComponenetProps> = ({ image, rounded, isLoad
       height={300}
       quality={100}
       className={cn(
-        `group-hover:opacity-75 duration-700 ease-in-out absolute object-cover border border-red-500 ${rounded ? "rounded-xl" : ""
+        `group-hover:opacity-75 duration-700 ease-in-out absolute object-cover ${rounded ? "rounded-xl" : ""
         }  ${isLoading
           ? "grayscale blur-2xl scale-110"
           : "grayscale-0 blur-0 scale-100"

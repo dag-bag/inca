@@ -155,8 +155,8 @@ export default function Example({
     <div className="bg-white">
       {/* Mobile menu */}
 
-      <main className="max-w-7xl mx-auto sm:pt-16 sm:px-6 lg:px-8">
-        <div className="text-sm breadcrumbs">
+      <main className="max-w-7xl mx-auto sm:pt-5 sm:px-6 lg:px-8 ">
+        <div className="text-sm breadcrumbs px-5 mb-5 py-5 border-t border-b border-gray-100 md:block hidden ">
           <ul>
             <li>
               <a>Home</a>
@@ -187,7 +187,7 @@ export default function Example({
                     >
                       {({ selected }) => (
                         <>
-                          <span className="sr-only">{}</span>
+                          <span className="sr-only">{ }</span>
                           <div className="absolute inset-0 rounded-md overflow-hidden h-32">
                             <BlurImage
                               image={image.img}
@@ -391,9 +391,8 @@ export default function Example({
                     }}
                   >
                     <HeartIcon
-                      className={`h-6 w-6 flex-shrink-0 ${
-                        isfav ? "text-red-500" : ""
-                      }`}
+                      className={`h-6 w-6 flex-shrink-0 ${isfav ? "text-red-500" : ""
+                        }`}
                       aria-hidden="true"
                     />
                     <span className="sr-only">Add to favorites</span>
