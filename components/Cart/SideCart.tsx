@@ -80,8 +80,8 @@ function SideCart({ }: Props) {
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >
-          <div className="ml-auto relative max-w-md w-full h-full  bg-red-500 shadow-xl flex flex-col overflow-y-scroll scrollbar-hide">
-            <div className="pointer-events-auto w-screen max-w-md h-screen border-2 border-blue-500">
+          <div className="ml-auto relative max-w-md w-full h-full  shadow-xl flex flex-col overflow-y-scroll scrollbar-hide">
+            <div className="pointer-events-auto w-screen max-w-md h-screen ">
               <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                   <div className="flex items-start justify-between border-b border-gray-300 pb-6">

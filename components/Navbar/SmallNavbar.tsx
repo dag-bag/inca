@@ -39,7 +39,7 @@ const SmallNavbar = ({ NavData }: Props) => {
           }`}
       >
         <div
-          className="w-full h-full shadow-md bg-white absolute border-2 border-red-500"
+          className="w-full h-full shadow-md bg-white absolute"
           id="sidenavSecExample"
         >
           <div className="pt-4 pb-2 px-6 ">
