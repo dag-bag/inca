@@ -6,7 +6,6 @@ import React from "react";
 import { ShoppingCartIcon } from "@heroicons/react/outline";
 import { GoPlus } from "react-icons/go";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { GrCart } from "react-icons/gr";
 import {
   atom,
   useRecoilState,
@@ -36,7 +35,7 @@ const styles = {
   },
 };
 
-function SideCart({}: Props) {
+function SideCart({ }: Props) {
   const [cartOpen, setCartOpen] = useRecoilState(SideCartOpenAtom);
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
 
@@ -81,8 +80,8 @@ function SideCart({}: Props) {
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >
-          <div className="ml-auto relative max-w-md w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto scrollbar-hide">
-            <div className="pointer-events-auto w-screen max-w-md h-screen">
+          <div className="ml-auto relative max-w-md w-full h-full  bg-red-500 shadow-xl flex flex-col overflow-y-scroll scrollbar-hide">
+            <div className="pointer-events-auto w-screen max-w-md h-screen border-2 border-blue-500">
               <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                   <div className="flex items-start justify-between border-b border-gray-300 pb-6">
