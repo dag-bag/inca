@@ -9,7 +9,7 @@ import SearchInput from "./SearchInput";
 
 type Props = {};
 
-function SeachForm({}: Props) {
+function SeachForm({ }: Props) {
   const { push } = useRouter();
 
   return (
@@ -27,7 +27,7 @@ function SeachForm({}: Props) {
     >
       {({ handleChange, handleSubmit, values }) => {
         return (
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="bg-red-500 fixed top-0 left-0">
             <SearchInput value={values.query} onChange={handleChange} />
           </Form>
         );

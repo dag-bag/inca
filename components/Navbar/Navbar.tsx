@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import SmallMenu, { menuState } from "./SmallNavbar";
 import dynamic from "next/dynamic";
@@ -15,6 +15,9 @@ const PoketCart = dynamic(() => import("../Cart/PoketCart"), {
 import SeachForm from "../Search/SeachForm";
 import SmallNavbar from "./SmallNavbar";
 import { useEffect, useState } from "react";
+import SearchBar, { SearchAtom, Result } from "../Searchbar-bombas";
+import { AnimatePresence } from "framer-motion";
+
 
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 
@@ -57,6 +60,10 @@ const styles = {
 
 function Navbar() {
   const { data: session } = useSession();
+
+  const [searchState, setSearchState] = useRecoilState(SearchAtom)
+
+
   const rightDivData = [
     {
       hide: true,
@@ -195,10 +202,12 @@ function Navbar() {
 
   return (
     <>
+
       <SmallNavbar NavData={centerDivData} />
+
       <div className={isSticky ? styles.navbar.sticky : ""}>
         <div className="navbar md:bg-white md:max-w-[90%] m-auto relative ">
-          <div className="navbar-start">
+          <div className="navbar-start ">
             <div className="relative w-12 sm:w-10 md:w-20 cursor-pointer ">
               <Link href={"/"}>
                 <Image
@@ -213,147 +222,161 @@ function Navbar() {
               </Link>
             </div>
           </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal p-0">
-              {centerDivData.map((item, index) => {
-                return item.dropdown ? (
-                  <li key={index + 100}>
-                    <a>
-                      {item.title}
-                      <svg
-                        className="fill-current"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-                      </svg>
-                    </a>
-                    <ul className="p-2 bg-white z-50">
-                      {item?.DropDownData?.map((subItem, index) => {
-                        return (
-                          <li className="" key={index}>
-                            <a className="">{subItem}</a>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </li>
-                ) : (
-                  <li key={index}>
-                    <Link href={item.href}>
-                      <span className="focus:bg-primary-1 focus-visible:bg-primary-1">
-                        {item.title}
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="navbar-end">
-            <div className="dropdown dropdown-end hidden md:block">
-              <label
-                tabIndex={0}
-                className="btn btn-link btn-circle hover:no-animation"
-              >
-                <div className="indicator">{rightDivData[0]?.svg}</div>
-              </label>
-              <div
-                tabIndex={0}
-                className="mt-7 card card-compact dropdown-content  bg-white shadow w-[80vw]"
-              >
-                {/* <Search /> */}
-                <SeachForm />
-              </div>
-            </div>
-            {/* <Search svg={rightDivData[0].svg} /> */}
-            <Link href={`${rightDivData[1]?.link}`}>
-              <label tabIndex={0} className="btn btn-link btn-circle">
-                <div className="indicator">{rightDivData[1]?.svg}</div>
-              </label>
-            </Link>
 
-            <div className="dropdown dropdown-end">
-              {session ? (
-                <>
+
+          {searchState.visiblity && <div className="w-full">
+            <SearchBar />
+          </div>}
+
+
+          {!searchState.visiblity && (
+            <>
+              <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal p-0">
+                  {centerDivData.map((item, index) => {
+                    return item.dropdown ? (
+                      <li key={index + 100}>
+                        <a>
+                          {item.title}
+                          <svg
+                            className="fill-current"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                          </svg>
+                        </a>
+                        <ul className="p-2 bg-white z-50">
+                          {item?.DropDownData?.map((subItem, index) => {
+                            return (
+                              <li className="" key={index}>
+                                <a className="">{subItem}</a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </li>
+                    ) : (
+                      <li key={index}>
+                        <Link href={item.href}>
+                          <span className="focus:bg-primary-1 focus-visible:bg-primary-1">
+                            {item.title}
+                          </span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="navbar-end">
+                <div className="dropdown dropdown-end hidden md:block" onClick={() => { setSearchState({ ...searchState, visiblity: true }) }}>
                   <label
                     tabIndex={0}
-                    className="btn btn-ghost btn-circle avatar"
+                    className="btn btn-link btn-circle hover:no-animation"
                   >
-                    <div className="w-10 rounded-full">
-                      <Image
-                        src={`${session?.user?.image}`}
-                        width={50}
-                        height={50}
-                        alt="user profile image"
-                      />
-                    </div>
+                    <div className="indicator">{rightDivData[0]?.svg}</div>
                   </label>
-                  <ul
+                  <div
                     tabIndex={0}
-                    className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
+                    className="mt-7 card card-compact dropdown-content  bg-white shadow w-[80vw]"
                   >
-                    <li>
-                      <Link href={"/account/personal-details"}>
-                        <span className="justify-between">
-                          Profile
-                          <span className="badge">New</span>
-                        </span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={"/account"}>Settings</Link>
-                    </li>
-                    <li>
-                      <span
-                        onClick={() => {
-                          signOut();
-                        }}
+
+                  </div>
+                </div>
+                <Link href={`${rightDivData[1]?.link}`}>
+                  <label tabIndex={0} className="btn btn-link btn-circle">
+                    <div className="indicator">{rightDivData[1]?.svg}</div>
+                  </label>
+                </Link>
+
+                <div className="dropdown dropdown-end">
+                  {session ? (
+                    <>
+                      <label
+                        tabIndex={0}
+                        className="btn btn-ghost btn-circle avatar"
                       >
-                        Logout
-                      </span>
-                    </li>
-                  </ul>
-                </>
-              ) : (
-                <>
-                  <Link href={"/login"}>
-                    <label tabIndex={0} className="btn btn-link btn-circle">
-                      <div className="indicator">{rightDivData[2]?.svg}</div>
-                    </label>
-                  </Link>
-                </>
-              )}
-            </div>
-            {/* <CartDetails svg={rightDivData[3].svg} /> */}
-            <PoketCart svg={rightDivData[3].svg} />
-            {/* <CartDetails /> */}
-            <label
-              tabIndex={0}
-              className="btn btn-ghost lg:hidden"
-              onClick={() => {
-                setHide(false);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-          </div>
+                        <div className="w-10 rounded-full">
+                          <Image
+                            src={`${session?.user?.image}`}
+                            width={50}
+                            height={50}
+                            alt="user profile image"
+                          />
+                        </div>
+                      </label>
+                      <ul
+                        tabIndex={0}
+                        className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
+                      >
+                        <li>
+                          <Link href={"/account/personal-details"}>
+                            <span className="justify-between">
+                              Profile
+                              <span className="badge">New</span>
+                            </span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href={"/account"}>Settings</Link>
+                        </li>
+                        <li>
+                          <span
+                            onClick={() => {
+                              signOut();
+                            }}
+                          >
+                            Logout
+                          </span>
+                        </li>
+                      </ul>
+                    </>
+                  ) : (
+                    <>
+                      <Link href={"/login"}>
+                        <label tabIndex={0} className="btn btn-link btn-circle">
+                          <div className="indicator">{rightDivData[2]?.svg}</div>
+                        </label>
+                      </Link>
+                    </>
+                  )}
+                </div>
+                <PoketCart svg={rightDivData[3].svg} />
+                <label
+                  tabIndex={0}
+                  className="btn btn-ghost lg:hidden"
+                  onClick={() => {
+                    setHide(false);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                  </svg>
+                </label>
+              </div>
+            </>
+          )}
+
         </div>
+
+
+
+        {searchState.visiblity && <Result />}
+
+
       </div>
     </>
   );
