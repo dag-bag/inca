@@ -3,7 +3,8 @@
 
   
 
-### SECTION 1 — WHAT DO WE DO WITH YOUR INFORMATION?
+## SECTION 1 
+### WHAT DO WE DO WITH YOUR INFORMATION?
 
 
 
@@ -14,7 +15,8 @@ When you purchase something from our store, as part of the buying and selling pr
   
 
 
-### SECTION 2 — CONSENT
+## SECTION 2 
+### CONSENT
 
   
 
@@ -27,7 +29,8 @@ How do I withdraw my consent? If after you opt-in, you change your mind, you may
   
 
 
-### SECTION 3 — DISCLOSURE
+## SECTION 3 
+### DISCLOSURE
 
   
 
@@ -35,26 +38,26 @@ We may disclose your personal information if we are required by law to do so or 
 
   
 
+## SECTION 4 
+### PLATFORMS
 
-### SECTION 4 – PLATFORMS
-
-  
 
 Our store is hosted on our private servers and we use Strapi to provide us with the online e-commerce platform that allows us to sell our products and services to you. Our email database is MailChimp and this may change without notice. We process payments with PayPal.
 
   
 
 
-### SECTION 5 — THIRD-PARTY SERVICE
+## SECTION 5  
+### THIRD-PARTY SERVICE
 
   
-
 In general, the third-party providers used by us will only collect, use and disclose your information to the extent necessary to allow them to perform the services they provide to us. However, certain third-party service providers, such as payment gateways and other payment transaction processors, have their own privacy policies in respect to the information we are required to provide to them for your purchase-related transactions. For these providers, we recommend that you read their privacy policies so you can understand the manner in which your personal information will be handled by these providers. In particular, remember that certain providers may be located in or have facilities that are located in a different jurisdiction than either you or us. So if you elect to proceed with a transaction that involves the services of a third-party service provider, then your information may become subject to the laws of the jurisdiction(s) in which that service provider or its facilities are located. As an example, if you are located in Canada and your transaction is processed by a payment gateway located in the United States, then your personal information used in completing that transaction may be subject to disclosure under United States legislation, including the Patriot Act. Once you leave our store’s website or are redirected to a third-party website or application, you are no longer governed by this Privacy Policy or our website’s Terms of Service. Links When you click on links on our store, they may direct you away from our site. We are not responsible for the privacy practices of other sites and encourage you to read their privacy statements.
 
   
 
 
-### SECTION 6 — SECURITY
+## SECTION 6 
+###  SECURITY
 
   
 
@@ -67,7 +70,8 @@ COOKIES A cookie is a small piece of text sent to your browser by a website you 
   
 
 
-### SECTION 7 — AGE OF CONSENT
+## SECTION 7  
+### AGE OF CONSENT
 
   
 
@@ -76,7 +80,8 @@ By using this site, you represent that you are at least the age of majority in y
   
 
 
-### SECTION 8 — CHANGES TO THIS PRIVACY POLICY
+## SECTION 8  
+### CHANGES TO THIS PRIVACY POLICY
 
   
 
