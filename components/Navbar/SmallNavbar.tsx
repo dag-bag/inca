@@ -33,13 +33,13 @@ const SmallNavbar = ({ NavData }: Props) => {
 
   return (
     <>
-      <div className="bg-red-200 h-screen  absolute left-0 z-50 top-0"></div>
+      <div className="bg-red-200 h-screen fixed left-0 z-50 top-0"></div>
       <div
-        className={`h-screen transition-all duration-200 absolute left-0 z-50 inset-y-0 transform  w-[90vw]  ease-in-out ${hide ? "-translate-x-full" : ""
+        className={`h-screen transition-all duration-200 fixed left-0 z-50 inset-y-0 transform  w-[90vw]  ease-in-out ${hide ? "-translate-x-full" : ""
           }`}
       >
         <div
-          className="w-full h-full shadow-md bg-white absolute"
+          className="w-full h-full shadow-md bg-white fixed"
           id="sidenavSecExample"
         >
           <div className="pt-4 pb-2 px-6 ">
