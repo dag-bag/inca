@@ -1,25 +1,27 @@
 /** @format */
-
-import Image from "next/image";
 import React from "react";
-import BlurImage from "../utils/BlurImage";
-
+import Image from "next/image";
 function Banner() {
   return (
     <div className="relative  md:block md:pb-16">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex justify-center items-center flex-col">
-        {/* <h1 className=" text-white text-5xl text-center leading-tight font-bold">
-          Inca Ancestry get to know the history of the Incs
-        </h1> */}
-        {/* <H1 h1={" Inca Ancestry get to know the history of the Incs"} /> */}
+      <div className="absolute top-1/2 left-1/2  z-10 flex justify-center items-center flex-col">
+
       </div>
-      <div className="w-full h-[40vh] md:h-[70vh] relative">
-        <BlurImage
-          image={"/assets/slider/slider.jpg"}
+      <div className="w-full h-[40vh] md:h-[70vh] relative object-fill md:block hidden">
+        <Image
+          src={"/assets/slider/slider.jpg"}
           alt="Banner"
-          type="fill"
-          height={35}
-          width={100}
+          className="object-cover"
+          fill
+        />
+      </div>
+
+      <div className="w-full h-[40vh] md:h-[70vh] relative object-fill md:hidden ">
+        <Image
+          src={"/assets/mobile-size-banner.png"}
+          alt="Banner"
+          className="object-cover"
+          fill
         />
       </div>
     </div>
