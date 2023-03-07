@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 let uri: string | undefined = process.env.MONGODB_URI;
 
 if (!uri) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
+  // throw new Error(
+  //   "Please define the MONGODB_URI environment variable inside .env.local"
+  // );
 }
 const connectDb = (handler: any) => async (req: any, res: any) => {
   if (mongoose.connections[0].readyState) {

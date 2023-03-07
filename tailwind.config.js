@@ -12,6 +12,9 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         custom: 'calc(100% - 400px) 400px'
+      },
+      gridTemplateRows: {
+        'xs-size': '100px calc(100% - 100px)'
       }
 
     },

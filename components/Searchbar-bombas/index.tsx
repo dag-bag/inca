@@ -1,12 +1,12 @@
 import { debounce } from "lodash";
+import Router from "next/router";
 import Link from "next/dist/client/link";
 import Image from "next/dist/client/image";
-import Router from "next/router";
+import { motion } from 'framer-motion'
 import { atom, useRecoilState } from "recoil"
 import { useQuery } from "@tanstack/react-query";
 import { type ProductType } from "../../types/product";
-
-import { motion } from 'framer-motion'
+import query from "../../pages/api/query";
 
 interface searchAtomType {
     visiblity: boolean,
@@ -29,12 +29,22 @@ const Search = () => {
     const onChange = (event: any) => {
         setState({ ...state, query: event.target.value as string })
     }
-    const debouncedHandleSearch = debounce(onChange, 500);
+    const onKeyHandler = (event: any) => {
+        if (event.keyCode === 13) {
+            Router.push({
+                pathname: "search",
+                query: {
+                    keyword: query
+                }
+            } as any)
+        }
+    }
+
     return (
         <div className=" w-full z-50 bg-gray-100 ">
 
             <div className="w-full flex border border-gray-300">
-                <input placeholder="search.." type="text" className="w-full border-none outline-none" onChange={onChange} />
+                <input placeholder="search.." type="text" className="w-full border-none outline-none" onChange={onChange} onKeyDown={onKeyHandler} />
                 <button onClick={onClose} className="px-5 text-2xl bg-gray-300">×</button>
             </div>
         </div>
@@ -86,14 +96,14 @@ export const Result = () => {
     }
 
     return (
-        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className=" rounded-xl my-5 bg-white z-50  md:max-w-[90%] mx-auto ">
+        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+            className="rounded-xl my-5 bg-white z-50   md:max-w-[90%] mx-auto shadow-md overflow-y-auto  ">
             <div className="grid  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 grid-cols-2 ">
                 {query !== "" && data?.slice(0, 6).map((product: ProductType, index: number) => (
                     <Link key={index} href={`/product/${product.variant[0].slug}`}>
                         <div
                             key={product._id}
-                            className="group relative border-r border-b border-gray-200 p-4 sm:p-6"
-                        >
+                            className="group relative border-r border-b border-gray-200 p-4 sm:p-6">
                             <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
                                 <Image
                                     src={product.variant[0].img[0].img}
@@ -128,7 +138,7 @@ export const Result = () => {
             {
                 // show : when result quantity above 12
                 query !== "" && data?.length > 6 && (
-                    <div className="flex items-center justify-center py-5">
+                    <div className="md:flex items-center justify-center py-5 hidden">
                         <button onClick={showAllHandler} className="bg-primary text-md text-white btn">Show All Result ({data?.length})</button>
                     </div>
                 )

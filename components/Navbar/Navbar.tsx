@@ -12,11 +12,9 @@ const PoketCart = dynamic(() => import("../Cart/PoketCart"), {
   ssr: false,
 });
 
-import SeachForm from "../Search/SeachForm";
 import SmallNavbar from "./SmallNavbar";
 import { useEffect, useState } from "react";
 import SearchBar, { SearchAtom, Result } from "../Searchbar-bombas";
-import { AnimatePresence } from "framer-motion";
 
 
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
@@ -202,12 +200,34 @@ function Navbar() {
 
   return (
     <>
-
       <SmallNavbar NavData={centerDivData} />
 
-      <div className={isSticky ? styles.navbar.sticky : ""}>
-        <div className="navbar md:bg-white md:max-w-[90%] m-auto relative ">
-          <div className="navbar-start ">
+      <div className={
+        isSticky
+          ? searchState.visiblity
+            ? 'fixed top-0 w-full bg-white z-50 max-h-[100%] grid grid-rows-xs-size'
+            : 'fixed top-0 w-full bg-white z-50 '
+          : ''}>
+
+        <div className="navbar md:bg-white md:max-w-[90%] m-auto relative">
+
+          {!searchState.visiblity && (
+            <div className="navbar-start md:hidden">
+              <div className="relative w-12 sm:w-10 md:w-20 cursor-pointer ">
+                <Link href={"/"}>
+                  <Image
+                    src={"https://res.cloudinary.com/dthpcwn8r/image/upload/v1675856646/Logo_solo_imagen_q1wwbz.png"}
+                    alt="logo"
+                    width={97}
+                    height={139}
+                    layout="responsive"
+                  />
+                </Link>
+              </div>
+            </div>
+          )}
+
+          <div className="navbar-start hidden md:block ">
             <div className="relative w-12 sm:w-10 md:w-20 cursor-pointer ">
               <Link href={"/"}>
                 <Image
@@ -271,7 +291,7 @@ function Navbar() {
                 </ul>
               </div>
               <div className="navbar-end">
-                <div className="dropdown dropdown-end hidden md:block" onClick={() => { setSearchState({ ...searchState, visiblity: true }) }}>
+                <div className="dropdown dropdown-end" onClick={() => { setSearchState({ ...searchState, visiblity: true }) }}>
                   <label
                     tabIndex={0}
                     className="btn btn-link btn-circle hover:no-animation"
