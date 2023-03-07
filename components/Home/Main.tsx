@@ -35,6 +35,7 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
           image={"/assets/home/Artesano.jpg"}
           boxType="left-right"
           type={1}
+          link="/about"
         />
         <Carousel products={products} title="Best Sellers" />
         <Features />
@@ -48,7 +49,8 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
             "https://res.cloudinary.com/hellooworkd/image/upload/v1675092246/Inca_kkenr5.jpg"
           }
           boxType="left-right"
-          type={2}
+          type={1}
+          link="/social-impact"
         />
         <Carousel products={products} title="Trending Products" />
         <Story

@@ -13,8 +13,9 @@ type Props = {
   description: string;
   boxType: "center-left" | "left-right" | "center-center";
   type: 1 | 2 | 3;
+  link?: string
 };
-function Story({ title, description, image, boxType, type }: Props) {
+function Story({ title, description, image, boxType, type, link }: Props) {
   const [readMore, setReadMore] = useState(false);
   return (
     <>
@@ -24,9 +25,8 @@ function Story({ title, description, image, boxType, type }: Props) {
         >
           <div className={`px-5 flex  flex-col   space-y-12 mt-8 md:w-[50%]`}>
             <div
-              className={` ${
-                boxType === "center-left" ? "text-left" : "text-right"
-              } mb-6  ml-auto`}
+              className={` ${boxType === "center-left" ? "text-left" : "text-right"
+                } mb-6  ml-auto`}
             >
               <h1 className={`text-right ${style.heading} `}>{title}</h1>
 
@@ -35,7 +35,7 @@ function Story({ title, description, image, boxType, type }: Props) {
             <Btn
               text="Learn More"
               className="btn-wide btn-outline ml-auto"
-              onClick={() => Router.push("/about")}
+              onClick={() => Router.push(link as string)}
             />
             {/* <Btn2>Cosmos</Btn2> */}
           </div>
@@ -84,9 +84,8 @@ function Story({ title, description, image, boxType, type }: Props) {
               </h1>
 
               <p
-                className={` text-base  text-[#333] mt-12 ${
-                  readMore ? "line-clamp-none" : "line-clamp-6"
-                } `}
+                className={` text-base  text-[#333] mt-12 ${readMore ? "line-clamp-none" : "line-clamp-6"
+                  } `}
               >
                 {description}
               </p>
@@ -114,9 +113,8 @@ function Story({ title, description, image, boxType, type }: Props) {
           </div>
           <div className={`flex-1 flex  ml-2 justify-center  relative pt-10`}>
             <div
-              className={`w-[70%] h-[70%] rounded-[3px]  ${
-                boxType === "center-center" ? "bg-[#e8e8e8]" : "bg-[#bd9575]"
-              } absolute md:w-1/2 -top-[1rem]  `}
+              className={`w-[70%] h-[70%] rounded-[3px]  ${boxType === "center-center" ? "bg-[#e8e8e8]" : "bg-[#bd9575]"
+                } absolute md:w-1/2 -top-[1rem]  `}
             ></div>
             <div className="w-[70%] rounded-[3px]   md:w-w-[70%] mt-16 relative">
               <Image

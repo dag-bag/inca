@@ -192,7 +192,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/legal/social-impact"
+                    href="/social-impact"
                     className="text-gray-700 transition hover:opacity-75">
                     Social Impact
                   </a>

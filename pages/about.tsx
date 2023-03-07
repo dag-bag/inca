@@ -8,7 +8,7 @@ const para = {
   styles:
     "mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-7xl text-left",
 };
-const About1 = () => {
+const About = () => {
   return (
     <div className="mt-10">
       <div className="relative  md:block ">
@@ -60,4 +60,4 @@ const About1 = () => {
   );
 };
 
-export default About1;
+export default About;
