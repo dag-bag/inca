@@ -42,7 +42,6 @@ const Search = () => {
 
     return (
         <div className=" w-full z-50 bg-gray-100 ">
-
             <div className="w-full flex border border-gray-300">
                 <input placeholder="search.." type="text" className="w-full border-none outline-none" onChange={onChange} onKeyDown={onKeyHandler} />
                 <button onClick={onClose} className="px-5 text-2xl bg-gray-300">×</button>
@@ -57,7 +56,7 @@ export const Result = () => {
 
     const SearchQuery = async () => {
         const resp = await fetch(
-            `http://localhost:3000/api/query?title=${query as string}`
+            `/api/query?title=${query as string}`
         );
         const products = await resp.json();
         return products;
