@@ -33,14 +33,11 @@ function AdsCard({ title, variant, tag }: Props) {
     variant[0];
   const setHideCart = useSetRecoilState(SideCartOpenAtom);
   return (
-    <div className="relative rounded-md pb-20">
+    <div className="relative rounded-md pb-20 ">
       <Link href={`/product/${slug}`} onClick={() => setHideCart(false)}>
         <div className="relative ">
-          {/* <span className="badge bg-primary text-white">{tag}</span> */}
           <div
-            className=" aspect-1
-          "
-          >
+            className="aspect-1">
             <Image
               src={img[0].img}
               height={500}
@@ -125,19 +122,17 @@ function Ads() {
         <button
           onClick={handlePrev}
           className="    disabled:opacity-25 disabled:cursor-not-allowed !z-50 p-0 m-0 transition-all ease-in-out duration-300
-            absolute top-[40%] left-2 transform -translate-x-1/2 -translate-y-1/2
-            hidden md:block
-            
-            bg
-            "
+            absolute top-[25%] left-2 transform -translate-x-1/2 -translate-y-1/2
+            hidden md:block"
         >
           <GrFormPrevious className="text-3xl !text-black " />
           <span className="sr-only">Prev</span>
         </button>
+
         <button
           onClick={handleNext}
           className=" text-white w-10 h-full text-center disabled:opacity-25 disabled:cursor-not-allowed z-50 p-0 m-0 transition-all ease-in-out duration-300
-            absolute top-[40%] -right-10 transform -translate-x-1/2 -translate-y-1/2
+            absolute top-[25%] -right-10 transform -translate-x-1/2 -translate-y-1/2
             hidden md:block
             "
         >
