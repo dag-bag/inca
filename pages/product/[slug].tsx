@@ -425,6 +425,10 @@ export default function Example({
           >
             <Carousel products={relatedProducts} title="You May Also Like" />
 
+
+
+
+
             <DynRecentlyViewed />
 
           </section>
