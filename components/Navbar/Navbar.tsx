@@ -205,11 +205,11 @@ function Navbar() {
       <div className={
         isSticky
           ? searchState.visiblity
-            ? 'fixed top-0 w-full bg-white z-50 max-h-[100%] grid grid-rows-xs-size'
-            : 'fixed top-0 w-full bg-white z-50 '
+            ? 'fixed top-0 w-full bg-white  z-50 max-h-[100%] grid grid-rows-xs-size'
+            : 'fixed top-0 w-full bg-white  z-50 '
           : ''}>
 
-        <div className="navbar md:bg-white md:max-w-[90%] m-auto relative">
+        <div className="navbar md:bg-white md:max-w-[90%] m-auto relative ">
 
           {!searchState.visiblity && (
             <div className="navbar-start md:hidden">
@@ -394,10 +394,16 @@ function Navbar() {
 
 
 
-        {searchState.visiblity && <Result />}
 
 
       </div>
+
+      <div className={
+        isSticky ? 'fixed top-[100px] z-50 w-full bg-gray-100' : ''}>
+        {searchState.visiblity && <Result />}
+      </div>
+
+
     </>
   );
 }

@@ -424,11 +424,6 @@ export default function Example({
             className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
           >
             <Carousel products={relatedProducts} title="You May Also Like" />
-
-
-
-
-
             <DynRecentlyViewed />
 
           </section>

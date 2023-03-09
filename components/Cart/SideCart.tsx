@@ -139,7 +139,7 @@ function SideCart({ }: Props) {
                                     className="h-full w-full object-cover object-center"
                                   />
                                 </div>
-                                <div className="ml-4 flex flex-1 flex-col">
+                                <div className="ml-4 flex flex-1 flex-col ">
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3 className="h-12">

@@ -35,7 +35,7 @@ const SmallNavbar = ({ NavData }: Props) => {
     <>
       <div className="bg-red-200 h-screen fixed left-0 z-50 top-0"></div>
       <div
-        className={`h-screen transition-all duration-200 fixed left-0 z-50 inset-y-0 transform  w-[90vw]  ease-in-out ${hide ? "-translate-x-full" : ""
+        className={`h-screen transition-all duration-200 fixed left-0 z-[1000] inset-y-0 transform  w-[90vw]  ease-in-out ${hide ? "-translate-x-full" : ""
           }`}
       >
         <div

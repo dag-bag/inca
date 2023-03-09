@@ -22,9 +22,8 @@ function LinkBtn({
   onClick,
   link,
 }: Props) {
-  const btnClasses = `btn btn-primary ${className} disabled:opacity-50 ${
-    isLoading && "loading"
-  }`;
+  const btnClasses = `btn btn-primary text-white ${className} disabled:opacity-50 ${isLoading && "loading"
+    }`;
   return (
     <Link href={`/${link}`}>
       <button className={btnClasses} disabled={disabled} onClick={onClick}>

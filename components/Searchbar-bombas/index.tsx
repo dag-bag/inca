@@ -40,11 +40,13 @@ const Search = () => {
         }
     }
 
+    const debounced = debounce(onChange, 500)
+
     return (
-        <div className=" w-full z-50 bg-gray-100 ">
-            <div className="w-full flex border border-gray-300">
-                <input placeholder="search.." type="text" className="w-full border-none outline-none" onChange={onChange} onKeyDown={onKeyHandler} />
-                <button onClick={onClose} className="px-5 text-2xl bg-gray-300">×</button>
+        <div className=" w-full z-50 bg-gray-100  ">
+            <div className="w-full flex border-2 border-gray-300 rounded-sm">
+                <input placeholder="search.." type="text" className="w-full !border-none !outline-none" onChange={debounced} onKeyDown={onKeyHandler} />
+                <button onClick={onClose} className="px-5 text-2xl bg-white border-l border-gray-300">×</button>
             </div>
         </div>
     )
@@ -52,7 +54,12 @@ const Search = () => {
 
 
 export const Result = () => {
+
     const [{ query }, setState] = useRecoilState(SearchAtom)
+
+    const onClose = () => {
+        setState({ query: " ", visiblity: false })
+    }
 
     const SearchQuery = async () => {
         const resp = await fetch(
@@ -62,9 +69,11 @@ export const Result = () => {
         return products;
     };
 
-    const { data } = useQuery(
+    const { data, isLoading } = useQuery(
         [`query`, { query }],
-        SearchQuery
+        SearchQuery, {
+        enabled: query !== " " && query !== ""
+    }
     );
 
     const showAllHandler = () => {
@@ -75,34 +84,40 @@ export const Result = () => {
                     keyword: query
                 }
             })
-
             return { query, visiblity: false }
         })
 
     }
 
-
-    if (query == "") {
-        return null
-    }
-
     if (data?.length == 0) {
         return (
-            <div className="  rounded-xl my-5 bg-white z-50 flex items-center justify-center ">
+            <div className=" bg-gray-50  rounded-xl  z-50 flex items-center justify-center shadow-xl ">
                 <h1 className="py-10 text-[18px]">No Result for {'" ' + query + ' "'} </h1>
             </div>
         )
     }
 
+    if (isLoading && query !== " " && query !== "") {
+        return (
+            <div className=" bg-gray-50 rounded-xl z-50 flex items-center justify-center shadow-xl ">
+                <h1 className="py-10 text-[18px]">Searching... </h1>
+            </div>
+        )
+    }
+
+    if (!data) {
+        return null
+    }
+
     return (
         <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-            className="rounded-xl my-5 bg-white z-50   md:max-w-[90%] mx-auto shadow-md overflow-y-auto  ">
-            <div className="grid  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 grid-cols-2 ">
-                {query !== "" && data?.slice(0, 6).map((product: ProductType, index: number) => (
-                    <Link key={index} href={`/product/${product.variant[0].slug}`}>
-                        <div
-                            key={product._id}
-                            className="group relative border-r border-b border-gray-200 p-4 sm:p-6">
+            className="rounded-xl mt-5 z-50    shadow-md  bg-gray-50  max-[800px]:max-h-[500px]  max-[800px]:overflow-y-auto ">
+            <div className="grid  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 grid-cols-2 md:max-w-[90%] mx-auto ">
+
+                {query !== "" && query !== " " && data?.slice(0, 6).map((product: ProductType, index: number) => (
+                    <Link key={index} href={`/product/${product.variant[0].slug}`} onClick={onClose}>
+                        <div key={product._id}
+                            className="group relative  p-4 sm:p-6">
                             <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75">
                                 <Image
                                     src={product.variant[0].img[0].img}
@@ -133,16 +148,14 @@ export const Result = () => {
                 ))}
             </div>
 
-
             {
                 // show : when result quantity above 12
-                query !== "" && data?.length > 6 && (
+                query !== "" && query !== " " && data?.length > 6 && (
                     <div className="md:flex items-center justify-center py-5 hidden">
                         <button onClick={showAllHandler} className="bg-primary text-md text-white btn">Show All Result ({data?.length})</button>
                     </div>
                 )
             }
-
 
         </motion.div >
     )

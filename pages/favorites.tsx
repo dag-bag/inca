@@ -8,7 +8,6 @@ import Btn from "../components/buttons/Btn";
 import LinkBtn from "../components/buttons/LinkBtn";
 import FavCard from "../components/Fav/Favcard";
 import Flex from "../components/utils/Flex";
-// import Flex from "../components/";
 import Grid from "../components/utils/Grid";
 import H1 from "../components/Headings/H1";
 import ProductCard from "../components/Product/ProductCard";
@@ -17,7 +16,6 @@ import { isEmpty } from "lodash";
 
 function Favorites() {
   const favItems = useRecoilValue<CartItem[]>(favAtom);
-
   return (
     <Flex className="mt-4">
       <H1 text={!isEmpty(favItems) ? "Favourites" : "No favourites Items"} />
