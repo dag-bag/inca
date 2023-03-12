@@ -9,12 +9,11 @@ const PaypalComponent = dynamic(() => import("../Paypal/PaypalComponent"), {
   ssr: true,
   loading: () => <Loader />,
 });
-// import PaypalComponent from "../Paypal/PaypalComponent";
 type Props = {};
 
-function Step3({}: Props) {
+function Step3({ }: Props) {
   return (
-    <div>
+    <div className="flex h-full flex-col ">
       <Container
         Title={"Payment"}
         Question="How do you want to pay? "
@@ -25,9 +24,12 @@ function Step3({}: Props) {
             Text: "Secure Payment",
             Icon: BsPaypal,
           },
-        ]}
-      />
-      <PaypalComponent />
+        ]}>
+
+        <PaypalComponent />
+
+
+      </Container>
     </div>
   );
 }

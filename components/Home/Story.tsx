@@ -70,17 +70,7 @@ function Story({ title, description, image, boxType, type, link }: Props) {
             <div className={` text-left mb-6  mr-auto`}>
               <h1 className={`${style.heading} `}>
                 {title}
-                {/* <svg
-                  width={60}
-                  height={2}
-                  viewBox="0 0 60 2"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`absolute  right-0 left-0 md:top-14`}
-                  preserveAspectRatio="none"
-                >
-                  <path d="M0 1L60 0.999995" stroke="#333333" />
-                </svg> */}
+
               </h1>
 
               <p
@@ -94,7 +84,8 @@ function Story({ title, description, image, boxType, type, link }: Props) {
             <Btn
               text={`${readMore ? "Read Less" : "Learn More"} `}
               className=" btn-outline btn-wide mr-auto"
-              onClick={() => setReadMore((value) => !value)}
+              onClick={() => Router.push(link as string)}
+
             />
           </div>
         </div>

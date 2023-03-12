@@ -7,6 +7,8 @@ type Props = {
   Question: string;
   Title: string;
   Level: number;
+  children?: any
+
   ShipCardData: {
     Icon?: any;
     Text: string;
@@ -15,14 +17,14 @@ type Props = {
     value?: number;
   }[];
 };
-function Container({ Question, Title, Level, ShipCardData }: Props) {
+function Container({ Question, Title, Level, ShipCardData, children }: Props) {
   return (
     <>
       <HeaderComponent Title={Title} Level={Level} />
       <div className="bg-gray-200   mt-2 max-w-4xl md:ml-14 rounded-md p-5 ">
         <h4 className="text-xl font-medium">{Question}</h4>
         <div className="flex flex-wrap gap-5 py-5">
-          {ShipCardData?.map((item, i) => {
+          {!children && ShipCardData?.map((item, i) => {
             return (
               <ShipCard
                 Title={item.Title}
@@ -34,6 +36,9 @@ function Container({ Question, Title, Level, ShipCardData }: Props) {
               />
             );
           })}
+
+          {children && children}
+
         </div>
       </div>
     </>

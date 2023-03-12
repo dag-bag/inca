@@ -175,24 +175,10 @@ export default function Example({
   const [recentlyItems, setRecentlyItems] = useRecoilState(recentlyViewedAtom);
 
   const setToRecentlyViewedItem = () => {
-    const productMetaData = {
-      title: product.title,
-      uni: `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`,
-      price: variantDetails.price,
-      color: variantDetails.color,
-      size: selectedSize,
-      img: variantDetails.img,
-      slug: variantDetails.slug,
-      id: variantDetails._id,
-      qty: 1,
-      desc: product.desc,
-    }
-
     if (!recentlyItems.map(ele => ele.id).includes(product._id)) {
       const T = elementReIndexer(recentlyItems, product)
       setRecentlyItems(T)
     }
-
   }
 
   useEffect(() => {
@@ -424,6 +410,7 @@ export default function Example({
             className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
           >
             <Carousel products={relatedProducts} title="You May Also Like" />
+
             <DynRecentlyViewed />
 
           </section>

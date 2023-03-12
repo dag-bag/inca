@@ -49,7 +49,7 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
             "https://res.cloudinary.com/hellooworkd/image/upload/v1675092246/Inca_kkenr5.jpg"
           }
           boxType="left-right"
-          type={1}
+          type={2}
           link="/social-impact"
         />
         <Carousel products={products} title="Trending Products" />
