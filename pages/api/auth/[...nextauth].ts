@@ -12,6 +12,7 @@ import clientPromise from "../../../libs/auth/mongoClient";
 import FacebookProvider from "next-auth/providers/facebook";
 import { Session } from "inspector";
 import { UserProp } from "../../../types/user";
+import { loginUserBackend } from "../../../services/auth/login_user";
 
 declare module "next-auth" {
   /**
@@ -36,37 +37,23 @@ export default NextAuth({
       clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
     }),
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-      // The credentials is used to generate a suitable form on the sign in page.
-      // You can specify whatever fields you are expecting to be submitted.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        email: { label: "Email", type: "text" },
+        identifier: {
+          label: "Identifier",
+          type: "string",
+          placeholder: "example@example.com or example",
+        },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, session: any) {
-        await connectMongo();
-        // Add logic here to look up the user from the credentials supplied
 
-        const user = await User.findOne({ email: credentials?.email });
-
-        if (!user) {
-          throw new Error("User not found");
-        }
-        if (user) {
-          let verifiedUser = await signInUser(user, credentials?.password);
-          // console.log(verifiedUser);
-          let fetchedUser = JSON.parse(JSON.stringify(verifiedUser));
-          // console.log(fetchedUser);
-          session.image = verifiedUser.image;
-          session.name = verifiedUser.name;
-          session.email = verifiedUser.email;
-          session.userId = fetchedUser._id;
-
-          return session;
-        }
+      //@ts-ignore
+      async authorize(credentials) {
+        const user = await loginUserBackend({
+          identifier: credentials?.identifier as string,
+          password: credentials?.password as string,
+        });
+        return user;
       },
     }),
     // ...add more providers here

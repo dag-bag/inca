@@ -6,10 +6,12 @@ import Input from "./Input";
 import { FormikValues, useFormik } from "formik";
 import Btn from "../buttons/Btn";
 import { formValidation, formValidationSchema } from "../../validation/form";
-import { createUser, loginUser } from "../../hooks/form";
+import { createUser } from "../../services/auth/register";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import BlurImage from "./BlurImage";
+import { loginUserClientSide } from "../../services/auth/login_user";
+import Email from "next-auth/providers/email";
 type Props = {
   type: "login" | "signup";
 };
@@ -54,11 +56,15 @@ function Auth({ type }: Props) {
       email: values.email,
       password: values.password,
       name: values?.name,
+      username: values?.email.split("@")[0],
     };
     setSubmitting(true);
     switch (type) {
       case "login":
-        let isVerified = await loginUser(loginUserDetails);
+        let isVerified = await loginUserClientSide({
+          identifier: values?.email,
+          password: values?.password,
+        });
         if (isVerified?.status === 200) {
           router.push("/");
           resetForm();
@@ -68,15 +74,19 @@ function Auth({ type }: Props) {
 
         break;
       case "signup":
-        let isSignedUp = await createUser(loginUserDetails);
-        if (isSignedUp?.status === 200) {
-          let isVerified = await loginUser(loginUserDetails);
-          isVerified?.status === 200 && router.push(`${isVerified?.url}`),
-            resetForm();
-        } else {
-          setErrors({ email: isSignedUp.error });
+        try {
+          let isSignedUp = await createUser(loginUserDetails);
+          if (isSignedUp.user) {
+            let isVerified = await loginUserClientSide({
+              identifier: values?.email,
+              password: values?.password,
+            });
+            isVerified?.status === 200 && router.push(`${isVerified?.url}`),
+              resetForm();
+          }
+        } catch (error: any) {
+          setErrors({ email: error?.error?.message });
         }
-
         break;
       default:
         break;

@@ -9,11 +9,15 @@ import { ProductType } from "../../types/product";
 import { motion } from "framer-motion";
 import ProductImage from "../Product/ProductImage";
 import Router from "next/router";
+import { MainDatum } from "../../services/product/product";
+// import { MainDatum } from "../../types/newtypes/product";
 
-type Props = { products?: ProductType[] };
+type Props = { products?: MainDatum[] };
 
 function CategoryPage({ products }: Props) {
+  // console.log("products:", products);
   const { push, query } = Router;
+
   const NaviGator = (href: string) => {
     push({
       pathname: href,
@@ -24,18 +28,32 @@ function CategoryPage({ products }: Props) {
   };
   return (
     <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:col-span-3 lg:gap-x-8">
-      {products?.map((product: ProductType, index) => {
+      {products?.map((product: MainDatum, index) => {
+        const {
+          attributes: {
+            category,
+            createdAt,
+
+            publishedAt,
+            title,
+            updatedAt,
+            variants,
+            desc,
+          },
+        } = product;
+        let Images = variants.data[0].attributes.images.data;
+        let Variant = variants.data[0].attributes;
+
         return (
-          // <Link key={index} href={`/product/${product.variant[0].slug}`}>
           <div
             className="group relative  border-gray-200 p-4 sm:p-6"
-            key={index}
-            onClick={() => NaviGator(`/product/${product.variant[0].slug}`)}
+            key={product.id}
+            onClick={() => NaviGator(`/product/${Variant.slug}`)}
           >
             <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-200 group-hover:opacity-75 ">
               <ProductImage
-                image={product.variant[0].img}
-                alt={product.desc}
+                image={Images}
+                alt={""}
                 className="h-full w-full object-cover object-center"
                 width={300}
                 height={300}
@@ -45,7 +63,8 @@ function CategoryPage({ products }: Props) {
               <h3 className="text-sm font-medium text-gray-900">
                 <a href={"#"}>
                   <span aria-hidden="true" />
-                  {product.variant[0].title}
+                  {/* Title */}
+                  {title}
                 </a>
               </h3>
               <div className="mt-3 flex flex-col items-center">
@@ -55,13 +74,12 @@ function CategoryPage({ products }: Props) {
               </div>
               <p className="mt-4 text-base font-medium text-gray-900">
                 <span className="text-orange-500 text-sm line-through mr-2">
-                  ${product.variant[0].price}
+                  ${Variant.price}
                 </span>{" "}
-                ${product.variant[0].sellPrice}
+                ${Variant.sellPrice}
               </p>
             </div>
           </div>
-          // </Link>
         );
       })}
     </div>

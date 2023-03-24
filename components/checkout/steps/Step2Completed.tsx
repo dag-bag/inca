@@ -11,7 +11,7 @@ import BlurImage from "../../utils/BlurImage";
 
 type Props = {};
 
-function Step2Completed({ }: Props) {
+function Step2Completed({}: Props) {
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
@@ -27,15 +27,18 @@ function Step2Completed({ }: Props) {
         <BsFillCheckCircleFill className=" text-green-500 w-10 h-10 rounded-full flex justify-center items-center mr-4"></BsFillCheckCircleFill>
         {"Delivery"}
       </h1>
-      <div >
+      <div>
         <h4 className="font-semibold mt-5">Expected Thu, Oct 13 </h4>
         <div className="0">
           {cartItems?.map((item, index) => {
             return (
-              <li key={index} className="mt-5 rounded-md p-3 flex  w-full  flex-col lg:flex-row border-2">
-                <div >
+              <li
+                key={index}
+                className="mt-5 rounded-md p-3 flex  w-full  flex-col lg:flex-row border-2"
+              >
+                <div>
                   <Image
-                    src={item.img[0].img}
+                    src={item.img.data[0].attributes.formats.medium.url}
                     alt="Front of men's Basic Tee in sienna."
                     className="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48"
                     width={150}
@@ -124,10 +127,10 @@ function Step2Completed({ }: Props) {
           type="button"
           className="px-2 py-2 font-medium tracking-wide text-black capitalize transition duration-300 ease-in-out transform rounded-xl hover:bg-gray-300 focus:outline-none active:scale-95 flex space-x-2"
           onClick={handleClick}
-        //   onClick={() => {
-        //     setState(2);
-        //     Setx({ ...x, 2: "Pending" });
-        //   }}
+          //   onClick={() => {
+          //     setState(2);
+          //     Setx({ ...x, 2: "Pending" });
+          //   }}
         >
           <span>Edit</span>
           <svg

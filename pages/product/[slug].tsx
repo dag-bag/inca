@@ -1,21 +1,22 @@
 /** @format */
 
-import mongoose from "mongoose";
-
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { Toaster } from "react-hot-toast";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import BlurImage from "../../components/utils/BlurImage";
-import Product from "../../models/Product";
+// import Product from "../../models/Product";
 import Loader from "../../components/Loaders/Loader";
 import dynamic from "next/dist/shared/lib/dynamic";
-const DynRecentlyViewed = dynamic(() => import('../../components/recently-viewed'), {
-  loading: () => <Loader />,
-  ssr: false
-})
+const DynRecentlyViewed = dynamic(
+  () => import("../../components/recently-viewed"),
+  {
+    loading: () => <Loader />,
+    ssr: false,
+  }
+);
 
 import { recentlyViewedAtom } from "../../components/recently-viewed";
-import { cartSelector, cartTotal } from "../../atoms/cart";
+import { cartSelector, cartTotal, SideCartOpenAtom } from "../../atoms/cart";
 import {
   FetchedProductType,
   Variant,
@@ -23,44 +24,28 @@ import {
 } from "../../types/product";
 import { favSelector } from "../../atoms/favraites";
 
-type Props = {
-  product: FetchedProductType;
-  variants: Variant[];
-  variantDetails: VariantDetails;
-  relatedProducts: FetchedProductType[];
-};
-
-import { Fragment, useEffect, useRef, useState } from "react";
+import strapi from "../../utils/strapi";
+import { useState } from "react";
+import { SizeGuideOpenAtom } from "../../components/Product/SizeGuide";
+import mongoose from "mongoose";
 import {
-  Dialog,
-  Disclosure,
-  Popover,
-  RadioGroup,
-  Tab,
-  Transition,
-} from "@headlessui/react";
-import {
-  HeartIcon,
-  MenuIcon,
-  MinusSmIcon,
-  PlusSmIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  UserIcon,
-  XIcon,
-} from "@heroicons/react/outline";
-import { StarIcon } from "@heroicons/react/solid";
-import ProductReviews from "../../components/Product/ProductReviews";
-import Link from "next/link";
-import Image from "next/image";
+  Data,
+  Main,
+  MainDatum,
+  Product,
+  PurpleAttributes,
+} from "../../services/variants/variants";
+import { Main as MainProduct } from "../../services/product/product";
+import Link from "next/dist/client/link";
+import { RadioGroup, Tab } from "@headlessui/react";
 import SkeLeTonImage from "../../components/skeleton/SkeletonImage";
-import SizeGuide, {
-  SizeGuideOpenAtom,
-} from "../../components/Product/SizeGuide";
+import { StarIcon } from "@heroicons/react/solid";
+// import ProductImage from "../../components/Product/ProductImage";
+import { HeartIcon } from "@heroicons/react/outline";
+import ProductReviews from "../../components/Product/ProductReviews";
 import ProductImage from "../../components/Product/ProductImage";
-import { SideCartOpenAtom } from "../../atoms/cart";
 import Carousel from "../../components/utils/Carosel";
-import { useRouter } from "next/dist/client/router";
+import { getParams } from "../../services/product/apis/params";
 
 const productRaw = {
   sizes: ["XS", "S", "M", "L", "XL"],
@@ -121,72 +106,85 @@ function classNames(...classes: string[]) {
 
 // conditionally change element index and add new element
 const elementReIndexer = (arr: any[], newElement: any) => {
-  const modifiedArr: any[] = [...arr]
+  const modifiedArr: any[] = [...arr];
   if (arr.length == 5) {
-    modifiedArr.unshift(newElement)
-    modifiedArr.pop()
+    modifiedArr.unshift(newElement);
+    modifiedArr.pop();
   } else {
-    modifiedArr.push(newElement)
+    modifiedArr.push(newElement);
   }
-  return modifiedArr
-}
-
-export default function Example({
-  product,
+  return modifiedArr;
+};
+type Props = {
+  Product: Data;
+  variants?: Variant[];
+  variantDetails?: VariantDetails;
+  relatedProducts?: MainProduct;
+  Variant: PurpleAttributes;
+  id: string;
+  Variants: Main;
+  variant_id: string;
+};
+export default function Product_Page({
+  Variant,
+  id,
+  Product,
+  Variants,
   relatedProducts,
-  variantDetails,
-  variants,
+  variant_id,
 }: Props) {
+  console.log({ relatedProducts });
+  // let rating = 4;
 
-  let rating = 4;
-
-  const [selectedSize, setSelectedSize] = useState(variantDetails.size[0]);
-  const [selectedColor, setSelectedColor] = useState(variantDetails.size[0]);
+  const [selectedSize, setSelectedSize] = useState(Variant.size[0]);
+  const [selectedColor, setSelectedColor] = useState(Variant.size[0]);
 
   const refreshVarient = (slug: string) => {
     let url = `/product/${slug}`;
   };
 
   const [cart, SetCart] = useRecoilState(cartSelector);
-  const uni = `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`;
+  const uni = `${Variant.slug}-${selectedSize}-${Variant.color}`;
   const [isfav, favSet] = useRecoilState(favSelector(uni));
   const setModalOpen = useSetRecoilState(SizeGuideOpenAtom);
   const setCartOpen = useSetRecoilState(SideCartOpenAtom);
   const addedToCart = () => {
     let newProduct = {
-      title: product.title,
-      uni: `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`,
-      price: variantDetails.price,
-      color: variantDetails.color,
+      variant_id: variant_id,
+      product_id: Product.id,
+      title: Product.attributes.title,
+      uni: `${Variant.slug}-${selectedSize}-${Variant.color}`,
+      price: Variant.price,
+
+      color: Variant.color,
       size: selectedSize,
-      img: variantDetails.img,
-      slug: variantDetails.slug,
-      id: variantDetails._id,
+      img: Variant.images,
+      slug: Variant.slug,
+      id: id,
       qty: 1,
-      category: product.category,
-      sellPrice: variantDetails.sellPrice,
+      category: Product.attributes.category,
+      sellPrice: Variant.sellPrice,
     };
     SetCart(newProduct);
     setCartOpen(true);
   };
 
+  // const validateRecentlyViewed = useRef(false);
+  // const [recentlyItems, setRecentlyItems] = useRecoilState(recentlyViewedAtom);
 
-  const validateRecentlyViewed = useRef(false);
-  const [recentlyItems, setRecentlyItems] = useRecoilState(recentlyViewedAtom);
+  // const setToRecentlyViewedItem = () => {
+  //   if (!recentlyItems.map((ele) => ele.id).includes(product._id)) {
+  //     const T = elementReIndexer(recentlyItems, product);
+  //     setRecentlyItems(T);
+  //   }
+  // };
 
-  const setToRecentlyViewedItem = () => {
-    if (!recentlyItems.map(ele => ele.id).includes(product._id)) {
-      const T = elementReIndexer(recentlyItems, product)
-      setRecentlyItems(T)
-    }
-  }
-
-  useEffect(() => {
-    if (validateRecentlyViewed.current) return;
-    validateRecentlyViewed.current = true;
-    setToRecentlyViewedItem()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   if (validateRecentlyViewed.current) return;
+  //   validateRecentlyViewed.current = true;
+  //   setToRecentlyViewedItem();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <div className="bg-white">
@@ -200,13 +198,13 @@ export default function Example({
             </li>
             <li>
               <Link
-                href={`/category?category=${product.category}`}
+                href={`/category?category=${Product.attributes.category}`}
                 className="capitalize"
               >
-                {product?.category?.split("-").join(" ")}
+                {Product.attributes?.category?.split("-").join(" ")}
               </Link>
             </li>
-            <li>{product.title}</li>
+            <li>{Product.attributes.title}</li>
           </ul>
         </div>
         <div className="max-w-2xl mx-auto lg:max-w-none">
@@ -217,17 +215,17 @@ export default function Example({
               {/* Image selector */}
               <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
                 <Tab.List className="grid grid-cols-4 gap-6 gap-y-10">
-                  {variantDetails.img.map((image, index) => (
+                  {Variant.images.data.map((image, index) => (
                     <Tab
                       key={index}
                       className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none  "
                     >
                       {({ selected }) => (
                         <>
-                          <span className="sr-only">{ }</span>
+                          <span className="sr-only">{}</span>
                           <div className="absolute inset-0 rounded-md overflow-hidden h-32">
                             <BlurImage
-                              image={image.img}
+                              image={image.attributes.formats.medium.url}
                               alt="product"
                               key={index}
                               className="h-14 w-14  cursor-pointer"
@@ -254,13 +252,13 @@ export default function Example({
               </div>
 
               <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
-                {variantDetails.img.map((image, index) => (
+                {Variant.images.data.map((image, index) => (
                   <Tab.Panel key={index}>
                     <SkeLeTonImage
                       width={600}
                       height={600}
-                      image={image.img}
-                      alt={image.alt}
+                      image={image.attributes.formats.large.url}
+                      alt={""}
                       type="responsive"
                       className="w-full h-full object-center object-cover sm:rounded-lg"
                     />
@@ -272,16 +270,16 @@ export default function Example({
             {/* Product info */}
             <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
               <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-                {product.title}
+                {Product.attributes.title}
               </h1>
 
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
                 <p className="text-3xl text-gray-700">
                   <span className="text-orange-500 text-xl line-through mr-2">
-                    ${variantDetails.price}
+                    ${Variant.price}
                   </span>
-                  ${variantDetails.sellPrice}
+                  ${Variant.sellPrice}
                 </p>
               </div>
 
@@ -301,7 +299,7 @@ export default function Example({
                       />
                     ))}
                   </div>
-                  <p className="sr-only">{rating} out of 5 stars</p>
+                  {/* <p className="sr-only">{rating} out of 5 stars</p> */}
                 </div>
               </div>
 
@@ -313,7 +311,7 @@ export default function Example({
               >
                 {/* Colors */}
                 <div>
-                  <h3 className="text-sm text-gray-600">Variant</h3>
+                  {/* <h3 className="text-sm text-gray-600">Variant</h3> */}
 
                   <RadioGroup
                     value={selectedColor}
@@ -324,7 +322,7 @@ export default function Example({
                       Choose a color
                     </RadioGroup.Label>
                     <ul className="flex flex-row  items-center mt-2 space-x-2">
-                      {variants.map((item, index) => {
+                      {/* {Variants?.data.map((item, index) => {
                         return (
                           // <Link key={index} href={`/${item.slug}`}>
                           <div
@@ -332,19 +330,21 @@ export default function Example({
                             className="h-14 w-14 relative hover:opacity-75 duration-700 ease-in-out border border-gray-200 rounded-xl"
                           >
                             <ProductImage
-                              image={item.img}
+                              image={Variant.images.data}
                               alt="product"
                               key={index}
                               className="h-14 w-14  cursor-pointer"
                               width={50}
                               height={50}
                               rounded={true}
-                              onClick={() => refreshVarient(item.slug)}
+                              onClick={() =>
+                                refreshVarient(item.attributes.slug)
+                              }
                               cursor={true}
                             />
                           </div>
                         );
-                      })}
+                      })} */}
                     </ul>
                   </RadioGroup>
                 </div>
@@ -364,23 +364,24 @@ export default function Example({
                       e.stopPropagation();
 
                       let newProduct = {
-                        title: product.title,
-                        uni: `${variantDetails.slug}-${selectedSize}-${variantDetails.color}`,
-                        price: variantDetails.price,
-                        color: variantDetails.color,
+                        title: Product.attributes.title,
+                        uni: `${Variant.slug}-${selectedSize}-${Variant.color}`,
+                        price: Variant.price,
+                        color: Variant.color,
                         size: selectedSize,
-                        img: variantDetails.img,
-                        slug: variantDetails.slug,
-                        id: variantDetails._id,
+                        img: Variant.images,
+                        slug: Variant.slug,
+                        id: id,
                         qty: 1,
-                        desc: product.desc,
+                        desc: Product.attributes.desc,
                       };
                       favSet(newProduct);
                     }}
                   >
                     <HeartIcon
-                      className={`h-6 w-6 flex-shrink-0 ${isfav ? "text-red-500" : ""
-                        }`}
+                      className={`h-6 w-6 flex-shrink-0 ${
+                        isfav ? "text-red-500" : ""
+                      }`}
                       aria-hidden="true"
                     />
                     <span className="sr-only">Add to favorites</span>
@@ -391,7 +392,7 @@ export default function Example({
                 <h3 className="sr-only">Description</h3>
 
                 <div className="text-base text-gray-700 space-y-6">
-                  {product.desc}
+                  {Product.attributes.desc}
                 </div>
               </div>
 
@@ -409,10 +410,10 @@ export default function Example({
             aria-labelledby="related-heading"
             className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0"
           >
+            {/* @ts-ignore */}
             <Carousel products={relatedProducts} title="You May Also Like" />
 
-            <DynRecentlyViewed />
-
+            {/* <DynRecentlyViewed /> */}
           </section>
           <ProductReviews />
         </div>
@@ -421,14 +422,14 @@ export default function Example({
   );
 }
 
-
 // export default ProductDetails;
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/allparams`);
-  const posts = await res.json();
+  // const res = await fetch(`${process.env.NEXTAUTH_URL}/api/allparams`);
+  // const posts = await res.json();
 
   // Get the paths we want to pre-render based on posts
-  const paths = posts.map((slug: string) => ({
+  const params = await getParams();
+  const paths = params.map((slug: string) => ({
     params: { slug: slug },
   }));
 
@@ -439,45 +440,73 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(`${process.env.MONGODB_URI}`);
-  }
+  const variantDetails = await strapi.find<MainDatum[]>("variants", {
+    filters: {
+      slug: params?.slug,
+    },
+    populate: ["*", "images", "product"],
+  });
+  const relatedProducts = await strapi.find("products", {
+    populate: ["variants", "variants.images"],
+    filters: {
+      category:
+        variantDetails.data[0].attributes.product.data.attributes.category,
+      id: {
+        $ne: variantDetails.data[0].attributes.product.data.id,
+      },
+    },
+    pagination: {
+      start: 0,
+      limit: 8,
+    },
+  });
+
+  // console.log("ctx:", query.id);
+  // if (!mongoose.connections[0].readyState) {
+  //   await mongoose.connect(`${process.env.MONGODB_URI}`);
+  // }
+  // const { keyword, id } = ctx.query;
+  // console.log(keyword, id);
 
   // res.setHeader(
   //   "Cache-Control",
   //   "public, s-maxage=3600, stale-while-revalidate=60"f
   // );
+  // const newProduct = await strapi.findOne("products", query?.id, {
+  //   populate: ["Variant", "Variant.images"],
+  // });
+  // console.log(newProduct);
 
-  let slug = params?.slug;
-  let product = await Product.findOne({
-    "variant.slug": slug,
-  });
-  let relatedProducts = await Product.find({
-    $nor: [{ title: product?.title }],
-    category: product?.category,
-    // category: product?.category,
-  });
+  // let slug = params?.slug;
+  // let product = await Product.findOne({
+  //   "variant.slug": slug,
+  // });
 
-  if (product) {
-    let variants = product.variant;
-    let variantDetails = variants.find((item) => item.slug === slug);
+  // let relatedProducts = await Product.find({
+  //   $nor: [{ title: product?.title }],
+  //   category: product?.category,
+  //   // category: product?.category,
+  // });
+
+  if (params) {
+    // let variants = newProduct.data.attributes.Variant;
+    // let variantDetails = variants.find((item) => item.slug === slug);
     return {
       props: {
-        product: JSON.parse(JSON.stringify(product)),
-        variants: JSON.parse(JSON.stringify(variants)),
-        variantDetails: JSON.parse(JSON.stringify(variantDetails)),
-        relatedProducts: JSON.parse(JSON.stringify(relatedProducts)),
+        Variant: variantDetails.data[0].attributes,
+        Product: variantDetails.data[0].attributes.product.data,
+        Variants: variantDetails.data,
+        variant_id: variantDetails.data[0].id,
+
+        // product: JSON.parse(JSON.stringify(product)),
+        // variants: JSON.parse(JSON.stringify(variants)),
+        // variantDetails: JSON.parse(JSON.stringify(variantDetails)),
+        relatedProducts: relatedProducts.data,
       }, // will be passed to the page component as props
     };
   } else {
     return {
-      props: {
-        product: null,
-        variants: [],
-        variantDetails: {
-          size: [10],
-        },
-      }, // will be passed to the page component as props
+      notFound: true,
     };
   }
 };

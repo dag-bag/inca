@@ -1,5 +1,6 @@
 /** @format */
 
+import { getSession } from "next-auth/react";
 import { Address } from "../../types/address";
 import { getUserData } from "./user";
 type Data = {
@@ -7,9 +8,9 @@ type Data = {
   userEmail: string;
 };
 export let createAddress = async (Data: Data) => {
-  const session = await getUserData();
+  const session = await getSession();
   const { values, userEmail } = Data;
-  let email = userEmail;
+  let email = session?.user?.email;
   if (!session) {
     email = "guest@gmail.com";
   }

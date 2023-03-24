@@ -16,26 +16,25 @@ import SmallNavbar from "./SmallNavbar";
 import { useEffect, useState } from "react";
 import SearchBar, { SearchAtom, Result } from "../Searchbar-bombas";
 
-
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 
 const centerDivData = [
   {
     title: "Stuffed Animals",
-    href: "/category?category=alpaca-stuffed-animals",
+    href: "/category?category=alpaca+stuffed+animals",
   },
   {
     title: " Slippers",
-    href: "/category?category=alpaca-slippers",
+    href: "/category?category=alpaca+slippers",
   },
   {
     title: " Clothing",
-    href: "/category?category=alpaca-clothing",
+    href: "/category?category=alpaca+clothing",
     dropdown: true,
     DropDownData: ["Alpaca Ponchos", "Scarves", "Alpaca Gloves", "Shawls"],
   },
-  { title: "Home", href: "/" },
-  { title: " Accessories", href: "/category?category=alpaca-accessories" },
+  // { title: "Home", href: "/" },
+  { title: " Accessories", href: "/category?category=alpaca+accessories" },
   {
     title: "About Us",
     href: "/about",
@@ -59,8 +58,7 @@ const styles = {
 function Navbar() {
   const { data: session } = useSession();
 
-  const [searchState, setSearchState] = useRecoilState(SearchAtom)
-
+  const [searchState, setSearchState] = useRecoilState(SearchAtom);
 
   const rightDivData = [
     {
@@ -202,21 +200,24 @@ function Navbar() {
     <>
       <SmallNavbar NavData={centerDivData} />
 
-      <div className={
-        isSticky
-          ? searchState.visiblity
-            ? 'fixed top-0 w-full bg-white  z-50 max-h-[100%] grid grid-rows-xs-size'
-            : 'fixed top-0 w-full bg-white  z-50 '
-          : ''}>
-
+      <div
+        className={
+          isSticky
+            ? searchState.visiblity
+              ? "fixed top-0 w-full bg-white  z-50 max-h-[100%] grid grid-rows-xs-size"
+              : "fixed top-0 w-full bg-white  z-50 "
+            : ""
+        }
+      >
         <div className="navbar md:bg-white md:max-w-[90%] m-auto relative ">
-
           {!searchState.visiblity && (
             <div className="navbar-start md:hidden">
               <div className="relative w-12 sm:w-10 md:w-20 cursor-pointer ">
                 <Link href={"/"}>
                   <Image
-                    src={"https://res.cloudinary.com/dthpcwn8r/image/upload/v1675856646/Logo_solo_imagen_q1wwbz.png"}
+                    src={
+                      "https://res.cloudinary.com/dthpcwn8r/image/upload/v1675856646/Logo_solo_imagen_q1wwbz.png"
+                    }
                     alt="logo"
                     width={97}
                     height={139}
@@ -243,11 +244,11 @@ function Navbar() {
             </div>
           </div>
 
-
-          {searchState.visiblity && <div className="w-full">
-            <SearchBar />
-          </div>}
-
+          {searchState.visiblity && (
+            <div className="w-full">
+              <SearchBar />
+            </div>
+          )}
 
           {!searchState.visiblity && (
             <>
@@ -291,7 +292,12 @@ function Navbar() {
                 </ul>
               </div>
               <div className="navbar-end">
-                <div className="dropdown dropdown-end" onClick={() => { setSearchState({ ...searchState, visiblity: true }) }}>
+                <div
+                  className="dropdown dropdown-end"
+                  onClick={() => {
+                    setSearchState({ ...searchState, visiblity: true });
+                  }}
+                >
                   <label
                     tabIndex={0}
                     className="btn btn-link btn-circle hover:no-animation"
@@ -301,9 +307,7 @@ function Navbar() {
                   <div
                     tabIndex={0}
                     className="mt-7 card card-compact dropdown-content  bg-white shadow w-[80vw]"
-                  >
-
-                  </div>
+                  ></div>
                 </div>
                 <Link href={`${rightDivData[1]?.link}`}>
                   <label tabIndex={0} className="btn btn-link btn-circle">
@@ -357,7 +361,9 @@ function Navbar() {
                     <>
                       <Link href={"/login"}>
                         <label tabIndex={0} className="btn btn-link btn-circle">
-                          <div className="indicator">{rightDivData[2]?.svg}</div>
+                          <div className="indicator">
+                            {rightDivData[2]?.svg}
+                          </div>
                         </label>
                       </Link>
                     </>
@@ -389,21 +395,14 @@ function Navbar() {
               </div>
             </>
           )}
-
         </div>
-
-
-
-
-
       </div>
 
-      <div className={
-        isSticky ? 'fixed top-[100px] z-50 w-full bg-gray-100' : ''}>
+      <div
+        className={isSticky ? "fixed top-[100px] z-50 w-full bg-gray-100" : ""}
+      >
         {searchState.visiblity && <Result />}
       </div>
-
-
     </>
   );
 }

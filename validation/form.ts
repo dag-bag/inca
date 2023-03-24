@@ -38,7 +38,9 @@ export const stringValidation = (properties: string[]) => {
 export const formValidation = (type: "login" | "signup") => {
   let stringSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().min(1, "Too Short!").required("Required"),
+    password: Yup.string()
+      .min(6, "Password must me 6 characters")
+      .required("Required"),
     [type === "signup" ? "name" : ""]: Yup.string()
       .required("Required")
       .min(2, "Too Short!"),

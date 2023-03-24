@@ -15,6 +15,10 @@ import Skeleton from "../../components/skeleton/Skeleton";
 import CategoryPage from "../../components/Category/CategoryPage";
 
 import ErrorPage from "../../components/utils/ErrorPage";
+import strapi from "../../utils/strapi";
+
+import { getProductByCategory } from "../../services/category/category";
+import { Main } from "../../services/product/product";
 
 type Props = {
   products: ProductType[];
@@ -22,15 +26,23 @@ type Props = {
 
 function DynamicCateGoryPage({ products }: Props) {
   const { query } = useRouter();
-  const fetchProducts = async () => {
-    const resp = await fetch(`/api/category?category=${query?.category}`);
-    const products = resp.json();
-    return products;
+  const getProductByCategory = async () => {
+    const response = await strapi.find<Main>("products", {
+      populate: ["*", "variants", "variants.images"],
+      filters: {
+        category: query?.category,
+      },
+    });
+    return response.data;
   };
-  const { data, isLoading, error } = useQuery<{ products: ProductType[] }>(
+
+  const { data, isLoading, error } = useQuery<Main>(
     ["productsCategories", { category: query?.category }],
-    fetchProducts
+    getProductByCategory
   );
+  console.log("data:", data);
+
+  // console.log(data);
   if (error) return <ErrorPage />;
 
   return (
@@ -42,7 +54,8 @@ function DynamicCateGoryPage({ products }: Props) {
           <Skeleton />
         </>
       ) : (
-        <CategoryPage products={data?.products} />
+        // @ts-ignore
+        <CategoryPage products={data} />
       )}
     </Layout>
   );

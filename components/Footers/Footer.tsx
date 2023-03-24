@@ -1,4 +1,9 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
+/**
+ * eslint-disable @next/next/no-html-link-for-pages
+ *
+ * @format
+ */
+
 /** @format */
 
 import Link from "next/link";
@@ -96,66 +101,61 @@ const navigation = {
 export default function Footer() {
   return (
     <>
-
       <footer aria-label="site footer" className=" mt-10">
         <div className=" border-b-2 border-primary bg-primary bg-opacity-10">
           <div className="py-5  flex justify-between mx-auto max-w-screen-xl px-5 flex-col md:flex-row">
-
-            <h3 className="text-xl flex items-center text-center">Sign up for exclusive BarkBox discounts, content, and more!</h3>
+            <h3 className="text-xl flex items-center text-center">
+              Sign up for exclusive Incancestry discounts, content, and more!
+            </h3>
 
             <div className="flex md:min-w-[500px] sm:items-center justify-center mt-5 md:mt-0">
-              <input type="text" placeholder="Email Address" className="md:h-[50px] w-[50%] md:w-[350px] border-primary" />
-              <button className="bg-primary h-[50px] px-5 ml-5 text-white">SIGN UP</button>
+              <input
+                type="text"
+                placeholder="Email Address"
+                className="md:h-[50px] w-[50%] md:w-[350px] border-primary"
+              />
+              <button className="bg-primary h-[50px] px-5 ml-5 text-white">
+                SIGN UP
+              </button>
             </div>
-
           </div>
-
         </div>
 
         <div className="md:flex md:justify-between grid grid-cols-2 px-5  mx-auto max-w-screen-xl ">
-
           <div className="col-span-2 sm:col-span-1 mt-8  ">
-            <p className="font-semibold  uppercase text-primary tracking-wide">Shop</p>
+            <p className="font-semibold  uppercase text-primary tracking-wide">
+              Shop
+            </p>
             <nav aria-label="Footer Navigation - Services" className="mt-6">
               <ul className="space-y-4 text-sm">
-                <li>
-                  <a
-                    href="/category?category=alpaca-stuffed-animals"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                <Link href="/category?category=alpaca-stuffed-animals">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     Stuffed Animals
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="/category?category=alpaca-slippers"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                </Link>
+                <Link href="/category?category=alpaca-slippers">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     Slippers
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="/category?category=alpaca-clothing"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                </Link>
+                <Link href="/category?category=alpaca-clothing">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     Clothings
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="/category?category=alpaca-key-chain"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                </Link>
+                <Link href="/category?category=alpaca-key-chain">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     Accessories
                   </a>
-                </li>
+                </Link>
               </ul>
             </nav>
           </div>
 
           <div className="col-span-2 sm:col-span-1 mt-8">
-            <p className="font-semibold  uppercase text-primary tracking-wide">Become a reseller</p>
+            <p className="font-semibold  uppercase text-primary tracking-wide">
+              Become a reseller
+            </p>
             <nav aria-label="Footer Navigation - Company" className="mt-6">
               <ul className="space-y-4 text-sm">
                 <li>
@@ -163,7 +163,8 @@ export default function Footer() {
                     href="#"
                     className="text-gray-700 transition hover:opacity-75"
                   >
-                    Want to become an  official <br /> reseller of INCANSTRY alpaca products?
+                    Want to become an official <br /> reseller of INCANSTRY
+                    alpaca products?
                   </a>
                 </li>
                 <li>
@@ -179,38 +180,34 @@ export default function Footer() {
           </div>
 
           <div className="col-span-2 sm:col-span-1 mt-8">
-            <p className="font-semibold  uppercase text-primary tracking-wide">Information</p>
+            <p className="font-semibold  uppercase text-primary tracking-wide">
+              Information
+            </p>
             <nav aria-label="Footer Navigation - Company" className="mt-6">
               <ul className="space-y-4 text-sm">
-                <li>
-                  <a
-                    href="/about"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                <Link href="/about">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     About us
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="/social-impact"
-                    className="text-gray-700 transition hover:opacity-75">
+                </Link>
+                <Link href="/social-impact">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     Social Impact
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="/blogs"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                </Link>
+                <Link href="/blogs">
+                  <a className="text-gray-700 transition hover:opacity-75">
                     Blogs
                   </a>
-                </li>
+                </Link>
               </ul>
             </nav>
           </div>
 
           <div className="col-span-2 sm:col-span-1 mt-8">
-            <p className="font-semibold  uppercase text-primary tracking-wide">Contact us</p>
+            <p className="font-semibold  uppercase text-primary tracking-wide">
+              Contact us
+            </p>
             <nav aria-label="Footer Navigation - Legal" className="mt-6">
               <ul className="space-y-4 text-sm">
                 <li>
@@ -233,7 +230,6 @@ export default function Footer() {
             </nav>
           </div>
         </div>
-
 
         <ul className="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end mt-5   max-w-screen-xl mx-auto pl-5 ">
           <li>
@@ -330,7 +326,8 @@ export default function Footer() {
                   <li>
                     <a
                       href="legal/terms-of-service"
-                      className="text-gray-500 transition hover:opacity-75">
+                      className="text-gray-500 transition hover:opacity-75"
+                    >
                       Terms &amp; Conditions
                     </a>
                   </li>

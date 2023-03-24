@@ -7,7 +7,7 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import { useQuery } from "@tanstack/react-query";
-import { FetchCartProduct } from "../../services/product/products";
+import { FetchCartProduct } from "../../services/product/apis/products";
 import Loader from "../Loaders/Loader";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,6 +18,8 @@ import { useSetRecoilState } from "recoil";
 import { SideCartOpenAtom } from "../../atoms/cart";
 import { SwiperEvents } from "swiper/types";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { getCartAdsProductsFromStrApi } from "../../services/product/apis/getCartAds";
+import { MainDatum } from "../../services/product/product";
 type Props = {
   _id: "string";
   active: boolean;
@@ -28,21 +30,25 @@ type Props = {
   variant: Variant[];
 };
 
-function AdsCard({ title, variant, tag }: Props) {
-  let { slug, price, color, availableQty, metadesc, img, sellPrice } =
-    variant[0];
+function AdsCard({
+  attributes: { title, category, createdAt, variants },
+  id,
+}: MainDatum) {
+  let { slug, price, color, images, sellPrice } = variants.data[0].attributes;
   const setHideCart = useSetRecoilState(SideCartOpenAtom);
   return (
     <div className="relative rounded-md pb-20 ">
       <Link href={`/product/${slug}`} onClick={() => setHideCart(false)}>
         <div className="relative ">
-          <div
-            className="aspect-1">
+          <div className="aspect-1">
             <Image
-              src={img[0].img}
+              src={images.data[0].attributes.formats.medium.url}
               height={500}
               width={500}
-              alt={img[0].alt}
+              alt={
+                images.data[0].attributes.alternativeText ??
+                "No alternative text"
+              }
               className="aspect-1"
             />
           </div>
@@ -89,7 +95,11 @@ function Ads() {
     // @ts-ignore
     sliderRef.current?.swiper.slideNext();
   }, []);
-  const { data, isLoading } = useQuery(["product"], FetchCartProduct);
+  const { data, isLoading } = useQuery(
+    ["product"],
+    getCartAdsProductsFromStrApi
+  );
+
   if (isLoading) return <Loader />;
 
   return (
@@ -112,13 +122,19 @@ function Ads() {
         className=" grid grid-cols-2  max-w-6xl relative"
         navigation={true}
       >
-        {data?.products?.map((product: FetchedProductType, index: number) => {
-          return (
-            <SwiperSlide key={index}>
-              <AdsCard {...product} />
-            </SwiperSlide>
-          );
-        })}
+        {data &&
+          data[0]?.attributes.products.data.map((product, index: number) => {
+            return (
+              <SwiperSlide key={index}>
+                <AdsCard
+                  // @ts-ignore
+                  attributes={product.attributes}
+                  id={product.id}
+                  key={index}
+                />
+              </SwiperSlide>
+            );
+          })}
         <button
           onClick={handlePrev}
           className="    disabled:opacity-25 disabled:cursor-not-allowed !z-50 p-0 m-0 transition-all ease-in-out duration-300

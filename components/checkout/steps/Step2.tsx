@@ -15,7 +15,7 @@ import Container from "../CheckoutCatainer";
 
 type Props = {};
 
-function Step2({ }: Props) {
+function Step2({}: Props) {
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
@@ -26,8 +26,8 @@ function Step2({ }: Props) {
           return i.status === "active"
             ? { ...i, status: "completed" } // change the status of the active step to completed
             : index === 2 // if the index is 1 then change the status of the next step to active
-              ? { ...i, status: "active" }
-              : i;
+            ? { ...i, status: "active" }
+            : i;
         })
       );
     } else {
@@ -66,10 +66,13 @@ function Step2({ }: Props) {
       <div className="lg:mx-16 max-w-4xl mb-5">
         {cartItems?.map((item, index) => {
           return (
-            <li key={index} className="mt-5 rounded-md pr-5 flex py-2 w-full sm:py-5 flex-col lg:flex-row border-2">
-              <div >
+            <li
+              key={index}
+              className="mt-5 rounded-md pr-5 flex py-2 w-full sm:py-5 flex-col lg:flex-row border-2"
+            >
+              <div>
                 <Image
-                  src={item.img[0].img}
+                  src={item.img.data[0].attributes.formats.medium.url}
                   alt="Front of men's Basic Tee in sienna."
                   className="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48"
                   width={150}

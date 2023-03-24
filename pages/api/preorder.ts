@@ -5,6 +5,7 @@ import Order from "../../models/Order";
 import paypal from "@paypal/checkout-server-sdk";
 import connectDb from "../../libs/ConnectDb";
 import { NextApiRequest, NextApiResponse } from "next";
+import strapi from "../../utils/strapi";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //This code is lifted from https://github.com/paypal/Checkout-NodeJS-SDK
@@ -13,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // request.prefer("return=representation");
 
   if (req.method === "POST") {
-    const { Cart, userEmail, subTotal, address, deliveryCost } = req.body;
+    const { Cart, userEmail, subTotal, address, deliveryCharges } = req.body;
 
     try {
       const PaypalClient = client();
@@ -27,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           {
             amount: {
               currency_code: "USD",
-              value: `${subTotal + deliveryCost}`,
+              value: `${subTotal + deliveryCharges}`,
             },
           },
         ],
@@ -36,19 +37,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (response.statusCode !== 201) {
         res.status(500);
       }
-      const order = await Order.create({
+
+      const orderData = await strapi.create("orders", {
         orderID: response.result.id,
         address: address,
-        products: Cart,
+        products: JSON.stringify(Cart),
         userEmail: userEmail,
-        total: subTotal + deliveryCost,
+        total: subTotal + deliveryCharges,
         subTotal,
-        deliveryCost,
+        // variant_id: 2,
+        // deliveryCost,
       });
 
-      res.json({ orderID: response.result.id });
+      // const order = await Order.create({
+      //   orderID: response.result.id,
+      //   address: address,
+      //   products: Cart,
+      //   userEmail: userEmail,
+      //   total: subTotal + deliveryCost,
+      //   subTotal,
+      //   deliveryCost,
+      // });
+
+      res.json({ orderID: response.result.id, orderData });
     } catch (error: any) {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error });
     }
   } else {
     res.status(500).json({ message: "Invalid request method" });

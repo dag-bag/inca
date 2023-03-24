@@ -7,6 +7,7 @@ import { Variant } from "../../types/product";
 import BlurImage from "../utils/BlurImage";
 import { AiFillStar } from "react-icons/ai";
 import ProductImage from "./ProductImage";
+import { MainDatum } from "../../services/product/product";
 type Props = {
   _id: "string";
   active: boolean;
@@ -17,9 +18,8 @@ type Props = {
   variant: Variant[];
 };
 
-function ProductCard({ title, variant, tag }: Props) {
-  let { slug, price, color, availableQty, metadesc, img, sellPrice } =
-    variant[0];
+function ProductCard({ attributes: { title, category, variants } }: MainDatum) {
+  let { slug, price, color, images, sellPrice } = variants.data[0].attributes;
   return (
     <div className="relative rounded-md">
       <Link href={`/product/${slug}`}>
@@ -30,10 +30,10 @@ function ProductCard({ title, variant, tag }: Props) {
           "
           >
             <ProductImage
-              image={img}
+              image={images.data}
               height={500}
               width={500}
-              alt={img[0].alt}
+              alt={" "}
               type="fill"
               rounded={true}
             />

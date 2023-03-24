@@ -5,6 +5,7 @@
  */
 
 import { StarIcon } from "@heroicons/react/solid";
+import Image from "next/image";
 
 const reviews = {
   average: 4,
@@ -137,10 +138,12 @@ export default function ProductReviews() {
               {reviews.featured.map((review) => (
                 <div key={review.id} className="py-12">
                   <div className="flex items-center">
-                    <img
+                    <Image
                       src={review.avatarSrc}
                       alt={`${review.author}.`}
                       className="h-12 w-12 rounded-full"
+                      width={200}
+                      height={200}
                     />
                     <div className="ml-4">
                       <h4 className="text-sm font-bold text-gray-900">

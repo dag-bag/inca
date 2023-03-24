@@ -10,6 +10,7 @@ import FeatureCard from "../Fav/FeatureCard";
 import CategoriesCard from "../Carosel/CategoriesCard";
 import { ICategories } from "../../types/category";
 import H2 from "../Headings/H2";
+import { MainDatum } from "../../services/product/product";
 interface FeaturesProps {
   title: string;
   svg: any;
@@ -17,7 +18,7 @@ interface FeaturesProps {
 }
 /* Install pure-react-carousel using -> npm i pure-react-carousel */
 type Props = {
-  products?: FetchedProductType[];
+  products?: MainDatum[];
   features?: FeaturesProps[];
   title?: string;
   categories?: ICategories[];
@@ -28,6 +29,7 @@ export default function Carousel({
   title,
   categories,
 }: Props) {
+  console.log("jldfjkldf", products);
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<any>(null);
@@ -109,11 +111,15 @@ export default function Carousel({
                 ref={carousel}
                 className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory  z-0 pb-16  md:!scrollbar-hide"
               >
-                {products
-                  ? products?.map((product, index) => {
-                      return <ProductCard {...product} key={index} />;
-                    })
-                  : null}
+                {products?.map((product, index) => {
+                  return (
+                    <ProductCard
+                      attributes={product.attributes}
+                      id={product.id}
+                      key={index}
+                    />
+                  );
+                })}
                 {features
                   ? features.map((feature, index) => {
                       return <FeatureCard {...feature} key={index} />;

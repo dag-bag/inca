@@ -35,9 +35,10 @@ const styles = {
   },
 };
 
-function SideCart({ }: Props) {
+function SideCart({}: Props) {
   const [cartOpen, setCartOpen] = useRecoilState(SideCartOpenAtom);
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
+  console.log("cartItems:", cartItems);
 
   const subTotal = useRecoilValue(cartTotal);
   const removeItem = useSetRecoilState(removeCart);
@@ -134,8 +135,14 @@ function SideCart({ }: Props) {
                                   <Image
                                     width={200}
                                     height={200}
-                                    src={item.img[0].img}
-                                    alt={item.img[0].alt}
+                                    src={
+                                      item.img.data[0].attributes.formats.small
+                                        .url
+                                    }
+                                    alt={
+                                      item.img.data[0].attributes
+                                        .alternativeText ?? ""
+                                    }
                                     className="h-full w-full object-cover object-center"
                                   />
                                 </div>
@@ -148,9 +155,9 @@ function SideCart({ }: Props) {
                                         </a>
                                       </h3>
                                       <p className="ml-4 text-primary flex flex-col">
-                                        <span>${item.sellPrice}</span>
+                                        <span>${item.price}</span>
                                         <span className="text-[#333] line-through">
-                                          ${item.price}
+                                          ${item.sellPrice}
                                         </span>
                                       </p>
                                     </div>
@@ -209,7 +216,7 @@ function SideCart({ }: Props) {
                               className="btn bg-[#333] btn-wide text-white border-none outline-none mt-6"
                               onClick={() => {
                                 Router.push(
-                                  "/category?category=alpaca-stuffed-animals"
+                                  "/category?category=alpaca+stuffed+animals"
                                 );
                                 setCartOpen(false);
                               }}

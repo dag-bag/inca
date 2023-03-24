@@ -6,6 +6,10 @@ import Banner from "./Banner";
 import { FetchedProductType } from "../../types/product";
 import Categories from "./Categories";
 import Loader from "../Loaders/Loader";
+import {
+  MainDatum,
+  type Main as Main_Trending,
+} from "../../services/product/trending";
 
 const Carousel = dynamic(() => import("../utils/Carosel"), {
   loading: () => <Loader />,
@@ -20,7 +24,14 @@ const Features = dynamic(() => import("./Features"), {
   loading: () => <Loader />,
 });
 
-export default function Main({ products }: { products: FetchedProductType[] }) {
+export default function Main({
+  products,
+  best_seller_products,
+}: {
+  products: MainDatum[];
+  best_seller_products: MainDatum[];
+}) {
+  console.log("products:", products);
   return (
     <>
       <main>
@@ -37,7 +48,11 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
           type={1}
           link="/about"
         />
-        <Carousel products={products} title="Best Sellers" />
+        <Carousel
+          // @ts-ignore
+          products={products[0].attributes.products.data}
+          title="Trending Products"
+        />
         <Features />
 
         <Story
@@ -52,7 +67,11 @@ export default function Main({ products }: { products: FetchedProductType[] }) {
           type={2}
           link="/social-impact"
         />
-        <Carousel products={products} title="Trending Products" />
+        <Carousel
+          // @ts-ignore
+          products={best_seller_products[0].attributes.products.data}
+          title="Best Sellers"
+        />
         <Story
           title={"¿Quieres comprar en grandes cantidades?"}
           description={

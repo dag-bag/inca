@@ -22,7 +22,7 @@ type Props = {
 };
 
 function OrderHistory({ orders }: Props) {
-  const { data, isLoading } = useQuery<OrderType[]>(["orders"], getAllOrders);
+  const { data, isLoading } = useQuery(["orders"], getAllOrders);
 
   return (
     <AccountLayout>
@@ -30,29 +30,39 @@ function OrderHistory({ orders }: Props) {
         <div className="w-full">
           <Loader />
         </div>
-
       ) : (
         <div className="mt-10 space-y-4">
           <h1 className="font-bold text-[#333] text-3xl">Order History</h1>
           <p>
             Check the status of recent and old orders & discover more products
           </p>
-          {data?.map((item, index) => {
+          {data?.data?.map((item, index) => {
+            const {
+              attributes: {
+                orderID,
+                createdAt,
+                userEmail,
+                products,
+                deliveryCharges,
+                subTotal,
+              },
+              id,
+            } = item;
             return (
               <div className="pb-10" key={index}>
                 <div className="flex  rounded-md border border-gray-300 w-[60rem]">
                   <div className="bg-gray-100 w-64 px-10 py-10 rounded-md space-y-4 flex justify-center flex-col">
                     <div>
                       <h5 className="text-lg text-gray-500">Order ID</h5>
-                      <p>#{item.orderID}</p>
+                      <p>#{orderID}</p>
                     </div>
                     <div>
                       <h5 className="text-lg text-gray-500">Date</h5>
-                      <p>{new Date(item.createdAt).toDateString()},</p>
+                      <p>{new Date(createdAt).toDateString()},</p>
                     </div>
                     <div>
                       <h5 className="text-lg text-gray-500">Total Amount</h5>
-                      <p>499.00$</p>
+                      <p>{deliveryCharges ?? 0 + subTotal}$</p>
                     </div>
                     <div>
                       <h5 className="text-lg text-gray-500">Order Status</h5>
@@ -64,13 +74,26 @@ function OrderHistory({ orders }: Props) {
                   </div>
 
                   <div className=" px-10 py-5 w-full">
-                    {Object.keys(item?.products).map((k) => {
+                    {products.map((k, index) => {
+                      const {
+                        category,
+                        color,
+                        img,
+                        price,
+                        sellPrice,
+                        product_id,
+                        qty,
+                        size,
+                        slug,
+                        title,
+                        uni,
+                      } = k;
                       return (
                         <>
-                          <li key={k} className="flex py-2 ">
+                          <li key={index} className="flex py-2 ">
                             <div className="flex-shrink-0 ">
                               <Image
-                                src={item?.products[k]?.img[0].img}
+                                src={img.data[0].attributes.formats.medium.url}
                                 alt="Front of men's Basic Tee in sienna."
                                 className=" rounded-md object-center object-cover sm:w-48 sm:h-48"
                                 width={150}
@@ -84,7 +107,7 @@ function OrderHistory({ orders }: Props) {
                                     <h3 className="text-sm">
                                       <p className="text-left text-black">
                                         <span className="text-xl font-semibold text-left text-black">
-                                          {item?.products[k]?.name}
+                                          {title}
                                         </span>
                                         <br />
                                         <span className=" font-medium text-left text-black">
@@ -92,14 +115,14 @@ function OrderHistory({ orders }: Props) {
                                         </span>
                                         <span className=" font-light text-left text-black">
                                           {" "}
-                                          {item.products[k].variant}
+                                          {color}
                                         </span>
                                         <br />
                                         <span className=" font-medium text-left text-black">
                                           Cantidad :{" "}
                                         </span>
                                         <span className=" font-light text-left text-black">
-                                          {item.products[k].qty}
+                                          {qty}
                                         </span>
                                         <br />
                                         <span className=" font-medium text-left text-black">
@@ -107,7 +130,7 @@ function OrderHistory({ orders }: Props) {
                                         </span>
                                         <span className=" font-light text-left text-black">
                                           {" "}
-                                          {item.products[k].size}
+                                          {size}
                                         </span>
                                         <br />
                                       </p>
@@ -133,7 +156,7 @@ function OrderHistory({ orders }: Props) {
 
                                   <div className="absolute top-0 right-0">
                                     <h4 className="text-2xl font-medium text-left text-black">
-                                      {item.products[k].price} $
+                                      {sellPrice} $
                                     </h4>
                                   </div>
                                 </div>

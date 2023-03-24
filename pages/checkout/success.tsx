@@ -14,19 +14,20 @@ import { getSession } from "next-auth/react";
 import Loader from "../../components/Loaders/Loader";
 import { OrderResponse } from "../../types/order";
 import Image from "next/image";
+import { MainDatum } from "../../services/product/order";
 function Success() {
   const router = useRouter();
   const { orderId } = router.query;
-  const { data, isLoading } = useQuery<OrderResponse>(
+  const { data, isLoading } = useQuery(
     ["/api/getorder", { orderId }],
-    () => {
+    async () => {
       invariant(typeof orderId === "string", "orderId must be a string");
       let result = fetchOrderById(orderId);
       return result;
     }
   );
   if (isLoading) return <Loader />;
-  console.log("data:", data);
+  const order = data?.data[0];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 mt-10">
@@ -34,9 +35,14 @@ function Success() {
         <div className="flex space-x-2">
           <AiOutlineCheckCircle className="text-6xl text-green-500" />
           <div>
-            <h3 className="mt-1  text-gray-500">Order# {data?.orderID}</h3>
+            <h3 className="mt-1  text-gray-500">
+              Order# {order?.attributes?.orderID}
+            </h3>
             <p>
-              Thanks {data?.address?.firstName + " " + data?.address?.lastName}{" "}
+              Thanks{" "}
+              {order?.attributes?.address.firstName +
+                " " +
+                order?.attributes?.address.lastName}{" "}
             </p>
           </div>
         </div>
@@ -55,7 +61,7 @@ function Success() {
             </p>
           </div>
           {/* @ts-ignore */}
-          <AddressCard {...data?.address} button={false} />
+          <AddressCard {...order?.attributes?.address} button={false} />
         </div>
       </div>
       <div className="bg-gray-50 py-12 md:py-15">
@@ -63,8 +69,8 @@ function Success() {
           <div className="mt-5">
             <div className="flow-root">
               <ul className="-my-4 divide-y divide-gray-200">
-                {data &&
-                  data.products.map((item, index) => {
+                {order &&
+                  order.attributes.products.map((item, index) => {
                     return (
                       <li
                         className="flex items-center justify-between py-4"
@@ -75,7 +81,7 @@ function Success() {
                             width={50}
                             height={50}
                             alt="Trainer"
-                            src={item.img[0].img}
+                            src={item.img.data[0].attributes.formats.small.url}
                             className="h-16 w-16 flex-shrink-0 rounded-lg object-cover"
                           />
                           <div className="ml-4">
@@ -111,7 +117,7 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm">${data?.subTotal}.00</p>
+                    <p className="text-sm">${order?.attributes.subTotal}.00</p>
                   </div>
                 </li>
                 <li className="flex items-center justify-between py-4">
@@ -121,7 +127,9 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm">${data?.deliveryCost}</p>
+                    <p className="text-sm">
+                      ${order?.attributes.deliveryCharges}
+                    </p>
                   </div>
                 </li>
                 <li className="flex items-center justify-between py-4 ">
@@ -132,7 +140,7 @@ function Success() {
                   </div>
                   <div>
                     <p className="text-xl">
-                      ${data?.total}
+                      ${order?.attributes?.total}
                       .00
                     </p>
                   </div>
