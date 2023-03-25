@@ -31,7 +31,7 @@ function Addresses({}: Props) {
         <h1 className="font-bold text-[#333] text-3xl">Address book</h1>
         {data?.map((item, i) => {
           // @ts-ignore
-          return <AddressCard {...item} key={i} da={data} />;
+          return <AddressCard {...item} key={i} da={data} button={true} />;
         })}
 
         <AccountModal />

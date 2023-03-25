@@ -13,13 +13,13 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { Session } from "inspector";
 import { UserProp } from "../../../types/user";
 import { loginUserBackend } from "../../../services/auth/login_user";
-
 declare module "next-auth" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   interface Session {
     user: {
+      username: string;
       /** The user's postal address. */
       id?: string;
     } & DefaultSession["user"];
@@ -77,7 +77,8 @@ export default NextAuth({
     async jwt({ token, account, user }) {
       if (user) {
         // @ts-ignore
-        token.sub = user.userId;
+        token.sub = user.id;
+        token.username = user?.username;
         return token;
       }
       return token;
@@ -87,6 +88,7 @@ export default NextAuth({
     },
     session({ session, token, user }) {
       session.user.id = token.sub;
+      session.user.username = token.username as string;
 
       return session;
     },

@@ -13,47 +13,56 @@ import { UserProps } from "../../pages/account/personal-details";
 import { stringValidation } from "../../validation/form";
 import Error from "../utils/Error";
 import { getUserData } from "../../services/account/user";
+import strapi from "../../utils/strapi";
+import { assert } from "console";
+import axios from "axios";
 
 type Props = {
-  user: UserProps;
+  user?: UserProps;
 };
 
 function PersonalUserDetails({ user }: Props) {
-  var { data: session } = useSession();
-
   const updateUser = async () => {
-    const update = await fetch("/api/user?id=" + session?.user.email, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: values?.name,
-        username: values?.username,
-      }),
-    });
-    const upd = await update.json();
-    return upd;
+    try {
+      const update = await strapi.axios.put(
+        `https://inca-strapi-production.up.railway.app/api/users/${user?.id}`,
+        {
+          name: values?.name,
+          username: values?.username,
+        }
+      );
+
+      return update;
+    } catch (error) {
+      setErrors({ username: "username already exists" });
+    }
   };
 
   const mutation = useMutation(updateUser);
   let onSubmit = () => {
     mutation.mutate();
   };
-  const { handleChange, handleSubmit, handleBlur, errors, values, isValid } =
-    useFormik<{
-      name: string;
-      username: string;
-      email: string;
-    }>({
-      initialValues: {
-        name: user?.name,
-        username: user?.username,
-        email: user?.email,
-      },
-      validationSchema: stringValidation(["name", "username"]),
-      onSubmit: onSubmit,
-    });
+  const {
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    errors,
+    values,
+    isValid,
+    setErrors,
+  } = useFormik<{
+    name: string;
+    username: string;
+    email: string;
+  }>({
+    initialValues: {
+      name: user?.name as string,
+      username: user?.username as string,
+      email: user?.email as string,
+    },
+    validationSchema: stringValidation(["name", "username"]),
+    onSubmit: onSubmit,
+  });
   const UserInputData = [
     {
       label: "Username",
@@ -102,7 +111,11 @@ function PersonalUserDetails({ user }: Props) {
               User details Updated! Please Wait 2 min for showing details on the
               website.
             </div>
-          ) : null}
+          ) : (
+            <div className="text-red-500">
+              User details not updated! User Name already exists! Please
+            </div>
+          )}
         </div>
         <Btn
           text="Save Now"

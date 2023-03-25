@@ -36,10 +36,12 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
+
   return {
     props: {
       Trending_products: await getTrendingProducts(),
       Best_sellers_products: await getBestSellersProducts(),
     },
+    revalidate: 120,
   };
 };

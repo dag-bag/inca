@@ -129,24 +129,24 @@ export default function Footer() {
             <nav aria-label="Footer Navigation - Services" className="mt-6">
               <ul className="space-y-4 text-sm">
                 <Link href="/category?category=alpaca-stuffed-animals">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     Stuffed Animals
-                  </a>
+                  </p>
                 </Link>
                 <Link href="/category?category=alpaca-slippers">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     Slippers
-                  </a>
+                  </p>
                 </Link>
                 <Link href="/category?category=alpaca-clothing">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     Clothings
-                  </a>
+                  </p>
                 </Link>
                 <Link href="/category?category=alpaca-key-chain">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     Accessories
-                  </a>
+                  </p>
                 </Link>
               </ul>
             </nav>
@@ -186,19 +186,19 @@ export default function Footer() {
             <nav aria-label="Footer Navigation - Company" className="mt-6">
               <ul className="space-y-4 text-sm">
                 <Link href="/about">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     About us
-                  </a>
+                  </p>
                 </Link>
                 <Link href="/social-impact">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     Social Impact
-                  </a>
+                  </p>
                 </Link>
                 <Link href="/blogs">
-                  <a className="text-gray-700 transition hover:opacity-75">
+                  <p className="text-gray-700 transition hover:opacity-75">
                     Blogs
-                  </a>
+                  </p>
                 </Link>
               </ul>
             </nav>
