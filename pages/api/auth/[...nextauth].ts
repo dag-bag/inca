@@ -13,6 +13,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import { Session } from "inspector";
 import { UserProp } from "../../../types/user";
 import { loginUserBackend } from "../../../services/auth/login_user";
+
 declare module "next-auth" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
@@ -23,6 +24,9 @@ declare module "next-auth" {
       /** The user's postal address. */
       id?: string;
     } & DefaultSession["user"];
+  }
+  interface User {
+    username: string;
   }
 }
 export default NextAuth({
