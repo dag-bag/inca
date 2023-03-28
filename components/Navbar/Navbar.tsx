@@ -38,22 +38,8 @@ const centerDivData = [
   {
     title: "About Us",
     href: "/about",
-    // dropdown: true,
-    // DropDownData: [
-    //   "Our Story",
-    //   "Sustainability ",
-    //   "Our Values",
-    //   "Alpacas for good",
-    //   "Our Team",
-    // ],
   },
 ];
-const styles = {
-  navbar: {
-    sticky:
-      "flex justify-around  bg-white backdrop-blur-sm shadow-md w-full fixed top-0 left-0 right-0  scroll-m-8 md:relative z-40",
-  },
-};
 
 function Navbar() {
   const { data: session } = useSession();

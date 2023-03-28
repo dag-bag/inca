@@ -42,6 +42,7 @@
     "mongoose": "^6.7.2",
     "next": "^13.0.6",
     "next-auth": "^4.17.0",
+    "node-mailjet": "^6.0.2",
     "postcode-validator": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

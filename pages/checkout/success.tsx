@@ -28,6 +28,7 @@ function Success() {
   );
   if (isLoading) return <Loader />;
   const order = data?.data[0];
+  console.log(order);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 mt-10">
@@ -139,10 +140,7 @@ function Success() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-xl">
-                      ${order?.attributes?.total}
-                      .00
-                    </p>
+                    <p className="text-xl">${order?.attributes?.total}</p>
                   </div>
                 </li>
               </ul>

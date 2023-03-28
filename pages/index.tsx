@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import mongoose from "mongoose";
 import Product from "../models/Product";
 import { FetchedProductType } from "../types/product";
-
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import Loader from "../components/Loaders/Loader";
 import Banner from "../components/Home/Banner";
@@ -25,6 +25,9 @@ export default function Home({
 }) {
   return (
     <div>
+      <Head>
+        <title>Incancestry Alpaca</title>
+      </Head>
       {/* <Skeleton /> */}
       <Banner />
       <Main
@@ -36,7 +39,6 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-
   return {
     props: {
       Trending_products: await getTrendingProducts(),

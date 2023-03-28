@@ -10,7 +10,10 @@ function Sidebar() {
   const deliveryCharges = useRecoilValue(selectedDeliveryCharges);
 
   return (
-    <div id="summary" className=" w-full px-8 py-10 lg:max-w-[1119px] bg-gray-300 lg:bg-white ">
+    <div
+      id="summary"
+      className=" w-full px-8 py-10 lg:max-w-[1119px] bg-gray-300 lg:bg-white "
+    >
       <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
       <div className="flex justify-between mt-10 mb-5">
         <span className="font-semibold text-sm uppercase">Items(s):</span>
@@ -40,7 +43,7 @@ function Sidebar() {
       <div className="border-t mt-8">
         <div className="flex font-semibold justify-between py-6 text-sm uppercase">
           <span>Total cost</span>
-          <span>{Subtotal + deliveryCharges}$ </span>
+          <span>{(Subtotal + deliveryCharges).toFixed(2)}$ </span>
         </div>
       </div>
     </div>

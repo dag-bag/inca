@@ -6,6 +6,7 @@ import Order from "../../models/Order";
 import connectDb from "../../libs/ConnectDb";
 import { NextApiRequest, NextApiResponse } from "next";
 import strapi from "../../utils/strapi";
+import axios from "axios";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //Capture order to complete payment
@@ -40,6 +41,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       { orderID: orderID },
       { status: "PAID" }
     );
+    await axios.post("http://localhost:3000/api/send-email", {
+      orderID,
+    });
 
     res.json({ ...response.result });
   } else {

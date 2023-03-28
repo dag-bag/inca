@@ -46,6 +46,7 @@ import ProductReviews from "../../components/Product/ProductReviews";
 import ProductImage from "../../components/Product/ProductImage";
 import Carousel from "../../components/utils/Carosel";
 import { getParams } from "../../services/product/apis/params";
+import ProductCarousel from "../../components/Product/ProductCarousel";
 
 const productRaw = {
   sizes: ["XS", "S", "M", "L", "XL"],
@@ -251,7 +252,8 @@ export default function Product_Page({
                 </Tab.List>
               </div>
 
-              <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
+              <ProductCarousel images={Variant.images.data} />
+              <Tab.Panels className="w-full aspect-w-1 aspect-h-1  hidden md:block">
                 {Variant.images.data.map((image, index) => (
                   <Tab.Panel key={index}>
                     <SkeLeTonImage

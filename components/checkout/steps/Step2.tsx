@@ -3,7 +3,12 @@
 import Image from "next/image";
 import React from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { cartAtom } from "../../../atoms/cart";
+import {
+  cartAtom,
+  cartQty,
+  cartQuantity,
+  cartTotal,
+} from "../../../atoms/cart";
 import {
   checkoutSteps,
   selectedDeliveryCharges,
@@ -16,6 +21,8 @@ import Container from "../CheckoutCatainer";
 type Props = {};
 
 function Step2({}: Props) {
+  const Qty = useRecoilValue(cartQuantity);
+  const subTotal = useRecoilValue(cartTotal);
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
@@ -40,7 +47,11 @@ function Step2({}: Props) {
       );
     }
   };
-  const selectedAddress = useRecoilValue(selectedDeliveryCharges);
+  const price = () => {
+    if (Qty === 1) return 17.99;
+    if (Qty > 1 && subTotal < 140) return 18.99;
+    if (subTotal >= 140) return 0;
+  };
 
   return (
     <>
@@ -50,16 +61,10 @@ function Step2({}: Props) {
         Level={2}
         ShipCardData={[
           {
-            Title: "Get It By",
-            Text: "Normal Delivery",
-            IconText: "40.8$",
-            value: 40.8,
-          },
-          {
-            Title: "Get It By",
-            Text: "Express Delivery",
-            IconText: "70.8$",
-            value: 70.8,
+            Title: "Get It in 3-4 weeks",
+            Text: "Free delivery over $140",
+            IconText: `${price()}$`,
+            value: price(),
           },
         ]}
       />

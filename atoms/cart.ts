@@ -97,6 +97,17 @@ export const cartQty = selector({
   },
 });
 
+export const cartQuantity = selector({
+  key: "cartQuantity",
+  get: ({ get }) => {
+    const cartItems = get(cartAtom);
+    let qty = 0;
+    cartItems.map((item) => {
+      qty += item.qty;
+    });
+    return qty;
+  },
+});
 export const removeCart = selector({
   key: "removeCart",
   get: ({ get }) => {
