@@ -78,7 +78,7 @@ export default NextAuth({
       if (user) {
         // @ts-ignore
         token.sub = user.id;
-        token.username = user?.username;
+        token.username = user.username;
         return token;
       }
       return token;

@@ -102,7 +102,7 @@ export const cartQuantity = selector({
   get: ({ get }) => {
     const cartItems = get(cartAtom);
     let qty = 0;
-    cartItems.map((item) => {
+    cartItems.map((item: any) => {
       qty += item.qty;
     });
     return qty;
