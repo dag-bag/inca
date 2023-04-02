@@ -20,7 +20,7 @@ import Skeleton from "../../skeleton/Skeleton";
 
 type Props = {};
 
-function Step1({ }: Props) {
+function Step1({}: Props) {
   const { data: session } = useSession();
   const fetchAddress = async () => {
     let email = session?.user?.email;
@@ -46,8 +46,8 @@ function Step1({ }: Props) {
           return i.status === "active"
             ? { ...i, status: "completed" } // change the status of the active step to completed
             : index === 1 // if the index is 1 then change the status of the next step to active
-              ? { ...i, status: "active" }
-              : i;
+            ? { ...i, status: "active" }
+            : i;
         })
       );
     } else {
@@ -76,7 +76,6 @@ function Step1({ }: Props) {
         ]}
       />
 
-
       <div className="md:ml-14 mt-4 ">
         <h4 className="font-semibold ">Ship to Your Location</h4>
         <p className="text-xs font-light">
@@ -104,12 +103,15 @@ function Step1({ }: Props) {
         </div>
       </div>
 
-
       {/* <AccountModal className="ml-12" /> */}
       {/* <button onClick={() => setOpenModal(true)}>Add New Address</button> */}
       <HeadLessUiButton text="Add New Address" className="md:ml-14" />
       <HeadLessUiComponent />
-      <PrimaryBtn text="Continue" onClick={handleClick} className="ml-auto" />
+      <PrimaryBtn
+        text="Continue"
+        onClick={handleClick}
+        className="ml-auto mt-4 md:mt-0"
+      />
     </>
   );
 }

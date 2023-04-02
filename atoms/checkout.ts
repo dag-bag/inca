@@ -61,7 +61,7 @@ const selectedAddress = atom<Address | null>({
 
 const selectedDeliveryCharges = atom({
   key: "selectedDeliveryAddress",
-  default: 0,
+  default: 17.99,
 });
 
 const selectedPaymentMethod = atom({

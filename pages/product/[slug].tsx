@@ -49,7 +49,7 @@ import { getParams } from "../../services/product/apis/params";
 import ProductCarousel from "../../components/Product/ProductCarousel";
 
 const productRaw = {
-  sizes: ["XS", "S", "M", "L", "XL"],
+  sizes: ["Mini", "Small", "Medium", "Large", "XL", "XXL"],
   name: "Zip Tote Basket",
   price: "$140",
   rating: 4,
@@ -272,7 +272,7 @@ export default function Product_Page({
             {/* Product info */}
             <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
               <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-                {Product.attributes.title}
+                {Product.attributes.title} ({selectedSize})
               </h1>
 
               <div className="mt-3">
@@ -349,6 +349,45 @@ export default function Product_Page({
                       })} */}
                     </ul>
                   </RadioGroup>
+                  {Variant.size.length === 0 ? (
+                    <RadioGroup
+                      value={selectedSize}
+                      onChange={setSelectedSize}
+                      className="mt-2"
+                    >
+                      <RadioGroup.Label className="sr-only">
+                        Choose a size
+                      </RadioGroup.Label>
+                      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+                        {productRaw.sizes.map((size) => {
+                          const isAvail = Variant.size.includes(size);
+                          return (
+                            <RadioGroup.Option
+                              key={size}
+                              value={size}
+                              className={({ active, checked }) =>
+                                classNames(
+                                  isAvail
+                                    ? "cursor-pointer focus:outline-none"
+                                    : "opacity-25 cursor-not-allowed",
+                                  active
+                                    ? "ring-2 ring-offset-2 ring-primary"
+                                    : "",
+                                  checked
+                                    ? "bg-primary border-transparent text-white hover:bg-[#8B5801]"
+                                    : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50",
+                                  "border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1"
+                                )
+                              }
+                              disabled={!isAvail}
+                            >
+                              <RadioGroup.Label as="p">{size}</RadioGroup.Label>
+                            </RadioGroup.Option>
+                          );
+                        })}
+                      </div>
+                    </RadioGroup>
+                  ) : null}
                 </div>
 
                 <div className="mt-10 flex sm:flex-col1">

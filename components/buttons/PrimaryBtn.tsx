@@ -53,10 +53,7 @@ function PrimaryBtn({
     });
 
     for (let i = 0; i < allData.length; i++) {
-      if (
-        allData[i].step === activeState?.step &&
-        allData[activeState.step - 1].data
-      ) {
+      if (allData[i].step === activeState?.step) {
         return false;
       }
     }

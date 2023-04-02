@@ -46,7 +46,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         total: subTotal + deliveryCharges,
         subTotal,
         // variant_id: 2,
-        // deliveryCost,
+        deliveryCharges,
       });
 
       // const order = await Order.create({

@@ -10,8 +10,8 @@ export default function Categories() {
   const { push } = useRouter();
   const CateGoriesClick = (queryName: string) => {
     push({
-      pathname: "category",
-      query: { category: queryName },
+      pathname: `categories/${queryName}`,
+      // query: { category: queryName },
     });
   };
   return (

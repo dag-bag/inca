@@ -105,7 +105,34 @@ export const cartQuantity = selector({
     cartItems.map((item: any) => {
       qty += item.qty;
     });
+
     return qty;
+  },
+});
+export const DeliverySelector = selector({
+  key: "deliverySelector",
+  get: ({ get }) => {
+    const total = get(cartTotal);
+    const cartItems = get(cartAtom);
+    let qty = 0;
+    cartItems.map((item: any) => {
+      qty += item.qty;
+    });
+    switch (qty > 0) {
+      case qty === 1:
+        return 17.99;
+        break;
+      case qty > 1 && total < 140:
+        return 18.99;
+        break;
+      case qty > 1 && total >= 140:
+        return 0;
+        break;
+
+      default:
+        return 17.99;
+        break;
+    }
   },
 });
 export const removeCart = selector({

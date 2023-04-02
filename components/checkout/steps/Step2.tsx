@@ -8,6 +8,7 @@ import {
   cartQty,
   cartQuantity,
   cartTotal,
+  DeliverySelector,
 } from "../../../atoms/cart";
 import {
   checkoutSteps,
@@ -21,8 +22,7 @@ import Container from "../CheckoutCatainer";
 type Props = {};
 
 function Step2({}: Props) {
-  const Qty = useRecoilValue(cartQuantity);
-  const subTotal = useRecoilValue(cartTotal);
+  const deliveryCharges = useRecoilValue<number>(DeliverySelector);
   const cartItems = useRecoilValue<CartItem[]>(cartAtom);
   const [checkoutState, setCheckoutState] = useRecoilState(checkoutSteps);
   const handleClick = () => {
@@ -47,11 +47,6 @@ function Step2({}: Props) {
       );
     }
   };
-  const price = () => {
-    if (Qty === 1) return 17.99;
-    if (Qty > 1 && subTotal < 140) return 18.99;
-    if (subTotal >= 140) return 0;
-  };
 
   return (
     <>
@@ -62,9 +57,9 @@ function Step2({}: Props) {
         ShipCardData={[
           {
             Title: "Get It in 3-4 weeks",
-            Text: "Free delivery over $140",
-            IconText: `${price()}$`,
-            value: price(),
+            Text: "",
+            IconText: `${deliveryCharges === 0 ? "Free" : deliveryCharges}`,
+            value: deliveryCharges,
           },
         ]}
       />
@@ -118,9 +113,6 @@ function Step2({}: Props) {
                           </span>
                           <br />
                           <br />
-                          <span className="text-sm font-light text-left text-black">
-                            REF. 8704403-incan-Mini
-                          </span>
                         </p>
                       </h3>
                     </div>
@@ -132,9 +124,12 @@ function Step2({}: Props) {
 
                     <div className="absolute top-0 right-0">
                       {/* Heroicon name: solid/x */}
-                      <h4 className="text-2xl font-medium text-left text-black">
-                        {item.price} $
-                      </h4>
+                      <p className="text-2xl font-medium text-left text-black flex flex-col">
+                        <span>${item.sellPrice}</span>
+                        <span className="text-primary line-through">
+                          ${item.price}
+                        </span>
+                      </p>
                     </div>
                   </div>
                 </div>

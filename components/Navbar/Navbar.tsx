@@ -21,20 +21,20 @@ const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 const centerDivData = [
   {
     title: "Stuffed Animals",
-    href: "/category?category=alpaca+stuffed+animals",
+    href: "/categories/alpaca-stuffed-animals",
   },
   {
     title: " Slippers",
-    href: "/category?category=alpaca+slippers",
+    href: "/categories/alpaca-slippers",
   },
   {
     title: " Clothing",
-    href: "/category?category=alpaca+clothing",
+    href: "/categories/alpaca-clothing",
     dropdown: true,
     DropDownData: ["Alpaca Ponchos", "Scarves", "Alpaca Gloves", "Shawls"],
   },
   // { title: "Home", href: "/" },
-  { title: " Accessories", href: "/category?category=alpaca+accessories" },
+  { title: " Accessories", href: "/categories/alpaca-accessories" },
   {
     title: "About Us",
     href: "/about",
@@ -174,12 +174,12 @@ function Navbar() {
   };
 
   useEffect(() => {
-    if (window.innerWidth < 664) {
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
+    // if (window.innerWidth < 664) {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+    // }
   }, []);
 
   return (
@@ -204,7 +204,7 @@ function Navbar() {
                     src={
                       "https://res.cloudinary.com/dthpcwn8r/image/upload/v1675856646/Logo_solo_imagen_q1wwbz.png"
                     }
-                    alt="logo"
+                    alt="Incancestry - Alpaca Products & Gifts"
                     width={97}
                     height={139}
                     layout="responsive"

@@ -37,13 +37,13 @@ function ProductCarousel({ images }: Props) {
       loop={true}
       slidesPerView={"auto"}
       modules={[Pagination, Autoplay]}
-      className=" flex justify-center items-center flex-col  max-w-6xl md:hidden"
+      className=" flex justify-center items-center flex-col  max-w-6xl md:hidden "
       navigation={true}
       // speed={1000}
     >
       {images?.map((img, index) => {
         return (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="!h-[28rem]">
             <SkeLeTonImage
               width={600}
               height={600}

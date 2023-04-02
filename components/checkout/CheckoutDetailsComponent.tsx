@@ -42,7 +42,7 @@ function CheckoutDetailsComponent({}: Props) {
   if (!CartQty) return <CartEmpty />;
 
   return (
-    <div className="flex flex-wrap md:max-w-[90%] xl:grid xl:grid-cols-custom w-full m-auto ">
+    <div className="flex flex-wrap-reverse md:max-w-[90%] xl:grid xl:grid-cols-custom w-full m-auto ">
       <div className="w-full">
         {checkoutState.map((item, index) => {
           return (

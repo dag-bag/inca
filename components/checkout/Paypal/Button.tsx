@@ -13,7 +13,7 @@ import {
   selectedAddress,
   selectedDeliveryCharges,
 } from "../../../atoms/checkout";
-import { cartAtom, cartTotal } from "../../../atoms/cart";
+import { cartAtom, cartTotal, DeliverySelector } from "../../../atoms/cart";
 import { Address } from "../../../types/address";
 import { useSession } from "next-auth/react";
 import bcrypt from "bcryptjs";
@@ -44,7 +44,8 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
   const [strapiOrderId, setStrapiOrderId] = useRecoilState(strapiIDAtom);
 
   const total = useRecoilValue(cartTotal);
-  const deliveryCharges = useRecoilValue(selectedDeliveryCharges);
+  const deliveryCharges = useRecoilValue(DeliverySelector);
+
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();

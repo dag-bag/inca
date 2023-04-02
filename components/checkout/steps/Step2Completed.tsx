@@ -79,9 +79,6 @@ function Step2Completed({}: Props) {
                             </span>
                             <br />
                             <br />
-                            <span className="text-sm font-light text-left text-black">
-                              REF. 8704403-incan-Mini
-                            </span>
                           </p>
                         </h3>
                       </div>
@@ -93,9 +90,12 @@ function Step2Completed({}: Props) {
 
                       <div className="absolute top-0 right-0">
                         {/* Heroicon name: solid/x */}
-                        <h4 className="text-2xl font-medium text-left text-black">
-                          {item.price} $
-                        </h4>
+                        <p className="text-2xl font-medium text-left text-black flex flex-col">
+                          <span>${item.sellPrice}</span>
+                          <span className="text-primary line-through">
+                            ${item.price}
+                          </span>
+                        </p>
                       </div>
                     </div>
                   </div>

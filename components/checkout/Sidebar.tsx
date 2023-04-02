@@ -2,12 +2,11 @@
 
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { cartTotal } from "../../atoms/cart";
-import { selectedDeliveryCharges } from "../../atoms/checkout";
+import { cartTotal, DeliverySelector } from "../../atoms/cart";
 
 function Sidebar() {
   const Subtotal = useRecoilValue(cartTotal);
-  const deliveryCharges = useRecoilValue(selectedDeliveryCharges);
+  const deliveryCharges = useRecoilValue(DeliverySelector);
 
   return (
     <div

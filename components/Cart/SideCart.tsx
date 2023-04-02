@@ -155,9 +155,9 @@ function SideCart({}: Props) {
                                         </a>
                                       </h3>
                                       <p className="ml-4 text-primary flex flex-col">
-                                        <span>${item.price}</span>
+                                        <span>${item.sellPrice}</span>
                                         <span className="text-[#333] line-through">
-                                          ${item.sellPrice}
+                                          ${item.price}
                                         </span>
                                       </p>
                                     </div>
@@ -216,7 +216,7 @@ function SideCart({}: Props) {
                               className="btn bg-[#333] btn-wide text-white border-none outline-none mt-6"
                               onClick={() => {
                                 Router.push(
-                                  "/category?category=alpaca+stuffed+animals"
+                                  "/categories/alpaca-stuffed-animals"
                                 );
                                 setCartOpen(false);
                               }}

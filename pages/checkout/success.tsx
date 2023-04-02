@@ -25,8 +25,9 @@ function Success() {
       let result = fetchOrderById(orderId);
       return result;
     }
-  );
-  if (isLoading) return <Loader />;
+    );
+    if (isLoading) return <Loader />;
+    console.log('data:', data)
   const order = data?.data[0];
   console.log(order);
 

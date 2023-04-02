@@ -128,22 +128,22 @@ export default function Footer() {
             </p>
             <nav aria-label="Footer Navigation - Services" className="mt-6">
               <ul className="space-y-4 text-sm">
-                <Link href="/category?category=alpaca-stuffed-animals">
+                <Link href="/categories/alpaca-stuffed-animals">
                   <p className="text-gray-700 transition hover:opacity-75">
                     Stuffed Animals
                   </p>
                 </Link>
-                <Link href="/category?category=alpaca-slippers">
+                <Link href="/categories/alpaca-slippers">
                   <p className="text-gray-700 transition hover:opacity-75">
                     Slippers
                   </p>
                 </Link>
-                <Link href="/category?category=alpaca-clothing">
+                <Link href="/categories/alpaca-clothing">
                   <p className="text-gray-700 transition hover:opacity-75">
                     Clothings
                   </p>
                 </Link>
-                <Link href="/category?category=alpaca-key-chain">
+                <Link href="/categories/alpaca-key-chain">
                   <p className="text-gray-700 transition hover:opacity-75">
                     Accessories
                   </p>
