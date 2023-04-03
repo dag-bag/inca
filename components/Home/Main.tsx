@@ -31,7 +31,6 @@ export default function Main({
   products: MainDatum[];
   best_seller_products: MainDatum[];
 }) {
-  console.log("products:", products);
   return (
     <>
       <main>

@@ -29,7 +29,6 @@ export default function Carousel({
   title,
   categories,
 }: Props) {
-  console.log("jldfjkldf", products);
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef<any>(null);

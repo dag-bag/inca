@@ -44,6 +44,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       Trending_products: await getTrendingProducts(),
       Best_sellers_products: await getBestSellersProducts(),
     },
-    revalidate: 120,
+    // revalidate: 120,
   };
 };

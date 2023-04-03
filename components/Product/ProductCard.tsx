@@ -18,13 +18,16 @@ type Props = {
   variant: Variant[];
 };
 
-function ProductCard({ attributes: { title, category, variants } }: MainDatum) {
+function ProductCard({
+  attributes: { title, category, desc, variants },
+}: MainDatum) {
+  if (!variants.data[0]) return null;
   let { slug, price, color, images, sellPrice } = variants.data[0].attributes;
+
   return (
     <div className="relative rounded-md">
       <Link href={`/product/${slug}`}>
         <div className="relative ">
-          {/* <span className="badge bg-primary text-white">{tag}</span> */}
           <div
             className="flex group relative  md:w-full bg-white h-[161.66px] md:h-[287.425px] justify-end items-center flex-col min-w-[161.66px] md:min-w-[300px] lg:min-w-[16rem] lg:min-h-auto xl:min-w-[300px] xl:min-h-[300px] rounded-xl
           "

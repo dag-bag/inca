@@ -71,7 +71,7 @@ export default function ProductImage({
         />
         <ImageComponent
           {...({
-            image: image[1],
+            image: image[1] ?? image[0],
             rounded,
             isLoading,
             cursor,
