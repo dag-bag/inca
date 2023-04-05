@@ -163,7 +163,7 @@ export default function Footer() {
                     href="#"
                     className="text-gray-700 transition hover:opacity-75"
                   >
-                    Want to become an official <br /> reseller of INCANSTRY
+                    Want to become an official <br /> reseller of INCANCESTRY
                     alpaca products?
                   </a>
                 </li>

@@ -27,8 +27,9 @@ const formValidationSchema = Yup.object().shape({
   address2: stringRequied,
   city: stringRequied,
   state: stringRequied,
-  zipcode: Yup.number().required("Required").min(4, "Too Short!"),
-
+  zipcode: Yup.string()
+    .matches(/^[0-9]{6}$/, "Pincode must be 6 digits long.")
+    .required("Pincode is required."),
   country: stringRequied,
   lastName: stringRequied,
   firstName: stringRequied,

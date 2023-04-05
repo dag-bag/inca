@@ -52,7 +52,7 @@ export default function ProductImage({
   return (
     <>
       <motion.div
-        className={`w-full aspect-w-1 aspect-h-1 --bg-gray-200 overflow-hidden  ${
+        className={`w-full aspect-w-1 aspect-h-1 --bg-gray-200 overflow-hidden  cursor-pointer ${
           rounded ? "rounded-xl" : ""
         }`}
         onMouseEnter={onMouseEnter}

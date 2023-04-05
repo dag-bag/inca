@@ -15,6 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
     const { Cart, userEmail, subTotal, address, deliveryCharges } = req.body;
+    console.log("deliveryCharges:", (deliveryCharges + subTotal).toFixed(2));
 
     try {
       const PaypalClient = client();
@@ -28,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           {
             amount: {
               currency_code: "USD",
-              value: `${subTotal + deliveryCharges}`,
+              value: `${(deliveryCharges + subTotal).toFixed(2)}`,
             },
           },
         ],
@@ -43,7 +44,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         address: address,
         products: JSON.stringify(Cart),
         userEmail: userEmail,
-        total: subTotal + deliveryCharges,
+        total: (deliveryCharges + subTotal).toFixed(2),
         subTotal,
         // variant_id: 2,
         deliveryCharges,

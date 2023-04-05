@@ -54,7 +54,7 @@ function CategoryPage({ products }: Props) {
               <ProductImage
                 image={Images}
                 alt={""}
-                className="h-full w-full object-cover object-center"
+                className="h-full w-full object-cover object-center "
                 width={300}
                 height={300}
               />
