@@ -65,7 +65,7 @@ function Step1({}: Props) {
     <>
       <Container
         Title={"Address"}
-        Question="Please Select Your Address ?"
+        Question="Please Select Your Address"
         Level={1}
         ShipCardData={[
           {
