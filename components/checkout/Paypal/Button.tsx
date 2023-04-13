@@ -50,7 +50,7 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
 
-  const cart = useRecoilValue(cartAtom);
+  const [cart, setCart] = useRecoilState(cartAtom);
 
   useEffect(() => {
     dispatch({
@@ -61,7 +61,7 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
       },
     });
   }, [currency, showSpinner]);
-  console.log({ strapiOrderId });
+
   return (
     <>
       {showSpinner && isPending && <div className="spinner" />}
@@ -99,6 +99,7 @@ const ButtonWrapper = ({ currency, showSpinner }: Props) => {
             }),
           });
           const order = await resp.json();
+          setCart([]);
           push({
             pathname: "/checkout/success",
             query: { orderId: order.id },

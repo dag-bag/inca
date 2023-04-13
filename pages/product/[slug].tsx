@@ -270,7 +270,7 @@ export default function Product_Page({
               >
                 {/* Colors */}
                 <div>
-                  {/* <h3 className="text-sm text-gray-600">Variant</h3> */}
+                  {/* <h3 className=" text-gray-600">Variant</h3> */}
 
                   <RadioGroup
                     value={selectedColor}

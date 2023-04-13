@@ -34,15 +34,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // console.log(strapiOrderId[0].id);
     // @ts-ignore
-    await strapi.update("orders", strapiOrderId?.data[0].id, {
+    const order = await strapi.update("orders", strapiOrderId?.data[0].id, {
       status: "success",
     });
-    const order = await Order.findOneAndUpdate(
-      { orderID: orderID },
-      { status: "PAID" }
-    );
+
     await axios.post("http://localhost:3000/api/send-email", {
-      orderID,
+      order,
     });
 
     res.json({ ...response.result });
