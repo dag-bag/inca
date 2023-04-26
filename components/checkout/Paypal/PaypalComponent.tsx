@@ -11,6 +11,7 @@ export default function PaypalComponent() {
           components: "buttons",
           currency: "USD",
         }}
+        deferLoading={true}
       >
         <ButtonWrapper currency={currency} showSpinner={false} />
       </PayPalScriptProvider>
