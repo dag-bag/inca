@@ -10,7 +10,7 @@ const configureEnvironment = function () {
   //   ? new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret)
   //   : new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret);
 
-  return new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret);
+  return new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret)
 };
 
 const client = function () {

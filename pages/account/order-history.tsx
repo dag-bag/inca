@@ -17,12 +17,20 @@ import getorder from "../api/getorder";
 import { getAllOrders } from "../../services/orders/orders";
 import Loader from "../../components/Loaders/Loader";
 import { isEmpty } from "lodash";
+import { atom, useSetRecoilState } from "recoil";
+import ReviewModal, { ReviewModalAtom } from "../../components/Modals/ReviewModal";
 type Props = {
   orders: OrderType[];
 };
+export const  ReviewProductIdAtom = atom<null | number>({
+  key: "reviewProductId",
+  default: null,
+}) 
 
 function OrderHistory({ orders }: Props) {
   const { data, isLoading } = useQuery(["orders"], getAllOrders);
+  const openModal = useSetRecoilState(ReviewModalAtom)
+  const setProuductId = useSetRecoilState(ReviewProductIdAtom)
 
   return (
     <AccountLayout>
@@ -32,6 +40,7 @@ function OrderHistory({ orders }: Props) {
         </div>
       ) : (
         <div className="mt-10 space-y-4">
+          <ReviewModal/>
           <h1 className="font-bold text-[#333] text-3xl">Order History</h1>
           <p>
             Check the status of recent and old orders & discover more products
@@ -45,6 +54,7 @@ function OrderHistory({ orders }: Props) {
                 products,
                 deliveryCharges,
                 subTotal,
+                
               },
               id,
             } = item;
@@ -81,13 +91,17 @@ function OrderHistory({ orders }: Props) {
                         img,
                         price,
                         sellPrice,
-                        product_id,
+
                         qty,
                         size,
                         slug,
                         title,
                         uni,
+                        product_id
+                        
+                        
                       } = k;
+                      
                       return (
                         <>
                           <li key={index} className="flex py-2 ">
@@ -137,13 +151,21 @@ function OrderHistory({ orders }: Props) {
                                     </h3>
                                   </div>
                                   <div className="flex items-center space-x-2 mt-7  divide-x-2 ">
-                                    <button className=" text-gray-600 hover:text-black w-56">
-                                      View Product
-                                    </button>
+                                  <button className="px-3 py-2 border border-gray-300 rounded-md">
+                        View Product
+                      </button>
 
-                                    <button className=" text-gray-600 hover:text-black w-52">
-                                      Similar Products
-                                    </button>
+                      <button className="px-3 py-2 border border-gray-300 rounded-md">
+                        Similar Product
+                      </button>
+                      <button className="px-3 py-2 border border-gray-300 rounded-md cursor-pointer" onClick={()=> {
+                        setProuductId(product_id)
+                         openModal(true)
+                      }
+                      // setProuductId(id)
+                     }>
+                        Write Review
+                      </button>
                                   </div>
                                 </div>
                                 <div className="mt-4 sm:mt-0 sm:pr-9">
@@ -174,6 +196,7 @@ function OrderHistory({ orders }: Props) {
                       <button className="px-3 py-2 border border-gray-300 rounded-md">
                         View Invoice
                       </button>
+                     
                     </div>
                   </div>
                 </div>

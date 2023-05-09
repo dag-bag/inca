@@ -60,7 +60,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       //   deliveryCost,
       // });
 
-      res.json({ orderID: response.result.id, orderData });
+      res.json({ orderID: response.result.id, orderData:null });
     } catch (error: any) {
       res.status(500).json({ message: error });
     }

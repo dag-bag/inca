@@ -16,10 +16,8 @@ import CategoryPage from "../../components/Category/CategoryPage";
 
 import ErrorPage from "../../components/utils/ErrorPage";
 import strapi from "../../utils/strapi";
-
-import { getProductByCategory } from "../../services/category/category";
+import Head from "next/head";
 import { Main } from "../../services/product/product";
-import query from "../api/query";
 
 type Props = {
   products: ProductType[];
@@ -50,6 +48,9 @@ function DynamicCateGoryPage({ products }: Props) {
 
   return (
     <Layout>
+      <Head>
+        <title>Incancestry Alpaca - {slug?.split("-").join(" ")}</title>
+      </Head>
       {isLoading ? (
         <>
           <Skeleton />

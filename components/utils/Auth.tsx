@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import BlurImage from "./BlurImage";
 import { loginUserClientSide } from "../../services/auth/login_user";
+import Head from "next/head";
 import Email from "next-auth/providers/email";
 type Props = {
   type: "login" | "signup";
@@ -120,6 +121,10 @@ function Auth({ type }: Props) {
 
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
+      <Head>
+        <title>Incancestry Alpaca - {type}</title>
+      </Head>
+      ;
       <div className="bg-white hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen relative">
         <BlurImage image="/login.JPG" alt="Random" width={200} height={200} />
       </div>

@@ -81,7 +81,6 @@ export default function Product_Page({
   relatedProducts,
   variant_id,
 }: Props) {
-  console.log({ Variant });
   // let rating = 4;
 
   const [selectedSize, setSelectedSize] = useState(Variant.size[0]);
@@ -412,7 +411,7 @@ export default function Product_Page({
 
             {/* <DynRecentlyViewed /> */}
           </section>
-          <ProductReviews />
+          <ProductReviews product_id={Product.id} />
         </div>
       </main>
     </div>

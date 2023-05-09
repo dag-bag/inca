@@ -1,9 +1,6 @@
 /** @format */
 
 import { GetStaticProps } from "next";
-import mongoose from "mongoose";
-import Product from "../models/Product";
-import { FetchedProductType } from "../types/product";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import Loader from "../components/Loaders/Loader";
@@ -38,12 +35,12 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       Trending_products: await getTrendingProducts(),
       Best_sellers_products: await getBestSellersProducts(),
     },
-    // revalidate: 120,
+    revalidate: 120,
   };
 };

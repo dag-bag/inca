@@ -15,6 +15,7 @@ const PoketCart = dynamic(() => import("../Cart/PoketCart"), {
 import SmallNavbar from "./SmallNavbar";
 import { useEffect, useState } from "react";
 import SearchBar, { SearchAtom, Result } from "../Searchbar-bombas";
+import Avatar from "../utils/Avatar";
 
 const svgClass = "md:w-8 md:h-8 h-6 w-6 cursor-pointer";
 
@@ -207,7 +208,7 @@ function Navbar() {
                     alt="Incancestry - Alpaca Products & Gifts"
                     width={97}
                     height={139}
-                    layout="responsive"
+                    
                   />
                 </Link>
               </div>
@@ -224,7 +225,7 @@ function Navbar() {
                   alt="logo"
                   width={97}
                   height={139}
-                  layout="responsive"
+                  
                 />
               </Link>
             </div>
@@ -309,12 +310,15 @@ function Navbar() {
                         className="btn btn-ghost btn-circle avatar"
                       >
                         <div className="w-10 rounded-full">
-                          <Image
+                          {
+                            session.user.image ?  <Image
                             src={`${session?.user?.image}`}
                             width={50}
                             height={50}
                             alt="user profile image"
-                          />
+                          />   :
+<Avatar/>                          }
+                         
                         </div>
                       </label>
                       <ul

@@ -5,7 +5,12 @@
  */
 
 import { StarIcon } from "@heroicons/react/solid";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import { getReviewsByProductId } from "../../services/review/apis/CRUD";
+import Loader from "../Loaders/Loader";
+import { Datum, Main } from "../../services/review/types/Review";
+import Avatar from "../utils/Avatar";
 
 const reviews = {
   average: 4,
@@ -36,7 +41,16 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductReviews() {
+export default function ProductReviews({product_id}:{product_id:number}) {
+  
+  const { data, isLoading } = useQuery(["reviews",product_id],async ()=>{
+   const data:Main = await getReviewsByProductId(product_id)
+   return data
+  });
+
+
+  if(isLoading) return <Loader/>
+
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:py-32 lg:px-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
@@ -64,7 +78,7 @@ export default function ProductReviews() {
               <p className="sr-only">{reviews.average} out of 5 stars</p>
             </div>
             <p className="ml-2 text-sm text-gray-900">
-              Based on {reviews.totalCount} reviews
+              Based on {data?.meta.pagination.total} reviews
             </p>
           </div>
 
@@ -72,11 +86,11 @@ export default function ProductReviews() {
             <h3 className="sr-only">Review data</h3>
 
             <dl className="space-y-3">
-              {reviews.counts.map((count) => (
-                <div key={count.rating} className="flex items-center text-sm">
+              {data?.data?.map((count) => (
+                <div key={count.id} className="flex items-center text-sm">
                   <dt className="flex-1 flex items-center">
                     <p className="w-3 font-medium text-gray-900">
-                      {count.rating}
+                      {count.attributes.rating}
                       <span className="sr-only"> star reviews</span>
                     </p>
                     <div
@@ -85,7 +99,7 @@ export default function ProductReviews() {
                     >
                       <StarIcon
                         className={classNames(
-                          count.count > 0 ? "text-yellow-400" : "text-gray-300",
+                          count.attributes.rating > 0 ? "text-yellow-400" : "text-gray-300",
                           "flex-shrink-0 h-5 w-5"
                         )}
                         aria-hidden="true"
@@ -93,11 +107,11 @@ export default function ProductReviews() {
 
                       <div className="ml-3 relative flex-1">
                         <div className="h-3 bg-gray-100 border border-gray-200 rounded-full" />
-                        {count.count > 0 ? (
+                        {count.attributes.rating > 0 ? (
                           <div
-                            className="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full"
+                            className="absolute inset-y-0 bg-yellow-400 border border-yellow-400 rounded-full max-w-[16rem]"
                             style={{
-                              width: `calc(${count.count} / ${reviews.totalCount} * 100%)`,
+                              width: `calc(${count.attributes.rating} / ${data.meta.pagination.total} * 100%)`,
                             }}
                           />
                         ) : null}
@@ -105,7 +119,7 @@ export default function ProductReviews() {
                     </div>
                   </dt>
                   <dd className="ml-3 w-10 text-right tabular-nums text-sm text-gray-900">
-                    {Math.round((count.count / reviews.totalCount) * 100)}%
+                    {Math.round((count.attributes.rating / data.meta.pagination.total) * 100)}%
                   </dd>
                 </div>
               ))}
@@ -135,26 +149,29 @@ export default function ProductReviews() {
 
           <div className="flow-root">
             <div className="-my-12 divide-y divide-gray-200">
-              {reviews.featured.map((review) => (
+              {data?.data.map((review) => (
                 <div key={review.id} className="py-12">
                   <div className="flex items-center">
-                    <Image
-                      src={review.avatarSrc}
-                      alt={`${review.author}.`}
+                    {
+                      review.attributes.user.data.attributes.image ? <Image
+                      src={review.attributes.user.data.attributes.image}
+                      alt={`${review.attributes.user.data.attributes.username}.`}
                       className="h-12 w-12 rounded-full"
                       width={200}
                       height={200}
-                    />
+                    /> : <Avatar/>
+                    }
+                   
                     <div className="ml-4">
                       <h4 className="text-sm font-bold text-gray-900">
-                        {review.author}
+                        {review.attributes.user.data.attributes.username}
                       </h4>
                       <div className="mt-1 flex items-center">
                         {[0, 1, 2, 3, 4].map((rating) => (
                           <StarIcon
                             key={rating}
                             className={classNames(
-                              review.rating > rating
+                              review.attributes.rating > rating
                                 ? "text-yellow-400"
                                 : "text-gray-300",
                               "h-5 w-5 flex-shrink-0"
@@ -163,13 +180,13 @@ export default function ProductReviews() {
                           />
                         ))}
                       </div>
-                      <p className="sr-only">{review.rating} out of 5 stars</p>
+                      <p className="sr-only">{review.attributes.rating} out of 5 stars</p>
                     </div>
                   </div>
 
                   <div
                     className="mt-4 space-y-6 text-base italic text-gray-600"
-                    dangerouslySetInnerHTML={{ __html: review.content }}
+                    dangerouslySetInnerHTML={{ __html: review.attributes.text }}
                   />
                 </div>
               ))}
