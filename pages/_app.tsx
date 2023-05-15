@@ -13,6 +13,7 @@ import {
 
 import Layout from "../components/layouts/Layout";
 import Script from "next/dist/client/script";
+import Head from "next/dist/shared/lib/head";
 
 export default function App({
   Component,
@@ -34,6 +35,7 @@ export default function App({
       `}
             </Script>
             <Layout>
+              <Head><meta name="facebook-domain-verification" content="7ifj44wjyd7w7ab3c3ipt79ect0iao" /></Head>
               <Component {...pageProps} />
             </Layout>
           </Hydrate>
