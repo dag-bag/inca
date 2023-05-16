@@ -37,36 +37,32 @@ function PrimaryBtn({
   const btnClasses = ` btn bg-[#333] text-white border-none outline-none ${className} disabled:opacity-70 ${
     isLoading && "loading"
   } `;
-  const IsSelectedOrNot = () => {
-    let allData = [
-      {
-        step: 1,
-        data: selectedAddress,
-      },
-      {
-        step: 2,
-        data: selectedDeliveryCharge,
-      },
-    ];
-    const activeState = find(checkOutStateData, {
-      status: "active",
-    });
+  // const IsSelectedOrNot = () => {
+  //   let allData = [
+  //     {
+  //       step: 1,
+  //       data: selectedAddress,
+  //     },
+  //   ];
+  //   const activeState = find(checkOutStateData, {
+  //     status: "active",
+  //   });
 
-    for (let i = 0; i < allData.length; i++) {
-      if (allData[i].step === activeState?.step) {
-        return false;
-      }
-    }
-    return true;
-  };
+  //   for (let i = 0; i < allData.length; i++) {
+  //     if (allData[i].step === activeState?.step) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // };
 
-  let disabled = IsSelectedOrNot();
+  // let disabled = IsSelectedOrNot();
   return (
     <div className="flex justify-end">
       <button
         type={type}
         className={btnClasses}
-        disabled={disabled}
+        disabled={!selectedAddress}
         onClick={onClick}
       >
         {text || children}

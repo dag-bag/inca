@@ -191,8 +191,8 @@ function Navbar() {
         className={
           isSticky
             ? searchState.visiblity
-              ? "fixed top-0 w-full bg-white  z-50 max-h-[100%] grid grid-rows-xs-size"
-              : "fixed top-0 w-full bg-white  z-50 "
+              ? "fixed top-0 w-full bg-white  z-40 max-h-[100%] grid grid-rows-xs-size"
+              : "fixed top-0 w-full bg-white  z-40 "
             : ""
         }
       >

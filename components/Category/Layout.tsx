@@ -142,7 +142,7 @@ export default function Layout({
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const router = useRouter();
 
-  let Title = router?.query?.category;
+  let Title = router?.query.slug
 
   return (
     <div

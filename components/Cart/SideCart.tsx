@@ -26,6 +26,7 @@ import Flex from "../utils/Flex";
 import Router from "next/router";
 import Image from "next/image";
 import Ads from "./Ads";
+import Link from "next/link";
 
 type Props = {};
 const styles = {
@@ -81,10 +82,10 @@ function SideCart({}: Props) {
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >
-          <div className="ml-auto relative max-w-md w-full h-full  shadow-xl flex flex-col overflow-y-scroll scrollbar-hide">
-            <div className="pointer-events-auto w-screen max-w-md h-screen ">
-              <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl">
-                <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+          <div className="ml-auto relative max-w-md w-full h-full  shadow-xl flex flex-col overflow-y-scroll scrollbar-hide z-50">
+            {/* <div className="pointer-events-auto w-screen max-w-md h-screen "> */}
+              {/* <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl"> */}
+                <div className="flex-1 overflow-y-auto pt-6 px-4 sm:px-6 bg-white">
                   <div className="flex items-start justify-between border-b border-gray-300 pb-6">
                     <h2
                       className="text-lg font-medium text-gray-900 flex space-x-2"
@@ -122,7 +123,7 @@ function SideCart({}: Props) {
                     </div>
                   </div>
                   <>
-                    <div className="mt-8 h-[55vh] overflow-y-scroll scrollbar-hide">
+                    <div className="mt-8 h-[50vh] overflow-y-scroll scrollbar-hide">
                       <div className="flow-root h-full">
                         {Qty ? (
                           <ul
@@ -250,21 +251,24 @@ function SideCart({}: Props) {
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
                             or
+                            <Link href="/categories/alpaca-stuffed-animals">
                             <button
+                            onClick={() => setCartOpen(false)}
                               type="button"
                               className="font-medium text-black hover:text-primary ml-2"
                             >
                               Continue Shopping
                               <span aria-hidden="true"> →</span>
                             </button>
+                            </Link>
                           </p>
                         </div>
                       </div>
                     ) : null}
                   </>
                 </div>
-              </div>
-            </div>
+              {/* </div> */}
+            {/* </div> */}
           </div>
         </Transition.Child>
       </Dialog>

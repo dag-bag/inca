@@ -81,6 +81,7 @@ export default function Product_Page({
   relatedProducts,
   variant_id,
 }: Props) {
+
   // let rating = 4;
 
   const [selectedSize, setSelectedSize] = useState(Variant.size[0]);
@@ -155,7 +156,7 @@ export default function Product_Page({
             </li>
             <li>
               <Link
-                href={`/category?category=${Product.attributes.category}`}
+                href={`/categories/${Product.attributes.category.split(" ").join("-")}`}
                 className="capitalize"
               >
                 {Product.attributes?.category?.split("-").join(" ")}
