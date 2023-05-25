@@ -82,7 +82,7 @@ function DynamicCateGoryPage({ products }: Props) {
         <CategoryPage products={data.data} />
       )}
 
-      <div className="btn-group w-full justify-center items-center col-span-10">
+      <div className="btn-group w-full justify-center items-center md:first-line:col-span-10">
         <button
           className={`btn ${page == 1 && "btn-disabled"} btn-lg`}
           onClick={() => handlePageChange(page - 1)}
