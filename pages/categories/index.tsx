@@ -1,6 +1,6 @@
 /** @format */
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery ,useInfiniteQuery} from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
