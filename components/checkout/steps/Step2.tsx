@@ -52,12 +52,12 @@ function Step2({}: Props) {
     <>
       <Container
         Title={"Delivery"}
-        Question="How soon you would like to receive the products? ?"
+        Question="How soon you would like to receive the products ?"
         Level={2}
         ShipCardData={[
           {
-            Title: "Get It in 3-4 weeks",
-            Text: "",
+            Title: "Standard shipping",
+            Text: "Get It in 3-4 weeks",
             IconText: `${deliveryCharges === 0 ? "Free" : deliveryCharges}`,
             value: deliveryCharges,
           },

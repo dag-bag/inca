@@ -17,8 +17,8 @@ function ShipCard({ Icon, Text, Title, IconText, value }: Props) {
       className={`h-[5rem] w-[20rem] bg-white border-4  flex items-center justify-between px-4 cursor-pointer rounded-md mt-4 border-primary`}
     >
       <div>
-        <h5>{Title}</h5>
-        <p className="text-primary-1 font-semibold">{Text}</p>
+        <h5 className="font-bold">{Title}</h5>
+        <p className="text-primary-1 ">{Text}</p>
       </div>
       <div>
         {Icon ? (

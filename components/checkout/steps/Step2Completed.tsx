@@ -28,7 +28,7 @@ function Step2Completed({}: Props) {
         {"Delivery"}
       </h1>
       <div>
-        <h4 className="font-semibold mt-5">Expected Thu, Oct 13 </h4>
+        {/* <h4 className="font-semibold mt-5">Expected Thu, Oct 13 </h4> */}
         <div className="0">
           {cartItems?.map((item, index) => {
             return (
