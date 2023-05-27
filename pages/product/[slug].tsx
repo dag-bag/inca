@@ -7,7 +7,7 @@ import BlurImage from "../../components/utils/BlurImage";
 // import Product from "../../models/Product";
 import Loader from "../../components/Loaders/Loader";
 import dynamic from "next/dist/shared/lib/dynamic";
-import ReactImageZoom from "react-image-zoom";
+// import ReactImageZoom from "react-image-zoom";
 const DynRecentlyViewed = dynamic(
   () => import("../../components/recently-viewed"),
   {
@@ -215,21 +215,21 @@ export default function Product_Page({
               <Tab.Panels className="w-full aspect-w-1 aspect-h-1  hidden md:block">
                 {Variant.images.data.map((image, index) => (
                   <Tab.Panel key={index}>
-                    <ReactImageZoom
+                    {/* <ReactImageZoom
                       height={600}
                       alt="df"
                       img={image.attributes.formats.large.url}
                       width={600}
                       zoomWidth={200}
-                    />
-                    {/* <SkeLeTonImage
+                    /> */}
+                    <SkeLeTonImage
                       width={600}
                       height={600}
                       image={image.attributes.formats.large.url}
                       alt={""}
                       type="responsive"
                       className="w-full h-full object-center object-cover sm:rounded-lg"
-                    /> */}
+                    />
                   </Tab.Panel>
                 ))}
               </Tab.Panels>
