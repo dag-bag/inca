@@ -7,6 +7,7 @@ import BlurImage from "../../components/utils/BlurImage";
 // import Product from "../../models/Product";
 import Loader from "../../components/Loaders/Loader";
 import dynamic from "next/dist/shared/lib/dynamic";
+import ReactImageZoom from "react-image-zoom";
 const DynRecentlyViewed = dynamic(
   () => import("../../components/recently-viewed"),
   {
@@ -81,7 +82,6 @@ export default function Product_Page({
   relatedProducts,
   variant_id,
 }: Props) {
-
   // let rating = 4;
 
   const [selectedSize, setSelectedSize] = useState(Variant.size[0]);
@@ -156,7 +156,9 @@ export default function Product_Page({
             </li>
             <li>
               <Link
-                href={`/categories/${Product.attributes.category.split(" ").join("-")}`}
+                href={`/categories/${Product.attributes.category
+                  .split(" ")
+                  .join("-")}`}
                 className="capitalize"
               >
                 {Product.attributes?.category?.split("-").join(" ")}
@@ -213,14 +215,21 @@ export default function Product_Page({
               <Tab.Panels className="w-full aspect-w-1 aspect-h-1  hidden md:block">
                 {Variant.images.data.map((image, index) => (
                   <Tab.Panel key={index}>
-                    <SkeLeTonImage
+                    <ReactImageZoom
+                      height={600}
+                      alt="df"
+                      img={image.attributes.formats.large.url}
+                      width={600}
+                      zoomWidth={200}
+                    />
+                    {/* <SkeLeTonImage
                       width={600}
                       height={600}
                       image={image.attributes.formats.large.url}
                       alt={""}
                       type="responsive"
                       className="w-full h-full object-center object-cover sm:rounded-lg"
-                    />
+                    /> */}
                   </Tab.Panel>
                 ))}
               </Tab.Panels>
@@ -500,6 +509,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         // variantDetails: JSON.parse(JSON.stringify(variantDetails)),
         relatedProducts: relatedProducts.data,
       }, // will be passed to the page component as props
+      revalidate: 60,
     };
   } else {
     return {
