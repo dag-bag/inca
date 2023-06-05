@@ -25,7 +25,7 @@ function ProductCard({
   let { slug, price, color, images, sellPrice } = variants.data[0].attributes;
 
   return (
-    <div className="relative rounded-md">
+    <div className="relative rounded-md ">
       <Link href={`/product/${slug}`}>
         <div className="relative ">
           <div

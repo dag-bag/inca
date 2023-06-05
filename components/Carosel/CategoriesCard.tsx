@@ -9,7 +9,7 @@ import Flex from "../utils/Flex";
 function CategoriesCard({ name, img, link, category }: ICategories) {
   return (
     <Link href={`/category/${link}?category=${category}`}>
-      <Flex className="hover:shadow-xl transition-all duration-200 ease-out cursor-pointer  rounded-md p-2">
+      <Flex className="hover:shadow-xl transition-all duration-200 ease-out cursor-pointer  rounded-md p-2 ">
         <div className="  ">
           {/* <div className="hero-overlay bg-opacity-60"></div> */}
           <div className=" ">

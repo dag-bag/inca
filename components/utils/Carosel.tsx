@@ -75,59 +75,57 @@ export default function Carousel({
   }, []);
 
   return (
-    <div className="max-w-7xl m-auto">
-      <div className="w-full md:max-w-7xl mx-auto ">
-        <H2 text={title} />
-        <div className="flex items-center justify-center w-full h-full  relative  ">
-          <button
-            onClick={movePrev}
-            className="    disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
+    <div className="max-w-7xl m-auto relative">
+      <H2 text={title} />
+      <div className="flex items-center justify-center w-full">
+        <button
+          onClick={movePrev}
+          className="    disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
             absolute top-[40%] left-0 transform -translate-x-1/2 -translate-y-1/2
             hidden md:block
             
             bg
             "
-            disabled={isDisabled("prev")}
-          >
-            <GrFormPrevious className="text-3xl !text-black btn btn-circle" />
-            <span className="sr-only">Prev</span>
-          </button>
-          <button
-            onClick={moveNext}
-            className=" text-white w-10 h-full text-center disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
+          disabled={isDisabled("prev")}
+        >
+          <GrFormPrevious className="text-3xl !text-black btn btn-circle" />
+          <span className="sr-only">Prev</span>
+        </button>
+        <button
+          onClick={moveNext}
+          className=" text-white w-10 h-full text-center disabled:opacity-25 disabled:cursor-not-allowed z-10 p-0 m-0 transition-all ease-in-out duration-300
             absolute top-[40%] right-0 transform -translate-x-1/2 -translate-y-1/2
             hidden md:block
             "
-            disabled={isDisabled("next")}
-          >
-            <GrFormNext className="text-3xl !text-black btn btn-circle" />
-            <span className="sr-only">Next</span>
-          </button>
-          {/* Carousel for desktop and large size devices */}
-          <div className="carousel  my-6 mx-auto max-w-full relative  md:block">
-            <div className="relative overflow-hidden ">
-              <div
-                ref={carousel}
-                className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory  z-0 pb-16  md:!scrollbar-hide"
-              >
-                {products?.map((product, index) => {
-                  return (
-                    <ProductCard
-                      attributes={product.attributes}
-                      id={product.id}
-                      key={index}
-                    />
-                  );
-                })}
-                {features
+          disabled={isDisabled("next")}
+        >
+          <GrFormNext className="text-3xl !text-black btn btn-circle" />
+          <span className="sr-only">Next</span>
+        </button>
+        {/* Carousel for desktop and large size devices */}
+        <div className="carousel  my-6 mx-auto max-w-full relative  md:block">
+          <div className="relative overflow-hidden ">
+            <div
+              ref={carousel}
+              className="carousel-container relative flex gap-6 overflow-x-scroll scroll-smooth snap-x snap-mandatory   pb-16  md:!scrollbar-hide"
+            >
+              {products?.map((product, index) => {
+                return (
+                  <ProductCard
+                    attributes={product.attributes}
+                    id={product.id}
+                    key={index}
+                  />
+                );
+              })}
+              {/* {features
                   ? features.map((feature, index) => {
                       return <FeatureCard {...feature} key={index} />;
                     })
                   : null}
                 {categories?.map((category, index) => {
                   return <CategoriesCard {...category} key={index} />;
-                })}
-              </div>
+                })} */}
             </div>
           </div>
         </div>

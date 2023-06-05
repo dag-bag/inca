@@ -12,7 +12,6 @@ import Link from "next/link";
 import BlurImage from "./BlurImage";
 import { loginUserClientSide } from "../../services/auth/login_user";
 import Head from "next/head";
-import Email from "next-auth/providers/email";
 type Props = {
   type: "login" | "signup";
 };
@@ -181,7 +180,7 @@ flex items-center justify-center"
             />
           </form>
           <hr className="my-6 border-gray-300 w-full" />
-          <button
+          {/* <button
             type="button"
             className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
           >
@@ -225,7 +224,7 @@ flex items-center justify-center"
                 Log in with Google
               </span>
             </div>
-          </button>
+          </button> */}
           <p className="mt-8">
             Need an account?{" "}
             <Link href={`/${type === "login" ? "signup" : "login"}`}>
