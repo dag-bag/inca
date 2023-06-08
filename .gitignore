@@ -34,3 +34,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 libs/paypal.ts
+libs/paypal.ts
