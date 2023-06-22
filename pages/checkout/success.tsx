@@ -12,9 +12,7 @@ import AuthenticationLayout from "../../components/layouts/AuthenticationLayout"
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Loader from "../../components/Loaders/Loader";
-import { OrderResponse } from "../../types/order";
 import Image from "next/image";
-import { MainDatum } from "../../services/product/order";
 function Success() {
   const router = useRouter();
   const { orderId } = router.query;
@@ -25,11 +23,9 @@ function Success() {
       let result = fetchOrderById(orderId);
       return result;
     }
-    );
-    if (isLoading) return <Loader />;
-    console.log('data:', data)
+  );
+  if (isLoading) return <Loader />;
   const order = data?.data[0];
-  console.log(order);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 mt-10">

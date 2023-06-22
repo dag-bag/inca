@@ -30,11 +30,10 @@ const sortOptions = [
   { name: "Price: High to Low", href: "#", current: false },
 ];
 const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
+  { name: "Stuffed Animals", href: "alpaca-stuffed-animals" },
+  { name: "Slippers", href: "alpaca-slippers" },
+  { name: "Clothing", href: "alpaca-clothing" },
+  { name: "Key Chain", href: "alpaca-key-chain" },
 ];
 const filters = [
   {
@@ -142,7 +141,7 @@ export default function Layout({
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const router = useRouter();
 
-  let Title = router?.query.slug
+  let Title = router?.query.slug;
 
   return (
     <div

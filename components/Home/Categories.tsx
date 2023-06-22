@@ -31,7 +31,7 @@ export default function Categories() {
             >
               {CategoriesData.map((product, index) => (
                 <li
-                  onClick={() => CateGoriesClick(product.link)}
+                  onClick={() => CateGoriesClick(product.category)}
                   key={index}
                   className="w-64 inline-flex flex-col text-center lg:w-auto cursor-pointer"
                 >
