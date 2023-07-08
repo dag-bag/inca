@@ -11,12 +11,17 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        custom: 'calc(100% - 400px) 400px'
+        custom: "calc(100% - 400px) 400px",
       },
       gridTemplateRows: {
-        'xs-size': '100px calc(100% - 100px)'
-      }
-
+        "xs-size": "100px calc(100% - 100px)",
+      },
+      aspectRatio: {
+        "4/3": "4 / 3",
+        "3/2": "3 / 2",
+        "2/3": "2 / 3",
+        "9/16": "9 / 16",
+      },
     },
   },
   daisyui: {

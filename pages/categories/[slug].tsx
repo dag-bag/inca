@@ -24,11 +24,7 @@ function DynamicCateGoryPage({ products }: Props) {
   const [page, setPage] = useState(1);
   const { query, push, pathname } = useRouter();
   const slug = query.slug as string;
-  const getProductByCategory = async ({
-    pageParam = 1,
-  }: {
-    pageParam?: number;
-  }) => {
+  const getProductByCategory = async () => {
     const response = await strapi.find<Main>("products", {
       populate: ["*", "variants", "variants.images"],
       filters: {

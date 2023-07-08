@@ -19,8 +19,6 @@ import {
 import { useRouter } from "next/router";
 import { ProductType } from "../../types/product";
 import Link from "next/link";
-import Image from "next/image";
-import Products from "./Products";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
