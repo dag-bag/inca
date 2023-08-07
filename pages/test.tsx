@@ -124,12 +124,23 @@
 //   );
 // }
 
+import axios from "axios";
 import React from "react";
 
 type Props = {};
 
 function test({}: Props) {
-  return <div>test</div>;
+  const getData = async () => {
+    const re = await axios.get(
+      "https://inca-strapi-production.up.railway.app/api/fuzzy-search/search?query=black"
+    );
+    console.log(re);
+  };
+  return (
+    <div>
+      <button onClick={getData}>GET DTA</button>
+    </div>
+  );
 }
 
 export default test;

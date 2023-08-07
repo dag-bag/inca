@@ -187,9 +187,7 @@ function Features({}: Props) {
       <div className=" m-auto md:px-6 text-gray-500   !w-full ">
         <div>
           <h2 className="mt-4 text-2xl font-bold text-primary  md:text-4xl text-center ">
-            Sabemos que amas las
-            <br className="lg:block" />
-            alpacas
+            Why is alpaca the best fit for you?
           </h2>
         </div>
 
