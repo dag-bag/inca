@@ -11,9 +11,7 @@ import AddressCard from "../AddessCard";
 import PrimaryBtn from "../../buttons/PrimaryBtn";
 import { useSession } from "next-auth/react";
 import AccountModal from "../../accountComponents/AccountModal";
-import HeadLessUiComponent, {
-  HeadUiModalOpenAtom,
-} from "../../Modals/HeadLessUiModal";
+import HeadLessUiComponent from "../../Modals/HeadLessUiModal";
 import HeadLessUiButton from "../../Modals/Button/HeadLessUiButton";
 import Loader from "../../Loaders/Loader";
 import Skeleton from "../../skeleton/Skeleton";

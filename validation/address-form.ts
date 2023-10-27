@@ -44,12 +44,7 @@ const formValidationSchema = Yup.object().shape({
     .min(1, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  zipcode: Yup.string()
-    .required("Required")
-    .matches(/^[0-9]+$/, "Must be only digits")
-    .min(5, "Must be exactly 5 digits")
-    .max(6, "Max  is 6 characters"),
-
+  zipcode: Yup.string().required("Required"),
   lastName: stringRequired,
   firstName: stringRequired,
   phone: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
